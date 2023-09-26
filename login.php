@@ -20,7 +20,7 @@
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="../../index2.html" class="h1"><b>Hotel</b>SOFT</a>
+      <a href="index.php" class="h1"><b>Hotel</b>SOFT</a>
     </div>
     <div class="card-body">
    
