@@ -1,0 +1,15 @@
+.login-page{
+    background-color: white;
+    background-image: url("../resources/images/loginbg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.login-logo{
+    color: white;
+    font-size: 3.1rem;
+}
+
+.card-body{
+    border-radius: 50%;
+}
