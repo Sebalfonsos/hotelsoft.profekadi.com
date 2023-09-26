@@ -1,4 +1,4 @@
-.login-page{
+.login-page, .register-page{
     background-color: white;
     background-image: url("../assets/img/loginbg.jpg");
     background-repeat: no-repeat;
