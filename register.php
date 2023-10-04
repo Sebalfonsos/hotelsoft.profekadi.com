@@ -1,3 +1,53 @@
+<?php
+$avisoIdentificación = "";
+$avisoCorreo = "";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $nombres = $_POST["Nombres"];
+  $apellidos = $_POST["Apellidos"];
+  $tipoIdentificacion = $_POST["TipoIdentificacion"];
+  $identificacion = $_POST["Identificacion"];
+  $telefono = $_POST["Telefono"];
+  $correoelectronico = $_POST["Correo"];
+  $contrasena = $_POST["Contrasena"];
+  
+  require 'conexion.php';
+  // Verificar si el correo o la identificación ya existen en la base de datos
+  $sql = "SELECT * FROM Usuarios WHERE correoelectronico = ? OR idUsuario = ?";
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param("ss", $correo, $identificacion);
+  $stmt->execute();
+
+  $result = $stmt->get_result();
+
+  if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+
+    if ($row['idUsuario'] == $identificacion) {
+      $avisoIdentificación = "El número de identificación ya está registrado.";
+
+    } elseif ($row['correoelectronico'] == $correo) {
+      $avisoCorreo = "El correo ya está registrado. Por favor, use otro correo.";
+    }
+
+
+  } else {
+    // Insertar el nuevo usuario en la base de datos
+    $insertQuery = "INSERT INTO `Usuarios` (`idUsuario`, `contrasena`, `nombre`, `apellido`, `correoelectronico`, `telefono`, `TipoIdentificacion_idTipo Identificacion`) VALUES (?, ?, ?, ?, ?, ?, ?)";  
+    $stmt = $conn->prepare($insertQuery);
+    $stmt->bind_param("ssssssi", $identificacion, $contrasena, $nombres, $apellidos, $correoelectronico, $telefono, $tipoIdentificacion);
+    if ($stmt->execute()) {
+      echo "Registro exitoso.";
+  } else {
+      echo "Error al registrar el usuario: " . $stmt->error;
+  }
+  
+  }
+  $stmt->close();
+  $conn->close();
+  
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,7 +78,7 @@
       <div class="card-body">
         <p class="login-box-msg">Registro de Nuevo Miembro</p>
 
-        <form action="register.php" method="post">
+        <form action="register.php" method="POST">
           <div class="input-group mb-3">
             <input required type="text" class="form-control" placeholder="Nombres" name="Nombres">
             <div class="input-group-append">
@@ -47,30 +97,33 @@
             </div>
           </div>
 
-
           <?php
           require 'conexion.php';
 
-          $result = $conn->query("SELECT nombreTipoId FROM Tipo_Identificacion");
-
-          $conn->close();
+          $result = $conn->query("SELECT * FROM Tipo_Identificacion");
 
           $tiposIdentificacion = array();
+
           while ($row = $result->fetch_assoc()) {
-            $tiposIdentificacion[] = $row['nombreTipoId'];
+            $tiposIdentificacion[] = array(
+              'id' => $row['idTipo_Identificacion'],
+              'nombre' => $row['nombreTipoId']
+            );
           }
 
+          $conn->close();
           ?>
 
+
           <div class="input-group mb-3">
-            <select required class="form-control" name="" id="">
+            <select required class="form-control" name="TipoIdentificacion" id="">
               <option selected disabled value="">Tipo de Identificación</option>
               <?php
-                  foreach ($tiposIdentificacion as $value) {
-                    echo '<option value="">';
-                    echo $value;
-                    echo '</option>';
-                  }
+              foreach ($tiposIdentificacion as $value) {
+                echo '<option value="'; echo $value['id']; echo '">';
+                echo $value['nombre'];
+                echo '</option>';
+              }
               ?>
             </select>
             <div class="input-group-append">
@@ -81,12 +134,16 @@
           </div>
 
           <div class="input-group mb-3">
-            <input required type="text" class="form-control" placeholder="Identificación" name="Identificación">
+            <input required type="text" class="form-control" placeholder="Identificación" name="Identificacion">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-user"></span>
               </div>
             </div>
+
+            <?php
+            echo $avisoIdentificación;
+            ?>
           </div>
 
 
@@ -100,12 +157,15 @@
           </div>
 
           <div class="input-group mb-3">
-            <input required type="email" class="form-control" placeholder="Email" name="Email">
+            <input required type="email" class="form-control" placeholder="Correo" name="Correo">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-envelope"></span>
               </div>
             </div>
+            <?php
+            echo $avisoCorreo;
+            ?>
           </div>
           <div class="input-group mb-3">
             <input required type="password" class="form-control" placeholder="Contraseña" name="Contrasena">
@@ -120,10 +180,9 @@
 
           <button type="submit" class="btn btn-primary btn-block">Registrate</button>
 
-
-
           <!-- /.form-box -->
       </div><!-- /.card -->
+
     </div>
     <!-- /.register-box -->
 
