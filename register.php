@@ -23,27 +23,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($row['idUsuario'] == $identificacion) {
       $avisoIdentificación = "El número de identificación ya está registrado.";
-
     } elseif ($row['correoelectronico'] == $correo) {
       $avisoCorreo = "El correo ya está registrado. Por favor, use otro correo.";
     }
-
-
   } else {
     // Insertar el nuevo usuario en la base de datos
-    $insertQuery = "INSERT INTO `Usuarios` (`idUsuario`, `contrasena`, `nombre`, `apellido`, `correoelectronico`, `telefono`, `TipoIdentificacion_idTipo Identificacion`) VALUES (?, ?, ?, ?, ?, ?, ?)";  
+    $insertQuery = "INSERT INTO `Usuarios` (`idUsuario`, `contrasena`, `nombre`, `apellido`, `correoelectronico`, `telefono`, `TipoIdentificacion_idTipo Identificacion`) VALUES (?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($insertQuery);
     $stmt->bind_param("ssssssi", $identificacion, $contrasenahash, $nombres, $apellidos, $correoelectronico, $telefono, $tipoIdentificacion);
     if ($stmt->execute()) {
       echo "Registro exitoso.";
-  } else {
+
+      $stmt->close();
+      $conn->close();
+      //necesito saber como mandar parametros por aqui
+      header('location: login.php?registrado=true');
+      exit();
+    } else {
       echo "Error al registrar el usuario: " . $stmt->error;
-  }
-  
+    }
   }
   $stmt->close();
   $conn->close();
-  
 }
 ?>
 
@@ -56,8 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <title>Registro</title>
   <link rel="icon" type="image/x-icon" href="assets/newfavicon.ico" />
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
   <!-- icheck bootstrap -->
@@ -119,7 +119,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <option selected disabled value="">Tipo de Identificación</option>
               <?php
               foreach ($tiposIdentificacion as $value) {
-                echo '<option value="'; echo $value['id']; echo '">';
+                echo '<option value="';
+                echo $value['id'];
+                echo '">';
                 echo $value['nombre'];
                 echo '</option>';
               }
