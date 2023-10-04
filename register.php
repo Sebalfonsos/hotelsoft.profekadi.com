@@ -8,8 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $identificacion = $_POST["Identificacion"];
   $telefono = $_POST["Telefono"];
   $correoelectronico = $_POST["Correo"];
-  $contrasena = $_POST["Contrasena"];
-  
+  $contrasenahash = password_hash($_POST["Contrasena"], PASSWORD_DEFAULT);
   require 'conexion.php';
   // Verificar si el correo o la identificación ya existen en la base de datos
   $sql = "SELECT * FROM Usuarios WHERE correoelectronico = ? OR idUsuario = ?";
@@ -34,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Insertar el nuevo usuario en la base de datos
     $insertQuery = "INSERT INTO `Usuarios` (`idUsuario`, `contrasena`, `nombre`, `apellido`, `correoelectronico`, `telefono`, `TipoIdentificacion_idTipo Identificacion`) VALUES (?, ?, ?, ?, ?, ?, ?)";  
     $stmt = $conn->prepare($insertQuery);
-    $stmt->bind_param("ssssssi", $identificacion, $contrasena, $nombres, $apellidos, $correoelectronico, $telefono, $tipoIdentificacion);
+    $stmt->bind_param("ssssssi", $identificacion, $contrasenahash, $nombres, $apellidos, $correoelectronico, $telefono, $tipoIdentificacion);
     if ($stmt->execute()) {
       echo "Registro exitoso.";
   } else {
