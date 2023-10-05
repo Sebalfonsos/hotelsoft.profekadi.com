@@ -1,3 +1,7 @@
+<?
+require 'consultasdb/loginUsuario.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +11,8 @@
   <title>Inicio de Sesión</title>
   <link rel="icon" type="image/x-icon" href="assets/newfavicon.ico" />
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
   <!-- icheck bootstrap -->
@@ -22,12 +27,18 @@
 
   <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
     <symbol id="check-circle-fill" viewBox="0 0 16 16">
-      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+      <path
+        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
     </symbol>
 
   </svg>
+  <?php
+  $registrado = $_GET["registrado"];
 
-  <div class="alert alert-success d-flex align-items-center" role="alert">
+
+  if($registrado){
+
+    echo '<div class="alert alert-success d-flex align-items-center" role="alert">
     <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:" style="
     width: 20px;
     height: 20px;">
@@ -36,7 +47,12 @@
     <div style="padding-left: 10px;">
       Usuario creado con exito.
     </div>
-  </div>
+  </div>';
+
+
+  }
+  ?>
+
 
   <div class="login-box">
     <!-- /.login-logo -->
@@ -51,9 +67,9 @@
 
 
 
-        <form action="../../index3.html" method="post">
+        <form action="login.php" method="post">
           <div class="input-group mb-3">
-            <input type="email" class="form-control" placeholder="Email">
+            <input type="email" class="form-control" placeholder="Correo" name="Correo">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-envelope"></span>
@@ -61,7 +77,7 @@
             </div>
           </div>
           <div class="input-group mb-3">
-            <input type="password" class="form-control" placeholder="Contraseña">
+            <input type="password" class="form-control" placeholder="Contraseña" name="Contrasena">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-lock"></span>
