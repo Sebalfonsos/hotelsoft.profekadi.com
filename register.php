@@ -1,5 +1,5 @@
 <?php
-require 'consultasdb/registrarUsuario.php';
+require 'consultasdb/registro.php';
 ?>
 
 <!DOCTYPE html>

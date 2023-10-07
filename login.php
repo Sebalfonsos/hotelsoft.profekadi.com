@@ -33,24 +33,29 @@ require 'consultasdb/loginUsuario.php';
 
   </svg>
   <?php
-  $registrado = $_GET["registrado"];
 
+  if(isset($_GET["registrado"])){
+    $registrado = $_GET["registrado"];
 
-  if($registrado){
+    if($registrado){
 
-    echo '<div class="alert alert-success d-flex align-items-center" role="alert">
-    <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:" style="
-    width: 20px;
-    height: 20px;">
-      <use xlink:href="#check-circle-fill" fill="white" />
-    </svg>
-    <div style="padding-left: 10px;">
-      Usuario creado con exito.
-    </div>
-  </div>';
-
+      echo '<div class="alert alert-success d-flex align-items-center" role="alert">
+      <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:" style="
+      width: 20px;
+      height: 20px;">
+        <use xlink:href="#check-circle-fill" fill="white" />
+      </svg>
+      <div style="padding-left: 10px;">
+        Usuario creado con exito.
+      </div>
+    </div>';
+  
+  
+    }
 
   }
+
+
   ?>
 
 
