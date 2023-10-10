@@ -1,9 +1,9 @@
 <?php
 
 $datos = isset($_POST["Correo"]) && isset($_POST["Contrasena"]);
-if($datos){
-  $correoelectronico =  $_POST["Correo"];
-  $password = $_POST["Contrasena"];
+if ($datos) {
+  $correoelectronico = $_POST["Correo"];
+  $contrasena = $_POST["Contrasena"];
 
   require 'consultasdb/conexion.php';
 
@@ -14,8 +14,20 @@ if($datos){
   $result = $stmt->get_result();
   $stmt->close();
   $conn->close();
-  if($result->num_rows > 0){
-    
+  if ($result->num_rows > 0) {
+    $user = $result->fetch_assoc();
+
+    $logeado;
+    if (password_verify($contrasena, $user['contrasena'])) {
+
+      echo "Login successful!";
+    } else {
+
+      $logeado = "usuarioocontrasenaincorrectos";
+    }
+  } else {
+    $logeado = "noencontrado";
+
   }
 }
 
