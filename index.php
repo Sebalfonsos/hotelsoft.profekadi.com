@@ -9,7 +9,7 @@
         <meta name="author" content="" />
         <title>HotelSOFT</title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/newfavicon.ico" />
+        <link rel="icon" type="zimage/x-icon" href="assets/newfavicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <!-- Google fonts-->
@@ -51,33 +51,41 @@
         <section class="page-section" id="services">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Services</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h2 class="section-heading text-uppercase">Servicios</h2>
+                    <h3 class="section-subheading text-muted">Nuestra misión es ofrecer a nuestros huéspedes una experiencia excepcional y relajante desde el momento en que llegan. Nuestro compromiso con la hospitalidad de alta calidad y la atención a los detalles se refleja en una amplia gama de servicios diseñados para satisfacer las necesidades de nuestros visitantes.</h3>
                 </div>
                 <div class="row text-center">
                     <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
-                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i>
-                        </span>
-                        <h4 class="my-3">E-Commerce</h4>
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                    <img class="card-img-top" src="assets/img/recepcion.jpg" alt="Card image cap" width="140px" height="240px" style="border-radius: 10px 10px 10px 10px; margin-bottom: 20px; ">
+                        <h4 class="my-3">Recepción 24/7</h4>
+                        <p class="text-muted">Nuestro equipo de recepción está disponible en todo momento para atender sus necesidades, ofrecer recomendaciones locales y brindar asistencia durante su estancia.</p>
+                    </div>
+                    <div class="col-md-4" > 
+                        <img class="card-img-top" src="assets/img/gym.jpg" alt="Card image cap" width="140px" height="240px" style="border-radius: 10px 10px 10px 10px; margin-bottom: 20px; ">
+                        
+                        <h4 class="my-3">Gimnasio Bien Equipado</h4>
+                        <p class="text-muted">Mantenga su rutina de ejercicio en nuestro moderno gimnasio con equipo de última generación.</p>
+                        
                     </div>
                     <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
-                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
-                        </span>
-                        <h4 class="my-3">Responsive Design</h4>
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                    <img class="card-img-top" src="assets/img/spa.jpg" alt="Card image cap" width="140px" height="240px" style="border-radius: 10px 10px 10px 10px; margin-bottom: 20px; ">
+                        <h4 class="my-3">Spa de Lujo</h4>
+                        <p class="text-muted">Deje que nuestros terapeutas expertos lo mimen con tratamientos de spa relajantes y revitalizantes.</p>
                     </div>
                     <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
-                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i class="fas fa-lock fa-stack-1x fa-inverse"></i>
-                        </span>
-                        <h4 class="my-3">Web Security</h4>
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                    <img class="card-img-top" src="assets/img/acr.jpg" alt="Card image cap" width="140px" height="240px" style="border-radius: 10px 10px 10px 10px; margin-bottom: 20px; ">
+                        <h4 class="my-3">Actividades Recreativas</h4>
+                        <p class="text-muted">Organizamos excursiones locales, deportes acuáticos y actividades emocionantes para que explore la zona.</p>
+                    </div>
+                    <div class="col-md-4">
+                    <img class="card-img-top" src="assets/img/boda.jpg" alt="Card image cap" width="140px" height="240px" style="border-radius: 10px 10px 10px 10px; margin-bottom: 20px; ">
+                        <h4 class="my-3">Servicios de Bodas y Eventos Especiales</h4>
+                        <p class="text-muted">Haga que su boda o evento especial sea inolvidable con nuestro equipo de planificación y espacios elegantes.</p>
+                    </div>
+                    <div class="col-md-4">
+                    <img class="card-img-top" src="assets/img/restaurante.jpg" alt="Card image cap" width="140px" height="240px" style="border-radius: 10px 10px 10px 10px; margin-bottom: 20px; ">
+                        <h4 class="my-3">Restaurante Gourmet</h4>
+                        <p class="text-muted">Disfrute de una experiencia culinaria excepcional en nuestro restaurante de alta calidad con platos locales e internacionales.</p>
                     </div>
                 </div>
             </div>
