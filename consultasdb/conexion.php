@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
-$username = "root";
-$password = "";
+$username = "hotelsoft";
+$password = "hotelsoft100%securepassword";
 $dbname = "hotelsoft";
 
 
