@@ -1,5 +1,5 @@
 <?php
-$logeado="";
+$logeado="nada";
 $datos = isset($_POST["Correo"]) && isset($_POST["Contrasena"]);
 if ($datos) {
   $correoelectronico = $_POST["Correo"];
@@ -17,7 +17,7 @@ if ($datos) {
   if ($result->num_rows > 0) {
     $user = $result->fetch_assoc();
 
-    $logeado;
+
     if (password_verify($contrasena, $user['contrasena'])) {
 
       echo "Login successful!";
