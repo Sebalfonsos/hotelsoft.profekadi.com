@@ -72,14 +72,14 @@
                         <h4 class="my-3">Spa de Lujo</h4>
                         <p class="text-muted">Deje que nuestros terapeutas expertos lo mimen con tratamientos de spa relajantes y revitalizantes.</p>
                     </div>
-                    <div class="col-md-4">
-                    <img class="card-img-top" src="assets/img/acr.jpg" alt="Card image cap" width="140px" height="240px" style="border-radius: 10px 10px 10px 10px; margin-bottom: 20px; ">
-                        <h4 class="my-3">Actividades Recreativas</h4>
-                        <p class="text-muted">Organizamos excursiones locales, deportes acuáticos y actividades emocionantes para que explore la zona.</p>
+                            <div class="col-md-4">
+                                <img class="card-img-top" src="assets/img/acr.jpg" alt="Card image cap" width="140px" height="240px" style="border-radius: 10px 10px 10px 10px; margin-bottom: 20px; ">
+                            <h4 class="my-3">Actividades Recreativas</h4>
+                         <p class="text-muted">Organizamos excursiones locales, deportes acuáticos y actividades emocionantes para que explore la zona.</p>
                     </div>
                     <div class="col-md-4">
-                    <img class="card-img-top" src="assets/img/boda.jpg" alt="Card image cap" width="140px" height="240px" style="border-radius: 10px 10px 10px 10px; margin-bottom: 20px; ">
-                        <h4 class="my-3">Servicios de Bodas y Eventos Especiales</h4>
+                        <img class="card-img-top" src="assets/img/boda.jpg" alt="Card image cap" width="140px" height="240px"       style="border-radius: 10px 10px 10px 10px; margin-bottom: 20px; ">
+                        <h4 class="my-3">Bodas y Eventos Especiales</h4>
                         <p class="text-muted">Haga que su boda o evento especial sea inolvidable con nuestro equipo de planificación y espacios elegantes.</p>
                     </div>
                     <div class="col-md-4">
@@ -195,16 +195,16 @@
         <section class="page-section" id="about">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">About</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h2 class="section-heading text-uppercase">Sobre Nosotros</h2>
+                    <h3 class="section-subheading text-muted">Nuestra trayectoria desde que brindamos nuestros mas ligeros servicios</h3>
                 </div>
                 <ul class="timeline">
                     <li>
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/1.jpg" alt="..." /></div>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/inicios.jpg" alt="..." /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h4>2009-2011</h4>
-                                <h4 class="subheading">Our Humble Beginnings</h4>
+                                <h4 class="subheading">Nuestros Inicios</h4>
                             </div>
                             <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
                         </div>
