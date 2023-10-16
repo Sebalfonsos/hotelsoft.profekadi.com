@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="utf-8">
@@ -22,7 +22,7 @@
 
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="">
       <!-- Content Header (Page header) -->
       <section class="content-header">
         <div class="container-fluid">
@@ -46,7 +46,7 @@
           <div id="external-events"></div>
         </div>
         <div class="card card-primary">
-          <div class="card-body p-0">
+          <div class="card-body">
             <div id="calendar"></div>
           </div>
         </div>
@@ -131,17 +131,7 @@
       // initialize the external events
       // -----------------------------------------------------------------
 
-      new Draggable(containerEl, {
-        itemSelector: '.external-event',
-        eventData: function (eventEl) {
-          return {
-            title: eventEl.innerText,
-            backgroundColor: window.getComputedStyle(eventEl, null).getPropertyValue('background-color'),
-            borderColor: window.getComputedStyle(eventEl, null).getPropertyValue('background-color'),
-            textColor: window.getComputedStyle(eventEl, null).getPropertyValue('color'),
-          };
-        }
-      });
+
 
       var calendar = new Calendar(calendarEl, {
         headerToolbar: {
@@ -198,8 +188,8 @@
             borderColor: '#3c8dbc' //Primary (light-blue)
           }
         ],
-        editable: true,
-        droppable: true, // this allows things to be dropped onto the calendar !!!
+        editable: false,
+        droppable: false, // this allows things to be dropped onto the calendar !!!
         drop: function (info) {
           // is the "remove after drop" checkbox checked?
           if (checkbox.checked) {
