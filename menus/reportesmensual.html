@@ -143,7 +143,8 @@
                                     </div>
                                     <!-- /.card-body -->
                                 </div>
-                                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                <div class="tab-pane fade" id="nav-profile" role="tabpanel"
+                                    aria-labelledby="nav-profile-tab">
                                     <div class="container" style="margin-top: 2%;">
                                         <div class="row">
                                             <div class="col order-last" style="text-align: center;">
@@ -234,15 +235,19 @@
     <script src="../../dist/js/adminlte.min.js"></script>
 
     <!-- Page specific script -->
+    <script src="../plugins/datatables/es-ES.js"></script>
     <script>
+
         $(function () {
             $("#tabla1").DataTable({
+                language: spanish,
                 "responsive": true, "lengthChange": false, "autoWidth": false,
-                "buttons": ["excel", "pdf", "print", "colvis"]
+                "buttons": ["excel", "pdf", "print", "colvis"],
             }).buttons().container().appendTo('#tabla1_wrapper .col-md-6:eq(0)');
 
 
             $("#tabla2").DataTable({
+                language: spanish,
                 "responsive": true, "lengthChange": false, "autoWidth": false,
                 "buttons": ["excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#tabla2_wrapper .col-md-6:eq(0)');
