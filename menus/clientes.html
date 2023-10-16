@@ -126,7 +126,7 @@
                   </tr>
               </thead>
               <tbody>
-                
+
               </tbody>
               <tfoot>
                   <tr>
@@ -167,11 +167,13 @@
 <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
+<script src="../plugins/datatables/es-ES.js"></script>
 
 <!-- Page specific script -->
 <script>
   $(function () {
       $("#tabla1").DataTable({
+        language: spanish,
           "responsive": true, "lengthChange": false, "autoWidth": false,
           "buttons": ["excel", "pdf", "print", "colvis"]
       }).buttons().container().appendTo('#tabla1_wrapper .col-md-6:eq(0)');
