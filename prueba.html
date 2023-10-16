@@ -17,9 +17,11 @@
     <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-    <style>   select.form-control.form-control-sm {
-        border-top: 2px solid green;
-      }</style>
+    <style>
+        select.form-control.form-control-sm {
+            border-top: 2px solid green;
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -45,38 +47,38 @@
         </section>
         <div class="container mt-2">
             <div class="row">
-              <div class="col-md-3">
-                <div class="form-group custom-select-wrapper">
-                  <label for="yearSelect">Año:</label>
-                  <select id="yearSelect" class="form-control form-control-sm">
-                    <option value="2023">2023</option>
-                    <option value="2024">2024</option>
-                    <!-- Agrega más años aquí -->
-                  </select>
+                <div class="col-md-3">
+                    <div class="form-group custom-select-wrapper">
+                        <label for="yearSelect">Año:</label>
+                        <select id="yearSelect" class="form-control form-control-sm">
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                            <!-- Agrega más años aquí -->
+                        </select>
+                    </div>
                 </div>
-              </div>
-              <div class="col-md-3">
-                <div class="form-group custom-select-wrapper">
-                  <label for="monthSelect">Mes:</label>
-                  <select id="monthSelect" class="form-control form-control-sm">
-                    <option value="1">Enero</option>
-                    <option value="2">Febrero</option>
-                    <!-- Agrega más meses aquí -->
-                  </select>
+                <div class="col-md-3">
+                    <div class="form-group custom-select-wrapper">
+                        <label for="monthSelect">Mes:</label>
+                        <select id="monthSelect" class="form-control form-control-sm">
+                            <option value="1">Enero</option>
+                            <option value="2">Febrero</option>
+                            <!-- Agrega más meses aquí -->
+                        </select>
+                    </div>
                 </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group custom-select-wrapper">
-                  <label for="responsibleSelect">Responsable:</label>
-                  <select id="responsibleSelect" class="form-control form-control-sm">
-                    <option value="john">John Doe</option>
-                    <option value="jane">Jane Smith</option>
-                    <!-- Agrega más responsables aquí -->
-                  </select>
+                <div class="col-md-6">
+                    <div class="form-group custom-select-wrapper">
+                        <label for="responsibleSelect">Responsable:</label>
+                        <select id="responsibleSelect" class="form-control form-control-sm">
+                            <option value="john">John Doe</option>
+                            <option value="jane">Jane Smith</option>
+                            <!-- Agrega más responsables aquí -->
+                        </select>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
+        </div>
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
@@ -124,7 +126,7 @@
                                         <table id="example1" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>Rendering engine</th>
+                                                    <th>ID</th>
                                                     <th>Browser</th>
                                                     <th>Platform(s)</th>
                                                     <th>Engine version</th>
@@ -553,13 +555,14 @@
                                     </div>
                                     <!-- /.card-body -->
                                 </div>
+                                <div class="tab-pane fade" id="nav-profile" role="tabpanel"
+                                    aria-labelledby="nav-profile-tab">
+
+                                </div>
                                 <!-- /.card -->
                             </div>
                             <!-- /.col -->
-                            <div class="tab-pane fade" id="nav-profile" role="tabpanel"
-                                aria-labelledby="nav-profile-tab">
 
-                            </div>
                         </div>
                         <!-- /.row -->
                     </div>
