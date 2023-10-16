@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="utf-8">
@@ -21,7 +21,7 @@
   <div class="wrapper">
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="">
       <!-- Content Header (Page header) -->
       <section class="content-header">
         <div class="container-fluid">
@@ -83,6 +83,8 @@
 <!-- AdminLTE for demo purposes -->
 <script src="../dist/js/demo.js"></script>
 <!-- Page specific script -->
+
+<script src="../plugins/fullcalendar/locales/es.js"></script>
 <script>
   $(function () {
 
@@ -100,12 +102,7 @@
           // store the Event Object in the DOM element so we can get to it later
           $(this).data('eventObject', eventObject)
 
-          // make the event draggable using jQuery UI
-          $(this).draggable({
-            zIndex: 1070,
-            revert: true, // will cause the event to go back to its
-            revertDuration: 0  //  original position after the drag
-          })
+          
 
         })
       }
@@ -121,7 +118,7 @@
         y = date.getFullYear()
 
       var Calendar = FullCalendar.Calendar;
-      var Draggable = FullCalendar.Draggable;
+    
 
       var containerEl = document.getElementById('external-events');
       var checkbox = document.getElementById('drop-remove');
@@ -130,19 +127,9 @@
       // initialize the external events
       // -----------------------------------------------------------------
 
-      new Draggable(containerEl, {
-        itemSelector: '.external-event',
-        eventData: function (eventEl) {
-          return {
-            title: eventEl.innerText,
-            backgroundColor: window.getComputedStyle(eventEl, null).getPropertyValue('background-color'),
-            borderColor: window.getComputedStyle(eventEl, null).getPropertyValue('background-color'),
-            textColor: window.getComputedStyle(eventEl, null).getPropertyValue('color'),
-          };
-        }
-      });
 
       var calendar = new Calendar(calendarEl, {
+        locale: 'es',
         headerToolbar: {
           left: 'prev,next today',
           center: 'title',
@@ -152,7 +139,7 @@
         //Random default events
         events: [
           {
-            title: 'All Day Event',
+            title: 'All Day Evento',
             start: new Date(y, m, 1),
             backgroundColor: '#f56954', //red
             borderColor: '#f56954', //red
@@ -197,8 +184,8 @@
             borderColor: '#3c8dbc' //Primary (light-blue)
           }
         ],
-        editable: true,
-        droppable: true, // this allows things to be dropped onto the calendar !!!
+        editable: false,
+        droppable: false, // this allows things to be dropped onto the calendar !!!
         drop: function (info) {
           // is the "remove after drop" checkbox checked?
           if (checkbox.checked) {
