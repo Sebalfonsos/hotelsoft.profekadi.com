@@ -59,17 +59,7 @@ require 'consultasdb/loginUsuario.php';
 
   }
 
-  if($logeado == "noencontrado"){
-    echo '
-    <div class="alert alert-warning d-flex align-items-center" role="alert">
-      <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Warning:" style="width: 20px; height: 20px;">
-        <use xlink:href="#exclamation-triangle-fill" fill="white" />
-      </svg>
-      <div style="padding-left: 10px;color: white; ">
-        Usuario no encontrado
-      </div>
-    </div>';
-  }else if($logeado == "usuarioocontrasenaincorrectos"){
+if($logeado == "usuarioocontrasenaincorrectos"){
     echo '
     <div class="alert alert-danger d-flex align-items-center" role="alert">
       <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Warning:" style="width: 20px; height: 20px;">

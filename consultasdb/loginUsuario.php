@@ -1,5 +1,5 @@
 <?php
-$logeado="nada";
+$logeado = "nada";
 $datos = isset($_POST["Correo"]) && isset($_POST["Contrasena"]);
 if ($datos) {
   $correoelectronico = $_POST["Correo"];
@@ -26,9 +26,6 @@ if ($datos) {
       $logeado = "usuarioocontrasenaincorrectos";
     }
   } else {
-    $logeado = "noencontrado";
-
+    $logeado = "usuarioocontrasenaincorrectos";
   }
 }
-
-?>
