@@ -15,7 +15,7 @@ if ($datos) {
     $contrasenahash = password_hash($_POST["Contrasena"], PASSWORD_DEFAULT);
 
 
-    require 'consultasdb/verificarExistencia.php';
+    require 'consultasdb/verificarExistenciaUsuario.php';
     $usuarioExistente = verificarUsuarioExistente($identificacion, $correoelectronico);
     if ($usuarioExistente) {
         if ($usuarioExistente['idUsuario'] == $identificacion) {

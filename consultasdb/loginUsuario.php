@@ -7,7 +7,8 @@ if ($datos) {
 
   require 'consultasdb/conexion.php';
 
-  $sql = "SELECT * FROM Usuarios WHERE correoelectronico = ? LIMIT 1";
+  $sql = "SELECT Usuarios.*, Roles.nombreRol AS nombre_rol FROM Usuarios JOIN Roles ON Usuarios.Roles_idRoles = Roles.idRol WHERE correoelectronico = ? LIMIT 1";
+
   $stmt = $conn->prepare($sql);
   $stmt->bind_param("s", $correoelectronico);
   $stmt->execute();
@@ -20,7 +21,11 @@ if ($datos) {
 
     if (password_verify($contrasena, $user['contrasena'])) {
 
-      echo "Login successful!";
+      require 'sesion/login.php';
+      loginExitoso($user['idUsuario'], $user['nombre'], $user['apellido'], $user['Roles_idRoles'], $user['nombre_rol']);
+
+      header('location: /panel.php');
+      exit();
     } else {
 
       $logeado = "usuarioocontrasenaincorrectos";
@@ -29,3 +34,9 @@ if ($datos) {
     $logeado = "usuarioocontrasenaincorrectos";
   }
 }
+
+
+
+
+
+?>

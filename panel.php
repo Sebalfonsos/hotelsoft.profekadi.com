@@ -1,3 +1,14 @@
+<?php
+session_start();
+if (!isset($_SESSION['id_usuario'])) {
+  header('location: /login.php');
+  exit();
+}
+
+$nombreUsuario = $_SESSION['nombreCompleto_usuario'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -70,26 +81,30 @@
       <!-- Sidebar -->
       <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
-        
 
-          <div class="user-panel mt-3 pb-3 mb-3 d-flex flex-column align-items-center">
-            <div class="image">
-              <img src="assets/avatar.png" class="img-circle elevation-3" alt="User Image">
-            </div>
 
-            <div class="info ">
-              <a href="#" class="d-block">Alexander Pierce</a>
-            </div>
-
-            <div class="mt-1 ">
-              <button type="button" class="btn btn-secondary">Salir</button>
-            </div>
-
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex flex-column align-items-center">
+          <div class="image">
+            <img src="assets/avatar.png" class="img-circle elevation-3" alt="User Image">
           </div>
 
+          <div class="info ">
+            <a href="#" class="d-block">
+              <?php echo $nombreUsuario ?>
+            </a>
+          </div>
+
+          <div class="mt-1 ">
+            <a href="sesion/logout.php">
+              <button type="button" class="btn btn-secondary">Salir</button>
+            </a>
+          </div>
+
+        </div>
 
 
-      
+
+
 
 
 
@@ -110,138 +125,12 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+            <?php
+            require 'consultasdb/mostrarMenus.php';
 
-
-            <li class="nav-item">
-              <a href="menus/inicio.html" class="nav-link">
-                <i class="nav-icon fas fa-home"></i>
-                <p>
-                  Inicio</p>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a href="menus/reserva.html" class="nav-link">
-                <i class="nav-icon far fa-calendar-alt"></i>
-                <p>
-                  Reserva</p>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a href="menus/recepcion.html" class="nav-link">
-                <i class="nav-icon fas fa-sign-in-alt"></i>
-                <p>
-                  Recepción</p>
-              </a>
-            </li>
-            <!-- <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-shopping-cart"></i>
-
-                <p>
-                  Punto de Ventas
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Vender Productos</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Catalogo de Productos</p>
-                  </a>
-                </li>
-
-              </ul>
-            </li> -->
-            <li class="nav-item">
-              <a href="menus/verificacionsalida.html" class="nav-link">
-                <i class="nav-icon fas fa-sign-out-alt"></i>
-                <p>
-                  Verificación de Salida</p>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a href="menus/clientes.html" class="nav-link">
-                <i class="nav-icon fas fa-users"></i>
-                <p>
-                  Clientes</p>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-file"></i>
-                <p>
-                  Reportes
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="menus/reportesdiario.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Reporte Diario</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="menus/reportesmensual.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Reporte Mensual</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            </li>
-
-            <li class="nav-item">
-              <a href="menus/usuarios.html" class="nav-link">
-                <i class="nav-icon fas fa-user-cog"></i>
-                <p>
-                  Usuarios</p>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-cogs"></i>
-                <p>
-                  Configuración
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="menus/rolesypermisos.php" class="nav-link">
-                    <i class="nav-icon fa fa-key"></i>
-                    <p>
-                      Roles y permisos
-                    </p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="menus/informacionhotel.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Información Hotel</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="menus/confihabitaciones.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Habitaciones</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
+            mostrarMenus();
+            ?>
+          </ul>
         </nav>
         <!-- /.sidebar-menu -->
       </div>
