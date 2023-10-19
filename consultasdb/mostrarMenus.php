@@ -22,7 +22,7 @@ function mostrarMenus()
                   </li>';
             } else if ($seccion['estado'] === 1 and $seccion['desplegable'] === 1 and $seccion['seccionesWEB_idseccionWEB'] === NULL) {
                 echo '<li class="nav-item">
-                <a href="' . $seccion['direccion'] . '" class="nav-link">
+                <a href="menus/' . $seccion['direccion'] . '" class="nav-link">
                 <i class="nav-icon ' . $seccion['icono'] . '"></i>
                 <p>
                 ' . $seccion['nombre'] . '
@@ -35,7 +35,7 @@ function mostrarMenus()
                     if($seccion2['seccionesWEB_idseccionWEB'] == $seccion['id']){
                         echo '
                         <li class="nav-item">
-                        <a href="'.$seccion2['direccion'].'" class="nav-link">
+                        <a href="menus/'.$seccion2['direccion'].'" class="nav-link">
                             <i class="'.$seccion2['icono'].' nav-icon"></i>
                             <p>' . $seccion2['nombre'] . '</p>
                          </a>
