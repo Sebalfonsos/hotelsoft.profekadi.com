@@ -61,7 +61,7 @@ function traerSeccionesPorRol($rolid)
     $sql = "SELECT sw.*
     FROM Roles_has_seccionesWEB rhs
     JOIN seccionesWEB sw ON rhs.seccionesWEB_idseccionWEB = sw.idseccionWEB
-    WHERE rhs.Roles_idRol = ?";
+    WHERE rhs.Roles_idRol = ?"; 
 
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $rolid);
