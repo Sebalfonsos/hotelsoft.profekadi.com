@@ -31,8 +31,8 @@ function mostrarMenus()
                 </a>';
                 echo '<ul class="nav nav-treeview">';
                 foreach ($seccionesAMostrar as $seccion2) {
-
-                    if($seccion2['seccionesWEB_idseccionWEB'] == $seccion['id']){
+                    
+                    if($seccion2['seccionesWEB_idseccionWEB'] == $seccion['id'] AND $seccion2['estado'] === 1 ){
                         echo '
                         <li class="nav-item">
                         <a href="'.$seccion2['direccion'].'" class="nav-link">
