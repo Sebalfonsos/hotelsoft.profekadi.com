@@ -66,7 +66,7 @@ function traerPermisos()
                 echo'<li class="list-group-item">
                         '.$permiso['nombreSeccion'].'
                         <div class=" float-right">
-                            <input id="" type="checkbox" '.$tieneAcceso.'>
+                            <input id="'.$permiso['nombreSeccion'].'" type="checkbox" '.$tieneAcceso.'>
                             
                         </div>
                     </li>';
