@@ -77,6 +77,7 @@
                     <th>Correo Electronico</th>
                     <th>Telefono</th>
                     <th>Rol</th>
+                    <th>Estado</th>
                     <th>Acciones</th>
                   </tr>
                 </thead>
@@ -92,6 +93,7 @@
                     <th>Correo Electronico</th>
                     <th>Telefono</th>
                     <th>Rol</th>
+                    <th>Estado</th>
                     <th>Acciones</th>
                   </tr>
                 </tfoot>
@@ -144,6 +146,7 @@
             { title: 'Correo Electronico' },
             { title: 'Telefono' },
             { title: 'Rol' },
+            { title: 'Estado'},
             {
               title: 'Acciones',
               searchable: false,
@@ -151,7 +154,7 @@
               render: function (data, type, row) {
                 return '<button class="btn btn-sm" onclick="editarUsuario(' + row[0] + ')"><i class="fas fa-edit"></i> Editar</button>' +
                 '<button class="btn btn-sm reset" onclick="resetearContrasena(' + row[0] + ')"><i class="fas fa-key"></i> Cambiar Contraseña</button>' +
-                  '<button class="btn btn-sm" onclick="eliminarUsuario(' + row[0] + ')"><i class="fas fa-trash"></i> Eliminar</button>';
+                  '<button class="btn btn-sm" onclick="cambiarEstadoUsuario(' + row[0] + ')"><i class="fas fa-power-off"></i> Cambiar estado</button>';
               }
 
             }
@@ -175,10 +178,11 @@
         console.log('Cambiar contraseña usuario con documento:', documento);
       }
 
-      function eliminarUsuario(documento) {
-        // Implementa la lógica para eliminar el usuario con el documento proporcionado
-        console.log('Eliminar usuario con documento:', documento);
+      function cambiarEstadoUsuario(documento) {
+        
+        console.log('Cambiar estado del usuario con documento:', documento);
       }
+
 
     </script>
   </div>
