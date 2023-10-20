@@ -48,43 +48,24 @@
                     
                     <!-- List group -->
                     <div class="list-group col-3" id="myList" role="tablist">
-                        <a class="list-group-item list-group-item-action active" data-toggle="list" href="#home"
-                            role="tab">Home</a>
-                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#profile"
-                            role="tab">Profile</a>
-                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#messages"
-                            role="tab">Messages</a>
-                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#settings"
-                            role="tab">Settings</a>
+
+                        <?php
+                        require '../consultasdb/roles/consultarRolesYPermisos.php';
+                        trearRoles();
+                        ?>
+                        
                     </div>
 
                     <!-- Tab panes -->
                     
                     <div class="tab-content col-8">
                     <label for="">Acceso a los modulos:</label>
-                        <div class="tab-pane active" id="home" role="tabpanel">
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    Employee
-                                    <div class=" float-right">
-                                        <input id="" type="checkbox">
-                                        
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    Employee
-                                    <div class=" float-right">
-                                        <input id="" type="checkbox">
-                                        
-                                    </div>
-                                </li>
-                                
-                            </ul>
 
-                        </div>
-                        <div class="tab-pane" id="profile" role="tabpanel">..2</div>
-                        <div class="tab-pane" id="messages" role="tabpanel">..3</div>
-                        <div class="tab-pane" id="settings" role="tabpanel">..4</div>
+                    <?php
+                        
+                        traerPermisos();
+                        ?>
+
                     </div>
 
                 </div>
