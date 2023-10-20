@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -22,7 +24,7 @@
 
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <div class="container-fluid">
@@ -40,12 +42,43 @@
 
             <div class="column">
                 <div class="col-3 mb-2 ml-1">
-                    <button type="button" class="btn btn-block btn-primary btn-lg">Crear Rol</button>
+                    <button id="guardarCambios" onclick="guardarCambios()" type="button"
+                        class="btn btn-block btn-primary btn-lg" disabled>Guardar cambios</button>
+                </div>
+                <div class="col-3 mb-2 ml-1">
+                    <button id="crearRol" type="button" class="btn btn-block btn-primary btn-lg" data-toggle="modal"
+                        data-target="#modalCrearRol">Crear Rol</button>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="modalCrearRol" tabindex="-1" role="dialog" aria-labelledby="modalCrearRol"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalScrollableTitle">Crear Rol</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="formularioCrearRol">
+                                    <div class="form-group">
+                                        <label for="nombreRol">Nombre del Rol:</label>
+                                        <input type="text" class="form-control" id="nombreRol" name="nombreRol"
+                                            placeholder="Ingrese el nombre del rol" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
 
                 <div class="row ml-2">
 
-                    
+
                     <!-- List group -->
                     <div class="list-group col-3" id="myList" role="tablist">
 
@@ -53,16 +86,16 @@
                         require '../consultasdb/roles/consultarRolesYPermisos.php';
                         trearRoles();
                         ?>
-                        
+
                     </div>
 
                     <!-- Tab panes -->
-                    
-                    <div class="tab-content col-8">
-                    <label for="">Acceso a los modulos:</label>
 
-                    <?php
-                        
+                    <div class="tab-content col-8">
+                        <label for="">Acceso a los modulos:</label>
+
+                        <?php
+
                         traerPermisos();
                         ?>
 
@@ -98,6 +131,84 @@
     <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/adminlte.min.js"></script>
+
+    <script>
+        // Función para activar el botón de "Guardar Cambios" cuando se haga un cambio en los checkboxes
+        function activarBotonGuardarCambios() {
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            var guardarCambiosButton = document.getElementById('guardarCambios');
+            var crearRolButton = document.getElementById('crearRol');
+            var listItems = document.querySelectorAll('.list-group a');
+
+            checkboxes.forEach(function (checkbox) {
+                checkbox.addEventListener('change', function () {
+                    guardarCambiosButton.disabled = false;
+                    crearRolButton.disabled = true;
+                    // Desactiva los elementos <a> que no tienen la clase "active"
+                    listItems.forEach(function (item) {
+                        if (!item.classList.contains('active')) {
+                            item.classList.add('disabled');
+                        } else {
+                            item.classList.remove('disabled');
+                        }
+                    });
+                });
+            });
+        }
+
+        // Función para guardar los cambios y quitar la clase "disabled"
+        function guardarCambios() {
+            // Aquí puedes agregar la lógica para guardar los cambios en tu base de datos o realizar otras acciones.
+            alert('Cambios guardados');
+            // Quita la clase "disabled" de los elementos <a>
+            var listItems = document.querySelectorAll('.list-group a');
+            listItems.forEach(function (item) {
+                item.classList.remove('disabled');
+            });
+            // Desactiva el botón después de guardar los cambios
+            document.getElementById('guardarCambios').disabled = true;
+            document.getElementById('crearRol').disabled = false;
+        }
+
+        // Activa el botón cuando se carga la página
+        activarBotonGuardarCambios();
+    </script>
+
+
+
+    <script>
+
+        document.getElementById('formularioCrearRol').addEventListener('submit', function (e) {
+            e.preventDefault(); // Evita el envío del formulario por defecto
+
+            // Realiza una solicitud AJAX para procesar el formulario
+            $.ajax({
+                type: 'POST',
+                url: '../consultasdb/roles/crearRol.php',
+                data: $(this).serialize(),
+                success: function (response) {
+                    if (response === 'success') {
+                        Swal.fire({
+                            title: 'Éxito',
+                            text: 'El rol se ha creado correctamente',
+                            icon: 'success'
+                        }).then(() => {
+                            // Recargar la página actual
+                            location.reload();
+                        });
+                    } else if (response === 'error') {
+                        Swal.fire('Error', 'Hubo un problema al crear el rol', 'error');
+                    } else if (response === 'errorExiste') {
+                        Swal.fire('Error', 'Ya existe un rol con ese nombre', 'error');
+                    }
+                }
+            });
+        });
+    </script>
+
+
+
+
 
 </body>
 
