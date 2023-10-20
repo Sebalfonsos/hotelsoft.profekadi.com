@@ -18,18 +18,24 @@ if ($datos) {
   if ($result->num_rows > 0) {
     $user = $result->fetch_assoc();
 
+    if($user['estado'] == 1){
 
-    if (password_verify($contrasena, $user['contrasena'])) {
+      if (password_verify($contrasena, $user['contrasena'])) {
+      
+        require 'sesion/login.php';
+        loginExitoso($user['idUsuario'], $user['nombre'], $user['apellido'], $user['Roles_idRoles'], $user['nombre_rol']);
+  
+        header('location: /panel.php');
+        exit();
+      } else {
+  
+        $logeado = "usuarioocontrasenaincorrectos";
+      }
 
-      require 'sesion/login.php';
-      loginExitoso($user['idUsuario'], $user['nombre'], $user['apellido'], $user['Roles_idRoles'], $user['nombre_rol']);
-
-      header('location: /panel.php');
-      exit();
-    } else {
-
-      $logeado = "usuarioocontrasenaincorrectos";
+    }else{
+      $logeado = "usuarioInactivo";
     }
+
   } else {
     $logeado = "usuarioocontrasenaincorrectos";
   }
