@@ -1,7 +1,7 @@
 <?php
 function mostrarMenus()
 {
-    session_start();
+
 
     if (isset($_SESSION['id_usuario'])) {
         $seccionesAMostrar = traerSeccionesPorRol($_SESSION['id_rol']);
