@@ -78,6 +78,18 @@ if($logeado == "usuarioocontrasenaincorrectos"){
     </div>';
 
   }
+  
+  if($logeado == "usuarioInactivo"){
+    echo '
+    <div class="alert alert-danger d-flex align-items-center" role="alert">
+      <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Warning:" style="width: 20px; height: 20px;">
+        <use xlink:href="#exclamation-triangle-fill" fill="white" />
+      </svg>
+      <div style="padding-left: 10px; ">
+        Usuario inactivo - Contacta con el administrador
+      </div>
+    </div>';
+  }
 
 
 
