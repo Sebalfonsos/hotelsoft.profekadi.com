@@ -3,10 +3,11 @@ function traerDatosEmpleados()
 {
     require 'conexion.php';
 
-    $sql = "SELECT Usuarios.idUsuario, Usuarios.nombre, Usuarios.apellido, Usuarios.correoelectronico, Usuarios.telefono, Tipo_Identificacion.nombreTipoId AS Tipo_Identificacion, Roles.nombreRol
+    $sql = "SELECT Usuarios.idUsuario, Usuarios.nombre, Usuarios.apellido, Usuarios.correoelectronico, Usuarios.telefono, Usuarios.estado, Tipo_Identificacion.nombreTipoId AS Tipo_Identificacion, Roles.nombreRol, estadosUsuarios.nombreEstado
     FROM Usuarios
     JOIN Tipo_Identificacion ON Usuarios.TipoIdentificacion_idTipoIdentificacion = Tipo_Identificacion.idTipo_Identificacion
     JOIN Roles ON Usuarios.Roles_idRoles = Roles.idRol
+    JOIN estadosUsuarios ON Usuarios.estado = estadosUsuarios.idEstado
     WHERE Usuarios.Roles_idRoles != 1 AND Usuarios.Roles_idRoles != 2;";
 
     $stmt = $conn->prepare($sql);
@@ -25,6 +26,7 @@ function traerDatosEmpleados()
                 $row["correoelectronico"],
                 $row["telefono"],
                 $row["nombreRol"],
+                $row["nombreEstado"],
                 ''
             );
         }
