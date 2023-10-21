@@ -31,7 +31,7 @@ while ($row = $resultPermisos->fetch_assoc()) {
 }
 
 
-function trearRoles()
+function traerRoles()
 {
 
     global $roles;
@@ -40,7 +40,7 @@ function trearRoles()
 
     foreach ($roles as $rol) {
         echo '<a class="list-group-item list-group-item-action" data-toggle="list" href="#' . $rol['nombreRol'] . '"
-        role="tab">' . $rol['nombreRol'] . '</a>';
+        role="tab" identificadorRol="'.$rol['idRol'].'">' . $rol['nombreRol'] . '</a>';
     }
 
 
@@ -66,7 +66,7 @@ function traerPermisos()
                 echo'<li class="list-group-item">
                         '.$permiso['nombreSeccion'].'
                         <div class=" float-right">
-                            <input id="'.$permiso['nombreSeccion'].'" type="checkbox" '.$tieneAcceso.'>
+                            <input pertenece="'.$rol['idRol'].'" id="'.$permiso['idseccionWEB'].'" type="checkbox" '.$tieneAcceso.'>
                             
                         </div>
                     </li>';

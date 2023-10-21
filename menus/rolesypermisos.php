@@ -14,7 +14,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="sweetalert2.all.min.js"></script>
+
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -80,11 +80,13 @@
 
 
                     <!-- List group -->
-                    <div class="list-group col-3" id="myList" role="tablist">
+                    <div class="list-group col-3" id="listaRoles" role="tablist">
 
                         <?php
                         require '../consultasdb/roles/consultarRolesYPermisos.php';
-                        trearRoles();
+                        traerRoles();
+
+
                         ?>
 
                     </div>
@@ -133,51 +135,59 @@
     <script src="../../dist/js/adminlte.min.js"></script>
 
     <script>
-        // Función para activar el botón de "Guardar Cambios" cuando se haga un cambio en los checkboxes
-        function activarBotonGuardarCambios() {
-            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-            var guardarCambiosButton = document.getElementById('guardarCambios');
-            var crearRolButton = document.getElementById('crearRol');
-            var listItems = document.querySelectorAll('.list-group a');
 
-            checkboxes.forEach(function (checkbox) {
-                checkbox.addEventListener('change', function () {
-                    guardarCambiosButton.disabled = false;
-                    crearRolButton.disabled = true;
-                    // Desactiva los elementos <a> que no tienen la clase "active"
-                    listItems.forEach(function (item) {
-                        if (!item.classList.contains('active')) {
-                            item.classList.add('disabled');
-                        } else {
-                            item.classList.remove('disabled');
-                        }
-                    });
-                });
+        const initialState = {};
+
+        function guardarEstadoInicial() {
+            // Obtener todos los checkboxes
+            const checkboxes = document.querySelectorAll('input[pertenece]');
+
+            checkboxes.forEach(checkbox => {
+                // Obtener el valor del atributo 'pertenece' para identificar la categoría
+                const categoria = checkbox.getAttribute('pertenece');
+
+                // Si la categoría aún no existe en initialState, crear un objeto vacío para ella
+                if (!initialState[categoria]) {
+                    initialState[categoria] = {};
+                }
+
+                // Almacenar el estado del checkbox en la categoría correspondiente
+                initialState[categoria][checkbox.id] = checkbox.checked;
             });
         }
 
-        // Función para guardar los cambios y quitar la clase "disabled"
-        function guardarCambios() {
-            // Aquí puedes agregar la lógica para guardar los cambios en tu base de datos o realizar otras acciones.
-            alert('Cambios guardados');
-            // Quita la clase "disabled" de los elementos <a>
-            var listItems = document.querySelectorAll('.list-group a');
-            listItems.forEach(function (item) {
-                item.classList.remove('disabled');
+        function detectarCambios(identificador) {
+            const cambios = [];
+            const checkboxes = document.querySelectorAll(`input[pertenece="${identificador}"]`);
+
+            checkboxes.forEach(checkbox => {
+                const estadoInicial = initialState[identificador] && initialState[identificador][checkbox.id];
+                const estadoActual = checkbox.checked;
+
+                if (estadoInicial !== undefined && estadoInicial !== estadoActual) {
+                    const cambioInfo = {
+                        id: checkbox.id,
+                        estadoAnterior: estadoInicial ? 1 : 0, // 1 si estaba seleccionado, 0 si no
+                        estadoActual: estadoActual ? 1 : 0 // 1 si está seleccionado, 0 si no
+                    };
+                    cambios.push(cambioInfo);
+                }
             });
-            // Desactiva el botón después de guardar los cambios
-            document.getElementById('guardarCambios').disabled = true;
-            document.getElementById('crearRol').disabled = false;
+
+            console.log(`Cambios en la categoría '${identificador}':`);
+            cambios.forEach(cambio => {
+                console.log(`ID: ${cambio.id}, Estado Anterior: ${cambio.estadoAnterior}, Estado Actual: ${cambio.estadoActual}`);
+            });
+            guardarEstadoInicial()
+
+            return cambios
+
+            
         }
 
-        // Activa el botón cuando se carga la página
-        activarBotonGuardarCambios();
-    </script>
 
 
-
-    <script>
-
+        // ajax para añadir rol
         document.getElementById('formularioCrearRol').addEventListener('submit', function (e) {
             e.preventDefault(); // Evita el envío del formulario por defecto
 
@@ -204,9 +214,97 @@
                 }
             });
         });
+
+      
+
+
+
+
+
+
+        // Función para activar el botón de "Guardar Cambios" cuando se haga un cambio en los checkboxes
+        function activarBotonGuardarCambios() {
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            var guardarCambiosButton = document.getElementById('guardarCambios');
+            var crearRolButton = document.getElementById('crearRol');
+            var listItems = document.querySelectorAll('.list-group a');
+
+            checkboxes.forEach(function (checkbox) {
+                checkbox.addEventListener('change', function () {
+                    guardarCambiosButton.disabled = false;
+                    crearRolButton.disabled = true;
+                    // Desactiva los elementos <a> que no tienen la clase "active"
+                    listItems.forEach(function (item) {
+                        if (!item.classList.contains('active')) {
+                            item.classList.add('disabled');
+                        } else {
+                            item.classList.remove('disabled');
+                        }
+                    });
+                });
+            });
+        }
+
+
+
+        // Función para guardar los cambios y quitar la clase "disabled"
+        function guardarCambios() {
+
+            const enlaceActivo = document.querySelector("#listaRoles a.active");
+            var textoEnlace;
+            var idRol;
+            // Comprobar si se encontró un enlace activo
+            if (enlaceActivo) {
+                textoEnlace = enlaceActivo.textContent;
+                console.log("ID: " + enlaceActivo.getAttribute("identificadorrol"))
+                idRol = enlaceActivo.getAttribute("identificadorrol");
+            }
+
+            var cambios = detectarCambios(idRol);
+
+            actualizarPermisos(idRol, cambios)
+
+
+
+
+            alert('Cambios guardados');
+            // Quita la clase "disabled" de los elementos <a>
+            var listItems = document.querySelectorAll('.list-group a');
+            listItems.forEach(function (item) {
+                item.classList.remove('disabled');
+            });
+            // Desactiva el botón después de guardar los cambios
+            document.getElementById('guardarCambios').disabled = true;
+            document.getElementById('crearRol').disabled = false;
+        }
+
+
+          //actualizar permisos ajax
+          function actualizarPermisos(idRol, permisosArray) {
+            $.ajax({
+                type: "POST",
+                url: "../consultasdb/roles/actualizarPermisos.php", // Ruta al archivo PHP
+                data: {
+                    idRol: idRol,
+                    permisos: permisosArray
+                },
+                success: function (response) {
+                    console.log("Operación completada con éxito.");
+                    // Aquí puedes manejar la respuesta del servidor si es necesario
+                },
+                error: function (error) {
+                    console.error("Error al realizar la operación.");
+                    // Manejar el error si es necesario
+                }
+            });
+        }
+
+        // Activa el botón cuando se carga la página
+        activarBotonGuardarCambios();
+
+        //guardar estado incial checkboxes
+        guardarEstadoInicial();
     </script>
-
-
 
 
 
