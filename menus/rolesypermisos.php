@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Blank Page</title>
+    <title>Hotel Soft | Roles y permisos</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -30,7 +30,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Blank Page</h1>
+                        <h1>Roles y permisos</h1>
                     </div>
 
                 </div>
@@ -264,10 +264,7 @@
 
             actualizarPermisos(idRol, cambios)
 
-
-
-
-            alert('Cambios guardados');
+            
             // Quita la clase "disabled" de los elementos <a>
             var listItems = document.querySelectorAll('.list-group a');
             listItems.forEach(function (item) {
@@ -289,13 +286,17 @@
                     permisos: permisosArray
                 },
                 success: function (response) {
-                    console.log("Operación completada con éxito.");
-                    // Aquí puedes manejar la respuesta del servidor si es necesario
-                },
-                error: function (error) {
-                    console.error("Error al realizar la operación.");
-                    // Manejar el error si es necesario
+                    if (response === 'exito') {
+                        Swal.fire({
+                            title: 'Éxito',
+                            text: 'Permisos actualizados con exito',
+                            icon: 'success'
+                        });
+                    } else if (response === 'error') {
+                        Swal.fire('Error', 'Hubo un problema al actualizar los permisos', 'error');
+                    } 
                 }
+                
             });
         }
 
