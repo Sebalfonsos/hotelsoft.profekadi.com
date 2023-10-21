@@ -1,13 +1,14 @@
 <?php
 
 require '../consultasdb/conexion.php';
-$result = $conn->query("SELECT * FROM Roles");
+$result = $conn->query("SELECT * FROM Roles WHERE idRol != 1");
 $resultPermisos = $conn->query("SELECT R.idRol, R.nombreRol, SW.idseccionWEB, SW.nombreSeccion,
 CASE WHEN RHS.Roles_idRol IS NOT NULL THEN 1 ELSE 0 END AS tieneAcceso
 FROM Roles AS R
 CROSS JOIN seccionesWEB AS SW
 LEFT JOIN Roles_has_seccionesWEB AS RHS
 ON R.idRol = RHS.Roles_idRol AND SW.idseccionWEB = RHS.seccionesWEB_idseccionWEB
+WHERE R.idRol != 1
 ORDER BY R.idRol, SW.idseccionWEB;");
 
 $conn->close();
