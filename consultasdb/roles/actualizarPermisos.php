@@ -17,7 +17,7 @@ foreach ($permisos as $permiso) {
     }
 
     if ($conn->query($sql) !== TRUE) {
-        echo "Error al procesar los permisos: " . $conn->error;
+        echo "error";
         exit; // Terminar la ejecución si hay un error en la consulta SQL
     }
 }
@@ -26,5 +26,5 @@ foreach ($permisos as $permiso) {
 $conn->close();
 
 // Respuesta exitosa
-echo "Los permisos se actualizaron con éxito.";
+echo "exito";
 ?>
