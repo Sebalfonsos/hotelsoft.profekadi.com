@@ -1,4 +1,3 @@
-
 <?php
 require 'conexion.php';
 // Obtener los valores enviados por el formulario
