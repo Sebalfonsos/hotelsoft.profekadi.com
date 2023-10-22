@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Blank Page</title>
+  <title>Hotel Soft | Lista Habitaciones</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -78,17 +78,17 @@
                                 <div class="form-group">
                                   <label for="tipoHabitacion">Tipo de Habitación</label>
                                   <select name="tipoHabitacion" class="form-control" id="tipoHabitacion">
-                                    <option value="individual">Individual</option>
-                                    <option value="doble">Doble</option>
-                                    <option value="suite">Suite</option>
+                                    <option value="Individual">Individual</option>
+                                    <option value="Doble">Doble</option>
+                                    <option value="Suite">Suite</option>
                                   </select>
                                 </div>
                                 <div class="form-group">
                                   <label for="estadoHabitacion">Estado de la Habitación</label>
                                   <select name="estadoHabitacion" class="form-control" id="estadoHabitacion">
-                                    <option value="disponible">Disponible</option>
-                                    <option value="ocupada">Ocupada</option>
-                                    <option value="mantenimiento">Mantenimiento</option>
+                                    <option value="Disponible">Disponible</option>
+                                    <option value="Ocupada">Ocupada</option>
+                                    <option value="Mantenimiento">Mantenimiento</option>
                                   </select>
                                 </div>
                                 <div class="form-group">
