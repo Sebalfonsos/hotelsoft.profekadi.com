@@ -7,8 +7,7 @@
   <title>AdminLTE 3 | Blank Page</title>
 
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
   <!-- DataTables -->
@@ -37,9 +36,9 @@
       </section>
       <section class="content">
 
-        <div class="container-fluid " >
+        <div class="container-fluid ">
           <div class="content-wrapper">
- 
+
             <section class="content-header">
               <div class="container-fluid">
                 <div class="row mb-2">
@@ -58,7 +57,54 @@
                 <div class="card-body ">
                   <div class="row mb-2">
                     <div class="col-sm-6">
-                      <button type="submit" class="btn btn-primary">Agregar Nuevo</button>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crearHabitacionModal">
+                        Crear Habitación
+                      </button>
+                      <div class="modal fade" id="crearHabitacionModal" tabindex="-1" role="dialog" aria-labelledby="crearHabitacionModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-vertical" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="crearHabitacionModalLabel">Crear Habitación</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <form action="../consultasdb/crearhabitaciones.php" method="post">
+                                <div class="form-group">
+                                  <label for="numeroHabitacion">Número de Habitación</label>
+                                  <input type="text" name="numHabitacion"  class="form-control" id="numeroHabitacion" placeholder="Ej. 101">
+                                </div>
+                                <div class="form-group">
+                                  <label for="tipoHabitacion">Tipo de Habitación</label>
+                                  <select name="tipoHabitacion" class="form-control" id="tipoHabitacion">
+                                    <option value="individual">Individual</option>
+                                    <option value="doble">Doble</option>
+                                    <option value="suite">Suite</option>
+                                  </select>
+                                </div>
+                                <div class="form-group">
+                                  <label for="estadoHabitacion">Estado de la Habitación</label>
+                                  <select name="estadoHabitacion" class="form-control" id="estadoHabitacion">
+                                    <option value="disponible">Disponible</option>
+                                    <option value="ocupada">Ocupada</option>
+                                    <option value="mantenimiento">Mantenimiento</option>
+                                  </select>
+                                </div>
+                                <div class="form-group">
+                                  <label for="numeroHabitacion">Precio de Habitación</label>
+                                  <input  name="precioHabitacion" type="text" class="form-control" id="numeroHabitacion" placeholder="Ej. $30,000">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                              <button type="submit" class="btn btn-primary">Crear Habitación</button> 
+                              </form>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <table id="tabla1" class="table table-bordered table-striped">
@@ -67,9 +113,7 @@
                         <th>N° Habitación</th>
                         <th>Categoria</th>
                         <th>Precio</th>
-                        <th>Tarifa</th>
-                        <th>Detalles</th>
-                        <th>Estatus</th>
+                        <th>Estado</th>
                         <th>Acciones</th>
                       </tr>
                     </thead>
@@ -81,9 +125,7 @@
                         <th>N° Habitación</th>
                         <th>Categoria</th>
                         <th>Precio</th>
-                        <th>Tarifa</th>
-                        <th>Detalles</th>
-                        <th>Estatus</th>
+                        <th>Estado</th>
                         <th>Acciones</th>
                       </tr>
                     </tfoot>
@@ -116,14 +158,35 @@
 
           <!-- Page specific script -->
           <script>
-            $(function () {
-              $("#tabla1").DataTable({
-                language: spanish,
-                "responsive": true, "lengthChange": false, "autoWidth": false,
-                "buttons": ["excel", "pdf", "print", "colvis"]
-              }).buttons().container().appendTo('#tabla1_wrapper .col-md-6:eq(0)');
+var data = <?php require '../consultasdb/habitaciones.php'; echo traerDatosHabitaciones(); ?>;
+      $(function () {
+        $("#tabla1").DataTable({
+          language: spanish,
+          "responsive": true, "lengthChange": false, "autoWidth": false,
+          "buttons": ["excel", "pdf", "print", "colvis"],
+          columns: [
+            { title: 'N° Habitación' },
+            { title: 'Categoria' },
+            { title: 'Precio' },
+            { title: 'Estado' },
+            {
+              title: 'Acciones',
+              searchable: false,
+              orderable: false,
+              render: function (data, type, row) {
+                return '<button class="btn btn-sm" onclick="editarUsuario(' + row[0] + ')"><i class="fas fa-edit"></i> Editar</button>' +
+                '<button class="btn btn-sm reset" onclick="resetearContrasena(' + row[0] + ')"><i class="fas fa-key"></i> Cambiar Contraseña</button>' +
+                  '<button class="btn btn-sm" onclick="cambiarEstadoUsuario(' + row[0] + ')"><i class="fas fa-power-off"></i> Cambiar estado</button>';
+              }
 
-            });
+            }
+          ],
+          data: data
+
+        }).buttons().container().appendTo('#tabla1_wrapper .col-md-6:eq(0)');
+
+      });
+
           </script>
       </section>
 </body>
