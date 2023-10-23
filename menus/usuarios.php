@@ -7,7 +7,8 @@
   <title>HotelSoft | Lista Usuarios</title>
 
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
   <!-- DataTables -->
@@ -61,8 +62,9 @@
                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crearHabitacionModal">
                     Crear Empleado
                   </button>
-                  <div class="modal fade" id="crearHabitacionModal" tabindex="-1" role="dialog" aria-labelledby="crearHabitacionModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-vertical" role="document">
+                  <div class="modal fade" id="crearHabitacionModal" tabindex="-1" role="dialog"
+                    aria-labelledby="crearHabitacionModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title" id="crearHabitacionModalLabel">Crear Empleado</h5>
@@ -74,52 +76,60 @@
                           <form action="../consultasdb/crearempleado.php" method="post">
                             <div class="form-group">
                               <label for="documento">Documento</label>
-                              <input type="text" name="documento" class="form-control" id="documento" placeholder="Ej. 100288790">
+                              <input type="text" name="documento" class="form-control" id="documento"
+                                placeholder="Ej. 100288790">
                             </div>
                             <div class="form-group">
-                                  <label for="rol">Tipo Documento</label>
-                                  <select name="tipoDocumento" class="form-control" id="rol">
-                                    <option value="1">Cedula Ciudadania</option>
-                                    <option value="2">Tarjeta de Identidad</option>
-                                    <option value="3">Cedula de Extranjeria</option>
-                                    <option value="4">Visa</option>
-                                    <option value="5">Pasaporte</option>
-                                  </select>
-                                </div>
+                              <label for="rol">Tipo Documento</label>
+                              <select required class="form-control" name="tipoDocumento" id="">
+                                <option selected disabled value="">Tipo de Identificación</option>
+                                <?php
+                                include '../consultasdb/traerTiposDeIdentificacion.php';
+
+                                ?>
+                              </select>
+                            </div>
                             <div class="form-group">
                               <label for="nombres">Nombres</label>
-                              <input name="nombre" type="text" class="form-control" id="nombres" placeholder="Ej. Carlos">
+                              <input name="nombre" type="text" class="form-control" id="nombres"
+                                placeholder="Ej. Carlos">
                             </div>
                             <div class="form-group">
                               <label for="apellidos">Apellidos</label>
-                              <input name="apellido" type="text" class="form-control" id="apellidos" placeholder="Ej. Fonseca">
+                              <input name="apellido" type="text" class="form-control" id="apellidos"
+                                placeholder="Ej. Fonseca">
                             </div>
                             <div class="form-group">
                               <label for="correoElectronico">Correo Electronico</label>
-                              <input name="correoElectronico" type="text" class="form-control" id="correoElectronico" placeholder="Ej. hotelsoft@hotmail.com">
+                              <input name="correoElectronico" type="text" class="form-control" id="correoElectronico"
+                                placeholder="Ej. hotelsoft@hotmail.com">
                             </div>
                             <div class="form-group">
                               <label for="contrasena">Contraseña</label>
-                              <input type="password" name="contrasena" class="form-control" id="contrasena" placeholder="Ej. 100288790">
+                              <input type="password" name="contrasena" class="form-control" id="contrasena"
+                                placeholder="Ej. 100288790">
                             </div>
                             <div class="form-group">
                               <label for="telefono">Telefono</label>
-                              <input name="telefono" type="text" class="form-control" id="telefono" placeholder="Ej. $3005186039">
+                              <input name="telefono" type="text" class="form-control" id="telefono"
+                                placeholder="Ej. $3005186039">
                             </div>
                             <div class="form-group">
-                                  <label for="rol">Rol</label>
-                                  <select name="rol" class="form-control" id="rol">
-                                    <option value="19">Portero</option>
-                                    <option value="3">Recepcionista</option>
-                                  </select>
-                                </div>
-                                <div class="form-group">
-                                  <label for="estado">Estado</label>
-                                  <select name="estado" class="form-control" id="estado">
-                                    <option value="1">Activo</option>
-                                    <option value="0">Inactivo</option>
-                                  </select>
-                                </div>
+                              <label for="rol">Rol</label>
+                              <select name="rol" class="form-control" id="rol">
+                                <?php
+                                include '../consultasdb/roles/consultarRolesYPermisos.php';
+                                traerRolesEnFormatoSelect();
+                                ?>
+                              </select>
+                            </div>
+                            <div class="form-group">
+                              <label for="estado">Estado</label>
+                              <select name="estado" class="form-control" id="estado">
+                                <option value="1">Activo</option>
+                                <option value="0">Inactivo</option>
+                              </select>
+                            </div>
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -199,8 +209,8 @@
     <!-- Page specific script -->
     <script>
       var data = <?php require '../consultasdb/empleados.php';
-                  echo traerDatosEmpleados(); ?>;
-      $(function() {
+      echo traerDatosEmpleados(); ?>;
+      $(function () {
         $("#tabla1").DataTable({
           language: spanish,
           "responsive": true,
@@ -208,19 +218,19 @@
           "autoWidth": false,
           "buttons": ["excel", "pdf", "print", "colvis"],
           columns: [
-            {title: 'Documento'},
-            {title: 'Tipo Documento'},
-            {title: 'Nombres'},
-            {title: 'Apellidos'},
-            {title: 'Correo Electronico'},
-            {title: 'Telefono'},
-            {title: 'Rol'},
-            {title: 'Estado'},
+            { title: 'Documento' },
+            { title: 'Tipo Documento' },
+            { title: 'Nombres' },
+            { title: 'Apellidos' },
+            { title: 'Correo Electronico' },
+            { title: 'Telefono' },
+            { title: 'Rol' },
+            { title: 'Estado' },
             {
               title: 'Acciones',
               searchable: false,
               orderable: false,
-              render: function(data, type, row) {
+              render: function (data, type, row) {
                 return '<button class="btn btn-sm" onclick="editarUsuario(' + row[0] + ')"><i class="fas fa-edit"></i> Editar</button>' +
                   '<button class="btn btn-sm reset" onclick="resetearContrasena(' + row[0] + ')"><i class="fas fa-key"></i> Cambiar Contraseña</button>' +
                   '<button class="btn btn-sm" onclick="cambiarEstadoUsuario(' + row[0] + ')"><i class="fas fa-power-off"></i> Cambiar estado</button>';
