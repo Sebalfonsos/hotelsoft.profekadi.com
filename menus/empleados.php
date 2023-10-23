@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>HotelSoft | Lista Usuarios</title>
+  <title>HotelSoft | Lista Empleados</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet"
@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -28,7 +29,7 @@
         <div class="text-center;" style="margin-left: 1%;">
           <i class="nav-icon fas fa-users" style=" font-size: 2rem;"></i>
         </div>
-        <h1 style="padding-left: 1%;">Usuarios</h1>
+        <h1 style="padding-left: 1%;">Empleados</h1>
       </div>
 
     </section>
@@ -53,7 +54,7 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title"> Listado de Usuarios </h3>
+                <h3 class="card-title"> Listado de Empleados </h3>
               </div>
             </div>
             <div class="card-body ">
@@ -73,14 +74,14 @@
                           </button>
                         </div>
                         <div class="modal-body">
-                          <form action="../consultasdb/crearempleado.php" method="post">
+                          <form id="formularioCrearEmpleado">
                             <div class="form-group">
-                              <label for="documento">Documento</label>
-                              <input type="text" name="documento" class="form-control" id="documento"
+                              <label for="">Documento</label>
+                              <input type="text" name="documento" class="form-control" id=" "
                                 placeholder="Ej. 100288790">
                             </div>
                             <div class="form-group">
-                              <label for="rol">Tipo Documento</label>
+                              <label for="">Tipo Documento</label>
                               <select required class="form-control" name="tipoDocumento" id="">
                                 <option selected disabled value="">Tipo de Identificación</option>
                                 <?php
@@ -90,32 +91,32 @@
                               </select>
                             </div>
                             <div class="form-group">
-                              <label for="nombres">Nombres</label>
+                              <label for="">Nombres</label>
                               <input name="nombre" type="text" class="form-control" id="nombres"
                                 placeholder="Ej. Carlos">
                             </div>
                             <div class="form-group">
-                              <label for="apellidos">Apellidos</label>
+                              <label for="">Apellidos</label>
                               <input name="apellido" type="text" class="form-control" id="apellidos"
                                 placeholder="Ej. Fonseca">
                             </div>
                             <div class="form-group">
-                              <label for="correoElectronico">Correo Electronico</label>
+                              <label for="">Correo Electronico</label>
                               <input name="correoElectronico" type="text" class="form-control" id="correoElectronico"
                                 placeholder="Ej. hotelsoft@hotmail.com">
                             </div>
                             <div class="form-group">
-                              <label for="contrasena">Contraseña</label>
+                              <label for="">Contraseña</label>
                               <input type="password" name="contrasena" class="form-control" id="contrasena"
                                 placeholder="Ej. 100288790">
                             </div>
                             <div class="form-group">
-                              <label for="telefono">Telefono</label>
+                              <label for="">Telefono</label>
                               <input name="telefono" type="text" class="form-control" id="telefono"
                                 placeholder="Ej. $3005186039">
                             </div>
                             <div class="form-group">
-                              <label for="rol">Rol</label>
+                              <label for="">Rol</label>
                               <select name="rol" class="form-control" id="rol">
                                 <?php
                                 include '../consultasdb/roles/consultarRolesYPermisos.php';
@@ -124,19 +125,21 @@
                               </select>
                             </div>
                             <div class="form-group">
-                              <label for="estado">Estado</label>
+                              <label for="">Estado</label>
                               <select name="estado" class="form-control" id="estado">
                                 <option value="1">Activo</option>
                                 <option value="0">Inactivo</option>
                               </select>
                             </div>
+                            
+
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                          <button type="submit" class="btn btn-primary">Crear Usuarios</button>
+                          <button type="submit" class="btn btn-primary">Crear</button>
                           </form>
-
                         </div>
+
                       </div>
                     </div>
                   </div>
@@ -241,6 +244,39 @@
           data: data
 
         }).buttons().container().appendTo('#tabla1_wrapper .col-md-6:eq(0)');
+
+      });
+
+
+      document.getElementById('formularioCrearEmpleado').addEventListener('submit', function (e) {
+        e.preventDefault(); // Evita el envío del formulario por defecto
+
+        // Realiza una solicitud AJAX para procesar el formulario
+        $.ajax({
+          type: 'POST',
+          url: '../consultasdb/crearempleado.php',
+          data: $(this).serialize(),
+          success: function (response) {
+
+          
+           
+            if (response === "success") {
+              Swal.fire({
+                title: 'Éxito',
+                text: 'El rol se ha creado correctamente',
+                icon: 'success'
+              }).then(() => {
+                // Recargar la página actual
+                location.reload();
+              });
+            } else if (response === 'error') {
+              Swal.fire('Error', 'Hubo un problema al crear el rol', 'error');
+            } else if (response === 'errorExiste') {
+              
+              Swal.fire('Error', 'Ya existe un rol con ese nombre', 'error');
+            }
+          }
+        });
 
       });
 
