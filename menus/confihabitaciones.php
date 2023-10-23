@@ -92,8 +92,8 @@
                                   </select>
                                 </div>
                                 <div class="form-group">
-                                  <label for="numeroHabitacion">Precio de Habitación</label>
-                                  <input  name="precioHabitacion" type="text" class="form-control" id="numeroHabitacion" placeholder="Ej. $30,000">
+                                  <label for="precopHabitacion">Precio de Habitación</label>
+                                  <input  name="precioHabitacion" type="text" class="form-control" id="precioHabitacion" placeholder="Ej. $30,000">
                                 </div>
                             </div>
                             <div class="modal-footer">

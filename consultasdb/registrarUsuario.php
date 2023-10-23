@@ -9,9 +9,6 @@ function registrarUsuario($identificacion, $contrasenahash, $nombres, $apellidos
 
     $result = $stmt->execute();
     $stmt->close();
-
-
-  
     return $result;
 }
 ?>
