@@ -41,7 +41,7 @@ function traerRoles()
 
     foreach ($roles as $rol) {
         echo '<a class="list-group-item list-group-item-action" data-toggle="list" href="#' . $rol['nombreRol'] . '"
-        role="tab" identificadorRol="'.$rol['idRol'].'">' . $rol['nombreRol'] . '</a>';
+        role="tab" identificadorRol="' . $rol['idRol'] . '">' . $rol['nombreRol'] . '</a>';
     }
 
 
@@ -58,25 +58,45 @@ function traerPermisos()
         echo '<ul class="list-group">';
         foreach ($permisos as $permiso) {
             if ($rol['idRol'] == $permiso['idRol']) {
-                
-                if($permiso['tieneAcceso'] == 1){
+
+                if ($permiso['tieneAcceso'] == 1) {
                     $tieneAcceso = "checked";
-                }else{
+                } else {
                     $tieneAcceso = "";
                 }
-                echo'<li class="list-group-item">
-                        '.$permiso['nombreSeccion'].'
+                echo '<li class="list-group-item">
+                        ' . $permiso['nombreSeccion'] . '
                         <div class=" float-right">
-                            <input pertenece="'.$rol['idRol'].'" id="'.$permiso['idseccionWEB'].'" type="checkbox" '.$tieneAcceso.'>
+                            <input pertenece="' . $rol['idRol'] . '" id="' . $permiso['idseccionWEB'] . '" type="checkbox" ' . $tieneAcceso . '>
                             
                         </div>
                     </li>';
             }
-            
+
         }
 
         echo '</ul>';
         echo '</div>';
+
+    }
+
+}
+
+function traerRolesEnFormatoSelect()
+{
+
+
+    global $roles;
+
+
+    foreach ($roles as $rol) {
+        if ($rol['idRol'] != 2) {
+            echo '<option value="';
+            echo $rol['idRol'];
+            echo '">';
+            echo $rol['nombreRol'];
+            echo '</option>';
+        }
 
     }
 
