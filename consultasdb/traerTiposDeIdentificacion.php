@@ -1,5 +1,5 @@
 <?php
-require 'consultasdb/conexion.php';
+require __DIR__ . '/conexion.php';
 
 $result = $conn->query("SELECT * FROM Tipo_Identificacion");
 
