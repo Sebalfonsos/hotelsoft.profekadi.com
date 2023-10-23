@@ -8,7 +8,7 @@ FROM Roles AS R
 CROSS JOIN seccionesWEB AS SW
 LEFT JOIN Roles_has_seccionesWEB AS RHS
 ON R.idRol = RHS.Roles_idRol AND SW.idseccionWEB = RHS.seccionesWEB_idseccionWEB
-WHERE R.idRol != 1
+WHERE R.idRol != 1 AND SW.estado = 1
 ORDER BY R.idRol, SW.idseccionWEB;");
 
 $conn->close();
