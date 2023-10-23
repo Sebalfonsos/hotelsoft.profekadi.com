@@ -110,9 +110,39 @@
 
                   </div>
                   <!-- /.card-header -->
-                  <div class="card-body">
-                    BARRA DE FRECUENCIA
-                  </div>
+                  <title>Gráfico de Barras</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <div style="width: 80%; margin: 0 auto;">
+        <canvas id="barChart"></canvas>
+    </div>
+
+    <script>
+        // Datos de ejemplo para las habitaciones ocupadas por mes
+        const data = {
+            labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            datasets: [{
+                label: 'Habitaciones Ocupadas',
+                data: [10, 15, 12, 20, 18, 25, 30, 28, 24, 22, 19, 16],
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        const ctx = document.getElementById('barChart').getContext('2d');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
                   <!-- /.card-body -->
                 </div>
               </div>
