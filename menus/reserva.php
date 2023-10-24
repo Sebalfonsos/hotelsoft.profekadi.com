@@ -40,7 +40,7 @@
         <div id="external-events"></div>
       </div>
       <div class="card card-primary">
-        <div class="card-body p-0">
+        <div class="ml-3 mr-3 card-body p-0">
           <div id="calendar"></div>
         </div>
       </div>
@@ -127,7 +127,7 @@
         headerToolbar: {
           left: 'prev,next today',
           center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay'
+          right: 'dayGridMonth,timeGridWeek,timeGridDay,list'
         },
         themeSystem: 'bootstrap',
         //Random default events
