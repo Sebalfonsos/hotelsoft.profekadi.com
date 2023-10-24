@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 
@@ -70,10 +71,10 @@
                               </button>
                             </div>
                             <div class="modal-body">
-                              <form action="../consultasdb/crearhabitaciones.php" method="post">
+                              <form id="formularioCrearHabitacion" action="../consultasdb/crearhabitaciones.php" method="post">
                                 <div class="form-group">
                                   <label for="numeroHabitacion">Número de Habitación</label>
-                                  <input type="text" name="numHabitacion"  class="form-control" id="numeroHabitacion" placeholder="Ej. 101">
+                                  <input type="text" name="numHabitacion" class="form-control" id="numeroHabitacion" placeholder="Ej. 101">
                                 </div>
                                 <div class="form-group">
                                   <label for="tipoHabitacion">Tipo de Habitación</label>
@@ -93,12 +94,12 @@
                                 </div>
                                 <div class="form-group">
                                   <label for="precopHabitacion">Precio de Habitación</label>
-                                  <input  name="precioHabitacion" type="text" class="form-control" id="precioHabitacion" placeholder="Ej. $30,000">
+                                  <input name="precioHabitacion" type="text" class="form-control" id="precioHabitacion" placeholder="Ej. $30,000">
                                 </div>
                             </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                              <button type="submit" class="btn btn-primary">Crear Habitación</button> 
+                              <button type="submit" class="btn btn-primary">Crear Habitación</button>
                               </form>
 
                             </div>
@@ -158,35 +159,93 @@
 
           <!-- Page specific script -->
           <script>
-var data = <?php require '../consultasdb/habitaciones.php'; echo traerDatosHabitaciones(); ?>;
-      $(function () {
-        $("#tabla1").DataTable({
-          language: spanish,
-          "responsive": true, "lengthChange": false, "autoWidth": false,
-          "buttons": ["excel", "pdf", "print", "colvis"],
-          columns: [
-            { title: 'N° Habitación' },
-            { title: 'Categoria' },
-            { title: 'Precio' },
-            { title: 'Estado' },
-            {
-              title: 'Acciones',
-              searchable: false,
-              orderable: false,
-              render: function (data, type, row) {
-                return '<button class="btn btn-sm" onclick="editarUsuario(' + row[0] + ')"><i class="fas fa-edit"></i> Editar</button>' +
-                '<button class="btn btn-sm reset" onclick="resetearContrasena(' + row[0] + ')"><i class="fas fa-key"></i> Cambiar Contraseña</button>' +
-                  '<button class="btn btn-sm" onclick="cambiarEstadoUsuario(' + row[0] + ')"><i class="fas fa-power-off"></i> Cambiar estado</button>';
-              }
+            var data = <?php require '../consultasdb/habitaciones.php';
+                        echo traerDatosHabitaciones(); ?>;
+            $(function() {
+              $("#tabla1").DataTable({
+                language: spanish,
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["excel", "pdf", "print", "colvis"],
+                columns: [{
+                    title: 'N° Habitación'
+                  },
+                  {
+                    title: 'Categoria'
+                  },
+                  {
+                    title: 'Precio'
+                  },
+                  {
+                    title: 'Estado'
+                  },
+                  {
+                    title: 'Acciones',
+                    searchable: false,
+                    orderable: false,
+                    render: function(data, type, row) {
+                      return '<button class="btn btn-sm" onclick="editarUsuario(' + row[0] + ')"><i class="fas fa-edit"></i> Editar</button>' +
+                        '<button class="btn btn-sm reset" onclick="resetearContrasena(' + row[0] + ')"><i class="fas fa-key"></i> Cambiar Contraseña</button>' +
+                        '<button class="btn btn-sm" onclick="cambiarEstadoUsuario(' + row[0] + ')"><i class="fas fa-power-off"></i> Cambiar estado</button>';
+                    }
 
+                  }
+                ],
+                data: data
+
+              }).buttons().container().appendTo('#tabla1_wrapper .col-md-6:eq(0)');
+
+            });
+            document.getElementById('formularioCrearHabitacion').addEventListener('submit', function(e) {
+              e.preventDefault(); // Evita el envío del formulario por defecto
+
+              // Realiza una solicitud AJAX para procesar el formulario
+              $.ajax({
+                type: 'POST',
+                url: '../consultasdb/crearhabitaciones.php',
+                data: $(this).serialize(),
+                success: function(response) {
+
+
+
+                  if (response === "success") {
+                    Swal.fire({
+                      title: 'Éxito',
+                      text: 'El rol se ha creado correctamente',
+                      icon: 'success'
+                    }).then(() => {
+                      // Recargar la página actual
+                      location.reload();
+                    });
+                  } else if (response === 'error') {
+                    Swal.fire('Error', 'Hubo un problema al crear el rol', 'error');
+                  } else if (response === 'errorExiste') {
+
+                    Swal.fire('Error', 'Ya existe un rol con ese nombre', 'error');
+                  }
+                }
+              });
+
+            });
+
+
+
+            function editarUsuario(documento) {
+              // Implementa la lógica para editar el usuario con el documento proporcionado
+              console.log('Editar usuario con documento:', documento);
             }
-          ],
-          data: data
 
-        }).buttons().container().appendTo('#tabla1_wrapper .col-md-6:eq(0)');
 
-      });
+            function resetearContrasena(documento) {
+              // Implementa la lógica para editar el usuario con el documento proporcionado
+              console.log('Cambiar contraseña usuario con documento:', documento);
+            }
 
+            function cambiarEstadoUsuario(documento) {
+
+              console.log('Cambiar estado del usuario con documento:', documento);
+            }
           </script>
       </section>
 </body>

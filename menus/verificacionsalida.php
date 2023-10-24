@@ -7,8 +7,7 @@
   <title>AdminLTE 3 | Blank Page</title>
 
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
@@ -37,202 +36,17 @@
 
         <div class="container-fluid">
 
-          <!-- =========================================================== -->
-
-          <!-- Small Box (Stat card) -->
-
           <div class="row">
-            <div class="col-lg-3 col-6">
-              <!-- small card -->
-              <div class="small-box bg-danger">
-                <div class="inner">
-                  <h3>150</h3>
-                  <p>New Orders</p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-bed"></i>
-                </div>
-                <a href="#" class="small-box-footer">
-                  Ocupada <i class="fas fa-arrow-circle-right"></i>
-                </a>
-              </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
-              <!-- small card -->
-              <div class="small-box bg-danger">
-                <div class="inner">
-                  <h3>53<sup style="font-size: 20px">%</sup></h3>
 
-                  <p>Bounce Rate</p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-bed"></i>
-                </div>
-                <a href="#" class="small-box-footer">
-                  Ocupada <i class="fas fa-arrow-circle-right"></i>
-                </a>
-              </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
-              <!-- small card -->
-              <div class="small-box bg-danger">
-                <div class="inner">
-                  <h3>44</h3>
-                  <p>User Registrations</p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-bed"></i>
-                </div>
-                <a href="#" class="small-box-footer">
-                  Ocupada <i class="fas fa-arrow-circle-right"></i>
-                </a>
-              </div>
-            </div>
-            <div class="col-lg-3 col-6">
-              <div class="small-box bg-danger">
-                <div class="inner">
-                  <h3>65</h3>
-                  <p>Unique Visitors</p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-bed"></i>
-                </div>
-                <a href="#" class="small-box-footer">
-                  Ocupada<i class="fas fa-arrow-circle-right"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-3 col-6">
-              <!-- small card -->
-              <div class="small-box bg-danger">
-                <div class="inner">
-                  <h3>150</h3>
-                  <p>New Orders</p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-bed"></i>
-                </div>
-                <a href="#" class="small-box-footer">
-                  Ocupada <i class="fas fa-arrow-circle-right"></i>
-                </a>
-              </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
-              <!-- small card -->
-              <div class="small-box bg-danger">
-                <div class="inner">
-                  <h3>53<sup style="font-size: 20px">%</sup></h3>
+            <?php
+            require '../consultasdb/verificacionsalida.php';
+            traerHabitacionesocupadas();
+            ?>
 
-                  <p>Bounce Rate</p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-bed"></i>
-                </div>
-                <a href="#" class="small-box-footer">
-                  Ocupada <i class="fas fa-arrow-circle-right"></i>
-                </a>
-              </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
-              <!-- small card -->
-              <div class="small-box bg-danger">
-                <div class="inner">
-                  <h3>44</h3>
-                  <p>User Registrations</p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-bed"></i>
-                </div>
-                <a href="#" class="small-box-footer">
-                  Ocupada <i class="fas fa-arrow-circle-right"></i>
-                </a>
-              </div>
-            </div>
-            <div class="col-lg-3 col-6">
-              <div class="small-box bg-danger">
-                <div class="inner">
-                  <h3>65</h3>
-                  <p>Unique Visitors</p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-bed"></i>
-                </div>
-                <a href="#" class="small-box-footer">
-                  Ocupada<i class="fas fa-arrow-circle-right"></i>
-                </a>
-              </div>
-            </div>
           </div>
-          <div class="row">
-            <div class="col-lg-3 col-6">
-              <!-- small card -->
-              <div class="small-box bg-danger">
-                <div class="inner">
-                  <h3>150</h3>
-                  <p>New Orders</p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-bed"></i>
-                </div>
-                <a href="#" class="small-box-footer">
-                  Ocupada <i class="fas fa-arrow-circle-right"></i>
-                </a>
-              </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
-              <!-- small card -->
-              <div class="small-box bg-danger">
-                <div class="inner">
-                  <h3>53<sup style="font-size: 20px">%</sup></h3>
 
-                  <p>Bounce Rate</p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-bed"></i>
-                </div>
-                <a href="#" class="small-box-footer">
-                  Ocupada <i class="fas fa-arrow-circle-right"></i>
-                </a>
-              </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
-              <!-- small card -->
-              <div class="small-box bg-danger">
-                <div class="inner">
-                  <h3>44</h3>
-                  <p>User Registrations</p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-bed"></i>
-                </div>
-                <a href="#" class="small-box-footer">
-                  Ocupada <i class="fas fa-arrow-circle-right"></i>
-                </a>
-              </div>
-            </div>
-            <div class="col-lg-3 col-6">
-              <div class="small-box bg-danger">
-                <div class="inner">
-                  <h3>65</h3>
-                  <p>Unique Visitors</p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-bed"></i>
-                </div>
-                <a href="#" class="small-box-footer">
-                  Ocupada<i class="fas fa-arrow-circle-right"></i>
-                </a>
-              </div>
-            </div>
-          </div>
+
+        </div>
 
 
       </section>
