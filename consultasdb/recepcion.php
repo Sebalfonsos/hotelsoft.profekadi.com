@@ -1,5 +1,21 @@
 <?php
 
+function ponerColor($estado) {
+    switch ($estado) {
+        case 'Disponible':
+            return 'bg-success';
+            break;
+        case 'Ocupada':
+            return 'bg-danger';
+            break;
+        case 'Mantenimiento':
+            return 'bg-info'; 
+            break;
+        default:
+            return ''; 
+            break;
+    }
+}
 
 function traerHabitaciones() {
     require 'conexion.php';
@@ -37,23 +53,5 @@ function traerHabitaciones() {
       </div>';
     }
 }
-
-function ponerColor($estado) {
-    switch ($estado) {
-        case 'Disponible':
-            return 'bg-success';
-            break;
-        case 'Ocupada':
-            return 'bg-danger';
-            break;
-        case 'Mantenimiento':
-            return 'bg-info'; 
-            break;
-        default:
-            return ''; 
-            break;
-    }
-}
-
 
 ?>
