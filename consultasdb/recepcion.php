@@ -53,5 +53,20 @@ function traerHabitaciones() {
       </div>';
     }
 }
+function contarHabitacionesCreadas()
+{
+    require 'conexion.php';
+    $result = $conn->query("SELECT COUNT(*) as total FROM Habitaciones");
+
+    $totalHabitaciones = 0;
+
+    if ($result) {
+        $row = $result->fetch_assoc();
+        $totalHabitaciones = $row['total'];
+    }
+
+    $conn->close();
+
+}
 
 ?>
