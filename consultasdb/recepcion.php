@@ -1,29 +1,28 @@
 <?php
 
-function traerHabitaciones()
-{
+
+function traerHabitaciones() {
     require 'conexion.php';
     $result = $conn->query("SELECT * FROM Habitaciones");
 
     $habitaciones = array();
 
     while ($row = $result->fetch_assoc()) {
+        $claseColor = ponerColor($row['estado']); // Obtener la clase CSS
         $habitaciones[] = array(
             'id' => $row['idHabitacion'],
             'numHabitacion' => $row['numHabitacion'],
             'tipoHabitacion' => $row['tipoHabitacion'],
             'estado' => $row['estado'],
-            'precioHabitacion' => $row['precioHabitacion']
+            'precioHabitacion' => $row['precioHabitacion'],
+            'claseColor' => $claseColor // Agregar la clase CSS al arreglo
         );
     }
     $conn->close();
 
-
-
-
     foreach ($habitaciones as $habitacion) {
         echo '<div class="col-lg-3 col-6">
-        <div class="small-box bg-success">
+        <div class="small-box ' . $habitacion['claseColor'] . '">
           <div class="inner">
             <h3>' . $habitacion['numHabitacion'] . '</h3>
             <p>' . $habitacion['tipoHabitacion'] . '</p>
@@ -36,34 +35,25 @@ function traerHabitaciones()
           </a>
         </div>
       </div>';
-
     }
-
 }
 
-
-function ponerColor($estado){
-
+function ponerColor($estado) {
     switch ($estado) {
         case 'Disponible':
-            
+            return 'bg-success';
             break;
-
-        case 'Ocupado':
-            # code...
+        case 'Ocupada':
+            return 'bg-danger';
             break;
-
         case 'Mantenimiento':
-            # code...
+            return 'bg-info'; 
             break;
-
         default:
-            # code...
+            return ''; 
             break;
     }
-
-
-
 }
+
 
 ?>
