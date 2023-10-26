@@ -7,7 +7,7 @@ $tipoDocumento = $_POST['tipoDocumento'];
 $nombre = $_POST['nombre'];
 $apellido = $_POST['apellido'];
 $correoElectronico = $_POST['correoElectronico']; 
-$contrasena = $_POST['contrasena']; 
+$contrasenahash = password_hash($_POST["contrasena"], PASSWORD_DEFAULT);
 $telefono = $_POST['telefono'];
 $rol = $_POST['rol']; 
 $estado = $_POST['estado'];
@@ -23,7 +23,7 @@ if ($result->num_rows < 1) {
     // El usuario no existe, entonces lo insertamos
     $insertQuery = "INSERT INTO Usuarios (idUsuario, TipoIdentificacion_idTipoIdentificacion, nombre, apellido, correoElectronico, contrasena,telefono, Roles_idRoles, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
     $stmt = $conn->prepare($insertQuery);
-    $stmt->bind_param("sssssssss", $documento, $tipoDocumento, $nombre, $apellido, $correoElectronico, $contrasena, $telefono, $rol, $estado);
+    $stmt->bind_param("sssssssss", $documento, $tipoDocumento, $nombre, $apellido, $correoElectronico, $contrasenahash, $telefono, $rol, $estado);
 
     if ($stmt->execute()) {
         // Inserción exitosa
