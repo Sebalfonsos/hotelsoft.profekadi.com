@@ -1,5 +1,5 @@
 <?php
-require 'conexion.php';
+require __DIR__ . '/../conexion.php';
 // Obtener los valores enviados por el formulario
 $numHabitacion = $_POST['numHabitacion'];
 $tipoHabitacion = $_POST['tipoHabitacion'];

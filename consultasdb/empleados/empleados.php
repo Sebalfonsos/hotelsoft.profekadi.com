@@ -1,7 +1,7 @@
 <?php
 function traerDatosEmpleados()
 {
-    require 'conexion.php';
+    require __DIR__ . '/../conexion.php';
 
     $sql = "SELECT Usuarios.idUsuario, Usuarios.nombre, Usuarios.apellido, Usuarios.correoelectronico, Usuarios.telefono, Usuarios.estado, Tipo_Identificacion.nombreTipoId AS Tipo_Identificacion, Roles.nombreRol, estadosUsuarios.nombreEstado
     FROM Usuarios

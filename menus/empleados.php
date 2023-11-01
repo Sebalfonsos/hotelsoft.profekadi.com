@@ -211,7 +211,7 @@
 
     <!-- Page specific script -->
     <script>
-      var data = <?php require '../consultasdb/empleados.php';
+      var data = <?php require '../consultasdb/empleados/empleados.php';
       echo traerDatosEmpleados(); ?>;
       $(function () {
         $("#tabla1").DataTable({
@@ -254,7 +254,7 @@
         // Realiza una solicitud AJAX para procesar el formulario
         $.ajax({
           type: 'POST',
-          url: '../consultasdb/crearempleado.php',
+          url: '../consultasdb/empleados/crearempleado.php',
           data: $(this).serialize(),
           success: function (response) {
 

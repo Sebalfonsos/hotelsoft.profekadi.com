@@ -39,7 +39,7 @@
           <div class="row">
 
             <?php
-            require '../consultasdb/verificacionsalida.php';
+            require '../consultasdb/verificacionsalida/verificacionsalida.php';
             traerHabitacionesocupadas();
             ?>
 

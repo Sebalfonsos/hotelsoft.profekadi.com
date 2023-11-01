@@ -25,7 +25,7 @@
   <div class="wrapper">
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="">
       <!-- Content Header (Page header) -->
       <section>
         <div class="row d-flex align-items-center">
@@ -38,7 +38,7 @@
       <section class="content">
 
         <div class="container-fluid ">
-          <div class="content-wrapper">
+          <div class="">
 
             <section class="content-header">
               <div class="container-fluid">
@@ -159,7 +159,7 @@
 
           <!-- Page specific script -->
           <script>
-            var data = <?php require '../consultasdb/habitaciones.php';
+            var data = <?php require '../consultasdb/confihabitaciones/habitaciones.php';
                         echo traerDatosHabitaciones(); ?>;
             $(function() {
               $("#tabla1").DataTable({
@@ -203,7 +203,7 @@
               // Realiza una solicitud AJAX para procesar el formulario
               $.ajax({
                 type: 'POST',
-                url: '../consultasdb/crearhabitaciones.php',
+                url: '../consultasdb/confihabitaciones/crearhabitaciones.php',
                 data: $(this).serialize(),
                 success: function(response) {
 
@@ -212,17 +212,17 @@
                   if (response === "success") {
                     Swal.fire({
                       title: 'Éxito',
-                      text: 'El rol se ha creado correctamente',
+                      text: 'La habitación se ha creado correctamente',
                       icon: 'success'
                     }).then(() => {
                       // Recargar la página actual
                       location.reload();
                     });
                   } else if (response === 'error') {
-                    Swal.fire('Error', 'Hubo un problema al crear el rol', 'error');
+                    Swal.fire('Error', 'Hubo un problema al crear la habitación', 'error');
                   } else if (response === 'errorExiste') {
 
-                    Swal.fire('Error', 'Ya existe un rol con ese nombre', 'error');
+                    Swal.fire('Error', 'Ya existe una habitación con ese numero', 'error');
                   }
                 }
               });

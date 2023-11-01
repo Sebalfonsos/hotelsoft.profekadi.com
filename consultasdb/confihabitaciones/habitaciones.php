@@ -1,7 +1,7 @@
 <?php
 function traerDatosHabitaciones()
 {
-    require 'conexion.php';
+    require __DIR__ . '/../conexion.php';
 
     $sql = "SELECT * FROM Habitaciones";
 

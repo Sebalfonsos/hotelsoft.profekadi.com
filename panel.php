@@ -117,7 +117,7 @@ $nombreUsuario = $_SESSION['nombreCompleto_usuario'];
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <?php
-            require 'consultasdb/mostrarMenus.php';
+            require 'consultasdb/panel/mostrarMenus.php';
 
             mostrarMenus();
             ?>

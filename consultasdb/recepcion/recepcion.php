@@ -18,7 +18,7 @@ function ponerColor($estado) {
 }
 
 function traerHabitaciones() {
-    require 'conexion.php';
+    require __DIR__.'/../conexion.php';
     $result = $conn->query("SELECT * FROM Habitaciones");
 
     $habitaciones = array();
@@ -55,7 +55,7 @@ function traerHabitaciones() {
 }
 function contarHabitacionesCreadas()
 {
-    require 'conexion.php';
+    require __DIR__.'/../conexion.php';
     $result = $conn->query("SELECT COUNT(*) as total FROM Habitaciones");
 
     $totalHabitaciones = 0;

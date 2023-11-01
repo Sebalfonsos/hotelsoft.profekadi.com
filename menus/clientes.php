@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>HotelSoft | Lista Usuarios</title>
+  <title>HotelSoft | Lista Clientes</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet"
@@ -28,7 +28,7 @@
         <div class="text-center;" style="margin-left: 1%;">
           <i class="nav-icon fas fa-users" style=" font-size: 2rem;"></i>
         </div>
-        <h1 style="padding-left: 1%;">Usuarios</h1>
+        <h1 style="padding-left: 1%;">Clientes</h1>
       </div>
 
     </section>
@@ -53,7 +53,7 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title"> Listado de Usuarios </h3>
+                <h3 class="card-title"> Listado de Clientes </h3>
               </div>
             </div>
 
@@ -132,7 +132,7 @@
 
     <!-- Page specific script -->
     <script>
-      var data = <?php require '../consultasdb/clientes.php'; echo traerDatosClientes(); ?>;
+      var data = <?php require '../consultasdb/clientes/clientes.php'; echo traerDatosClientes(); ?>;
       $(function () {
         $("#tabla1").DataTable({
           language: spanish,

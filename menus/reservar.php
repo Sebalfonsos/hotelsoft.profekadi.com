@@ -40,7 +40,7 @@
           <div class="row">
 
             <?php
-              require '../consultasdb/recepcion.php';
+              require '../consultasdb/recepcion/recepcion.php';
               traerHabitaciones();
             ?>
 

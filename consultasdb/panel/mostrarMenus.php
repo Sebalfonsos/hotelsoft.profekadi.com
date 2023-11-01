@@ -57,7 +57,7 @@ function mostrarMenus()
 
 function traerSeccionesPorRol($rolid)
 {
-    require 'consultasdb/conexion.php';
+    require __DIR__.'/../conexion.php';
     $sql = "SELECT sw.*
     FROM Roles_has_seccionesWEB rhs
     JOIN seccionesWEB sw ON rhs.seccionesWEB_idseccionWEB = sw.idseccionWEB

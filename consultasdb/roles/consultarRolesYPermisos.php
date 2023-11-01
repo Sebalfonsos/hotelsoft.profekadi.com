@@ -1,6 +1,6 @@
 <?php
 
-require '../consultasdb/conexion.php';
+require __DIR__.'/../conexion.php';
 $result = $conn->query("SELECT * FROM Roles WHERE idRol != 1");
 $resultPermisos = $conn->query("SELECT R.idRol, R.nombreRol, SW.idseccionWEB, SW.nombreSeccion,
 CASE WHEN RHS.Roles_idRol IS NOT NULL THEN 1 ELSE 0 END AS tieneAcceso

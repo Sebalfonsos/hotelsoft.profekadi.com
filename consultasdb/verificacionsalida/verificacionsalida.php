@@ -2,7 +2,7 @@
 
 function traerHabitacionesOcupadas()
 {
-    require 'conexion.php';
+    require __DIR__.'/../conexion.php';
     $result = $conn->query("SELECT * FROM Habitaciones");
 
     $habitaciones = array();

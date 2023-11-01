@@ -63,7 +63,7 @@
                                                 placeholder="Numero de Contacto" </div>
 
                                             <div class="form-group">
-                                                <label for "email">Correo Electrónico:</label>
+                                                <label for type="email">Correo Electrónico:</label>
                                                 <input type="text" class="form-control" id="email" name="email"
                                                     placeholder="Correo Electronico">
                                             </div>

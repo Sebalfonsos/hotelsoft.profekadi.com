@@ -1,5 +1,5 @@
 <?php
-require 'conexion.php';
+require __DIR__ . '/../conexion.php';
 
 // Obtener los valores enviados por el formulario
 $documento = $_POST['documento'];
