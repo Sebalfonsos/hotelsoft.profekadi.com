@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -56,14 +57,85 @@
                 <h3 class="card-title"> Listado de Clientes </h3>
               </div>
             </div>
-
-
-
-
+            
             <div class="card-body ">
               <div class="row mb-2">
                 <div class="col-sm-6">
-                  <button type="submit" class="btn btn-primary">Agregar Nuevo</button>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crearHabitacionModal">
+                    Crear Cliente
+                  </button>
+                  <div class="modal fade" id="crearHabitacionModal" tabindex="-1" role="dialog"
+                    aria-labelledby="crearHabitacionModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="crearHabitacionModalLabel">Crear Cliente</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <form id="formularioCrearCliente">
+                            <div class="form-group">
+                              <label for="">Documento</label>
+                              <input type="text" name="documento" class="form-control" id=" "
+                                placeholder="Ej. 100288790">
+                            </div>
+                            <div class="form-group">
+                              <label for="">Tipo Documento</label>
+                              <select required class="form-control" name="tipoDocumento" id="">
+                                <option selected disabled value="">Tipo de Identificación</option>
+                                <?php
+                                include '../consultasdb/traerTiposDeIdentificacion.php';
+
+                                ?>
+                              </select>
+                            </div>
+                            <div class="form-group">
+                              <label for="">Nombres</label>
+                              <input name="nombre" type="text" class="form-control" id="nombres"
+                                placeholder="Ej. Carlos">
+                            </div>
+                            <div class="form-group">
+                              <label for="">Apellidos</label>
+                              <input name="apellido" type="text" class="form-control" id="apellidos"
+                                placeholder="Ej. Fonseca">
+                            </div>
+                            <div class="form-group">
+                              <label for="">Correo Electronico</label>
+                              <input name="correoElectronico" type="text" class="form-control" id="correoElectronico"
+                                placeholder="Ej. hotelsoft@hotmail.com">
+                            </div>
+                            <div class="form-group">
+                              <label for="">Contraseña</label>
+                              <input type="password" name="contrasena" class="form-control" id="contrasena"
+                                placeholder="Ej. 100288790">
+                            </div>
+                            <div class="form-group">
+                              <label for="">Telefono</label>
+                              <input name="telefono" type="text" class="form-control" id="telefono"
+                                placeholder="Ej. $3005186039">
+                            </div>
+
+                            <div class="form-group">
+                              <label for="">Estado</label>
+                              <select name="estado" class="form-control" id="estado">
+                                <option value="1">Activo</option>
+                                <option value="0">Inactivo</option>
+                              </select>
+                            </div>
+                            
+
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                          <button type="submit" class="btn btn-primary">Crear</button>
+                          </form>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
               </div>
@@ -99,6 +171,10 @@
                 </tfoot>
               </table>
             </div>
+
+
+
+          
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
@@ -165,6 +241,38 @@
 
       });
 
+
+      document.getElementById('formularioCrearCliente').addEventListener('submit', function (e) {
+        e.preventDefault(); // Evita el envío del formulario por defecto
+
+        // Realiza una solicitud AJAX para procesar el formulario
+        $.ajax({
+          type: 'POST',
+          url: '../consultasdb/clientes/crearcliente.php',
+          data: $(this).serialize(),
+          success: function (response) {
+
+          
+            console.log(response)
+            if (response === "success") {
+              Swal.fire({
+                title: 'Éxito',
+                text: 'El cliente se ha creado correctamente',
+                icon: 'success'
+              }).then(() => {
+                // Recargar la página actual
+                location.reload();
+              });
+            } else if (response === 'error') {
+              Swal.fire('Error', 'Hubo un problema al crear el cliente', 'error');
+            } else if (response === 'errorExiste') {
+              
+              Swal.fire('Error', 'Ya existe ese cliente', 'error');
+            }
+          }
+        });
+
+      });
 
 
       function editarUsuario(documento) {

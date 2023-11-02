@@ -131,7 +131,7 @@
                                 <option value="0">Inactivo</option>
                               </select>
                             </div>
-                            
+                         
 
                         </div>
                         <div class="modal-footer">
@@ -263,17 +263,17 @@
             if (response === "success") {
               Swal.fire({
                 title: 'Éxito',
-                text: 'El rol se ha creado correctamente',
+                text: 'El cliente se ha creado correctamente',
                 icon: 'success'
               }).then(() => {
                 // Recargar la página actual
                 location.reload();
               });
             } else if (response === 'error') {
-              Swal.fire('Error', 'Hubo un problema al crear el rol', 'error');
+              Swal.fire('Error', 'Hubo un problema al crear el cliente', 'error');
             } else if (response === 'errorExiste') {
               
-              Swal.fire('Error', 'Ya existe un rol con ese nombre', 'error');
+              Swal.fire('Error', 'Ya existe ese cliente', 'error');
             }
           }
         });
