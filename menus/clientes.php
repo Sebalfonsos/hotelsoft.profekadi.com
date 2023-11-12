@@ -230,7 +230,7 @@
               orderable: false,
               render: function (data, type, row) {
                 return '<button class="btn btn-sm" onclick="editarUsuario(' + row[0] + ')"><i class="fas fa-edit"></i> Editar</button>' +
-                  '<button class="btn btn-sm reset" onclick="resetearContrasena(' + row[0] + ')"><i class="fas fa-key"></i> Cambiar Contraseña</button>' +
+                  '<button class="btn btn-sm reset" onclick="resetearContrasena(' + row[0] + ',\'' + row[2] + '\')"><i class="fas fa-key"></i> Cambiar Contraseña</button>' +
                   '<button class="btn btn-sm" onclick="cambiarEstadoCliente(' + row[0] + ',\'' + row[2] + '\')"><i class="fas fa-power-off"></i> Cambiar estado</button>';
               }
 
@@ -281,9 +281,52 @@
         console.log('Editar usuario con documento:', documento);
       }
 
-      function resetearContrasena(documento) {
+      function resetearContrasena(documento, nombre) {
 
-        console.log('Cambiar contraseña usuario con documento:', documento);
+        Swal.fire({
+          title: "Nueva contraseña para el usuario " + nombre,
+          html:
+            '<input type="password" id="password" placeholder="ContraseñaImposible123" class="swal2-input" autocomplete="new-password">',
+          showCancelButton: true,
+          confirmButtonText: "Cambiar Contraseña",
+          preConfirm: () => {
+            const password = Swal.getPopup().querySelector("#password").value;
+            if (!password) {
+              Swal.showValidationMessage("Por favor, ingresa la nueva contraseña");
+            }
+            return password;
+          },
+        }).then((result) => {
+          if (result.isConfirmed) {
+            const newPassword = result.value;
+
+            // Realizar la solicitud AJAX
+            $.ajax({
+              type: 'POST',
+              url: '../consultasdb/clientes/update_password.php',
+              data: { userId: documento, newPassword: newPassword },
+              success: function (response) {
+                if (response == "Contraseña actualizada correctamente") {
+                  Swal.fire({
+                    title: "Listo",
+                    text: "La contraseña ha sido cambiada con éxito.",
+                    icon: "success"
+                  }).then(() => {
+                    // Recargar la página después de cerrar el SweetAlert
+                    location.reload();
+                  });
+                } else {
+                  Swal.fire({
+                    title: "Error",
+                    text: "Hubo un error al cambiar la contraseña.",
+                    icon: "error"
+                  });
+                }
+              }
+            });
+          }
+        });
+
       }
 
       function cambiarEstadoCliente(documento, nombre) {
@@ -314,7 +357,7 @@
                     text: "El estado ha sido cambiado con exito.",
                     icon: "success"
                   }).then(() => {
-                   
+
                     location.reload();
                   });
 
@@ -328,6 +371,8 @@
       }
 
     </script>
+
+
 
   </div>
 </body>

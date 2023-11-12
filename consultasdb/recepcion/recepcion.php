@@ -7,7 +7,7 @@ if (isset($_POST['habitacion']) && isset($_POST['fechaEntrada']) && isset($_POST
     $fechaSalida = strtotime($_POST['fechaSalida']);
     $idCliente = $_POST['idCliente'];
 
-    // Llamar a la función específica
+  
     
     habitacionOcupada($habitacion, $fechaEntrada, $fechaSalida, $idCliente);
 
