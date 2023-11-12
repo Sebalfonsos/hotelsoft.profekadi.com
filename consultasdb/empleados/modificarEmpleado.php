@@ -7,6 +7,7 @@ $nombres = $_POST['nombres'];
 $apellidos = $_POST['apellidos'];
 $correoElectronico = $_POST['correoElectronico'];
 $telefono = $_POST['telefono'];
+$rol = $_POST['rol'];
 
 // Verificar si ya existe un usuario con el nuevo correo electrónico
 $sqlVerificarCorreo = "SELECT idUsuario FROM Usuarios WHERE correoelectronico = ? AND idUsuario != ?";
@@ -43,13 +44,14 @@ if ($stmtVerificarCorreo) {
 
 // Si llegamos aquí, significa que el correo electrónico no está en uso y podemos continuar con la actualización
 
-$sql = "UPDATE Usuarios SET TipoIdentificacion_idTipoIdentificacion = ?, nombre = ?, apellido = ?, correoelectronico = ?, telefono = ? WHERE idUsuario = ?";
+$sql = "UPDATE Usuarios SET TipoIdentificacion_idTipoIdentificacion = ?, nombre = ?, apellido = ?, correoelectronico = ?, telefono = ?, Roles_idRoles = ?  WHERE idUsuario = ?";
 $stmt = $conn->prepare($sql);
 
 // Verificar si la preparación fue exitosa
 if ($stmt) {
     // Vincular los parámetros
-    $stmt->bind_param("sssssi", $tipoDocumento, $nombres, $apellidos, $correoElectronico, $telefono, $idUsuario);
+    $stmt->bind_param("ssssssi", $tipoDocumento, $nombres, $apellidos, $correoElectronico, $telefono, $rol, $idUsuario);
+
 
     // Ejecutar la sentencia
     if ($stmt->execute()) {

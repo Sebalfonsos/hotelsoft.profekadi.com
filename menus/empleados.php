@@ -131,7 +131,7 @@
                                 <option value="0">Inactivo</option>
                               </select>
                             </div>
-                         
+
 
                         </div>
                         <div class="modal-footer">
@@ -188,6 +188,88 @@
     </div>
     <!-- ./wrapper -->
 
+
+    <!-- SEGUNDO MODAL -->
+
+    <div class="card-body ">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+
+          <div class="modal fade" id="ModificarEmpleado" tabindex="-1" role="dialog"
+            aria-labelledby="ModificarEmpleadoLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="ModificarEmpleadoLabel">Editar información del empleado</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form id="formularioModificarEmpleado">
+                    <div class="form-group">
+                      <label for="">Documento</label>
+                      <input disabled type="text" name="documento" class="form-control" id="modificarDocumento"
+                        placeholder="Ej. 100288790">
+                    </div>
+                    <div class="form-group">
+                      <label for="">Tipo Documento</label>
+                      <select required class="form-control" name="tipoDocumento" id="modificarTipoDocumento">
+                        <option selected disabled value="">Tipo de Identificación</option>
+                        <?php
+                        include '../consultasdb/traerTiposDeIdentificacion.php';
+
+                        ?>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="">Nombres</label>
+                      <input name="nombre" type="text" class="form-control" id="modificarNombres"
+                        placeholder="Ej. Carlos">
+                    </div>
+                    <div class="form-group">
+                      <label for="">Apellidos</label>
+                      <input name="apellido" type="text" class="form-control" id="modificarApellidos"
+                        placeholder="Ej. Fonseca">
+                    </div>
+                    <div class="form-group">
+                      <label for="">Correo Electronico</label>
+                      <input name="correoElectronico" type="text" class="form-control" id="modificarCorreoElectronico"
+                        placeholder="Ej. hotelsoft@hotmail.com">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="">Telefono</label>
+                      <input name="telefono" type="text" class="form-control" id="modificarTelefono"
+                        placeholder="Ej. $3005186039">
+                    </div>
+                    <div class="form-group">
+                      <label for="">Rol</label>
+                      <select class="form-control" id="modificarRol">
+                        <?php
+
+                        traerRolesEnFormatoSelect();
+                        ?>
+                      </select>
+                    </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                  <button type="button" onclick="enviarFormularioModificarEmpleado()" class="btn btn-primary">Modificar</button>
+                  </form>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
     <!-- jQuery -->
     <script src="../../plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
@@ -234,9 +316,9 @@
               searchable: false,
               orderable: false,
               render: function (data, type, row) {
-                return '<button class="btn btn-sm" onclick="editarUsuario(' + row[0] + ')"><i class="fas fa-edit"></i> Editar</button>' +
-                  '<button class="btn btn-sm reset" onclick="resetearContrasena(' + row[0] + ')"><i class="fas fa-key"></i> Cambiar Contraseña</button>' +
-                  '<button class="btn btn-sm" onclick="cambiarEstadoUsuario(' + row[0] + ')"><i class="fas fa-power-off"></i> Cambiar estado</button>';
+                return '<button class="btn btn-sm" onclick="editarEmpleado(' + row[0] + ',\'' + row[1] + '\'' + ',\'' + row[2] + '\'' + ',\'' + row[3] + '\'' + ',\'' + row[4] + '\'' + ',\'' + row[5] + '\' ,\'' + row[6] + '\')"><i class="fas fa-edit"></i> Editar</button>' +
+                  '<button class="btn btn-sm reset" onclick="resetearContrasena(' + row[0] + ',\'' + row[2] + '\')"><i class="fas fa-key"></i> Cambiar Contraseña</button>' +
+                  '<button class="btn btn-sm" onclick="cambiarEstadoEmpleado(' + row[0] + ',\'' + row[2] + '\')"><i class="fas fa-power-off"></i> Cambiar estado</button>';
               }
 
             }
@@ -258,8 +340,8 @@
           data: $(this).serialize(),
           success: function (response) {
 
-          
-           
+
+
             if (response === "success") {
               Swal.fire({
                 title: 'Éxito',
@@ -272,7 +354,7 @@
             } else if (response === 'error') {
               Swal.fire('Error', 'Hubo un problema al crear el cliente', 'error');
             } else if (response === 'errorExiste') {
-              
+
               Swal.fire('Error', 'Ya existe ese cliente', 'error');
             }
           }
@@ -282,20 +364,186 @@
 
 
 
-      function editarUsuario(documento) {
-        // Implementa la lógica para editar el usuario con el documento proporcionado
+      function editarEmpleado(documento, tipoDocumento, nombres, apellidos, correo, telefono, rol) {
+
         console.log('Editar usuario con documento:', documento);
+
+        $('#ModificarEmpleado').modal('show');
+        document.getElementById('modificarDocumento').value = documento
+        var select = document.getElementById('modificarTipoDocumento');
+
+        // Iterar sobre las opciones y seleccionar la que coincide con el contenido deseado
+        for (var i = 0; i < select.options.length; i++) {
+          if (select.options[i].text === tipoDocumento) {
+            // Cambiar la opción seleccionada
+            select.options[i].selected = true;
+            break; // Terminar el bucle ya que encontramos la opción deseada
+          }
+        }
+
+        document.getElementById('modificarNombres').value = nombres
+        document.getElementById('modificarApellidos').value = apellidos
+        document.getElementById('modificarCorreoElectronico').value = correo
+        document.getElementById('modificarTelefono').value = telefono
+
+        var select2 = document.getElementById('modificarRol');
+
+        // Iterar sobre las opciones y seleccionar la que coincide con el contenido deseado
+        for (var i = 0; i < select2.options.length; i++) {
+          if (select2.options[i].text === rol) {
+            // Cambiar la opción seleccionada
+            select2.options[i].selected = true;
+            break; // Terminar el bucle ya que encontramos la opción deseada
+          }
+        }
+      }
+
+      function enviarFormularioModificarEmpleado() {
+        // Obtener los valores del formulario
+        var idUsuario = $('#modificarDocumento').val();
+        var tipoDocumento = $('#modificarTipoDocumento').val();
+        var nombres = $('#modificarNombres').val();
+        var apellidos = $('#modificarApellidos').val();
+        var correoElectronico = $('#modificarCorreoElectronico').val();
+        var telefono = $('#modificarTelefono').val();
+        var rol = $('#modificarRol').val();
+
+        console.log(rol)
+        // Realizar la verificación del correo electrónico antes de la solicitud AJAX
+        $.ajax({
+          type: 'POST',
+          url: '../consultasdb/empleados/modificarEmpleado.php',
+          data: {
+            idUsuario: idUsuario,
+            tipoDocumento: tipoDocumento,
+            nombres: nombres,
+            apellidos: apellidos,
+            correoElectronico: correoElectronico,
+            telefono: telefono,
+            rol: rol
+          },
+          success: function (response) {
+            // Manejar la respuesta del servidor
+            console.log(response);
+
+            // Cerrar el modal si la modificación fue exitosa
+            if (response === "Modificación exitosa") {
+              Swal.fire({
+                title: "Listo",
+                text: "Información modificada correctamente",
+                icon: "success"
+              }).then(() => {
+                // Recargar la página después de cerrar el SweetAlert
+                location.reload();
+              });
+              $('#ModificarCliente').modal('hide');
+            } else if (response === "Error: El correo electrónico ya está en uso") {
+              // Mostrar mensaje específico si el correo ya existe
+              Swal.fire({
+                title: "Upss",
+                html: "El correo electrónico <strong>" + correoElectronico + "</strong> ya está en uso por otro usuario",
+                icon: "error"
+              });
+            } else {
+              // Mostrar algún mensaje de error genérico si es necesario
+              Swal.fire({
+                title: "Upss",
+                text: "Hubo un error al modificar la información",
+                icon: "error"
+              });
+            }
+          }
+        });
       }
 
 
-      function resetearContrasena(documento) {
-        // Implementa la lógica para editar el usuario con el documento proporcionado
-        console.log('Cambiar contraseña usuario con documento:', documento);
+      function resetearContrasena(documento, nombre) {
+
+        Swal.fire({
+          title: "Nueva contraseña para el Empleado " + nombre,
+          html:
+            '<input type="password" id="password" placeholder="ContraseñaImposible123" class="swal2-input" autocomplete="new-password">',
+          showCancelButton: true,
+          confirmButtonText: "Cambiar Contraseña",
+          preConfirm: () => {
+            const password = Swal.getPopup().querySelector("#password").value;
+            if (!password) {
+              Swal.showValidationMessage("Por favor, ingresa la nueva contraseña");
+            }
+            return password;
+          },
+        }).then((result) => {
+          if (result.isConfirmed) {
+            const newPassword = result.value;
+
+            // Realizar la solicitud AJAX
+            $.ajax({
+              type: 'POST',
+              url: '../consultasdb/clientes/update_password.php',
+              data: { userId: documento, newPassword: newPassword },
+              success: function (response) {
+                if (response == "Contraseña actualizada correctamente") {
+                  Swal.fire({
+                    title: "Listo",
+                    text: "La contraseña ha sido cambiada con éxito.",
+                    icon: "success"
+                  }).then(() => {
+                    // Recargar la página después de cerrar el SweetAlert
+                    location.reload();
+                  });
+                } else {
+                  Swal.fire({
+                    title: "Error",
+                    text: "Hubo un error al cambiar la contraseña.",
+                    icon: "error"
+                  });
+                }
+              }
+            });
+          }
+        });
+
       }
 
-      function cambiarEstadoUsuario(documento) {
+      function cambiarEstadoEmpleado(documento, nombre) {
 
-        console.log('Cambiar estado del usuario con documento:', documento);
+
+
+        Swal.fire({
+          title: "Estas seguro?",
+          text: "Vas a cambiar el estado del Empleado " + nombre,
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          cancelButtonText: "Cancelar",
+          confirmButtonText: "Si!"
+        }).then((result) => {
+          if (result.isConfirmed) {
+
+            $.ajax({
+              type: 'POST',
+              url: '../consultasdb/clientes/update_user_state.php',
+              data: { userId: documento },
+              success: function (response) {
+
+                if (response == "Estado actualizado correctamente") {
+                  Swal.fire({
+                    title: "Listo",
+                    text: "El estado ha sido cambiado con exito.",
+                    icon: "success"
+                  }).then(() => {
+
+                    location.reload();
+                  });
+
+                }
+
+              }
+            });
+
+          }
+        });
       }
     </script>
   </div>
