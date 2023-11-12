@@ -12,7 +12,7 @@ if ($result->num_rows > 0) {
         // Formatear los datos según el formato de FullCalendar
         $event = array(
             'id' => $row['idReserva'],
-            'title' => $row['idUsuario']." - ".$row['nombre']." ".$row['apellido'],
+            'title' => " Habitación numero: ".$row['numHabitacion']." | ".$row['idUsuario']." | ".$row['nombre']." ".$row['apellido'],
             'start' => $row['fechaEntrada'],
             'end' => $row['fechasalida'],
             'clientId' => $row['Clientes_idClientes']

@@ -164,43 +164,149 @@ session_start();
         var fechaSalida = document.getElementById('fecha_salida').value;
         var idCliente = "<?php echo $_SESSION['id_usuario']; ?>"
 
+        var fechaEntradaDate = new Date(fechaEntrada);
+        var hoy = new Date();
+        hoy.setHours(0, 0, 0, 0); 
 
-        // Realizar la solicitud AJAX
-        $.ajax({
-          type: "POST",
-          url: "../consultasdb/recepcion/recepcion.php", // Reemplaza con la ruta correcta a tu archivo PHP
-          data: {
-            idCliente: idCliente,
-            habitacion: habitacion,
-            fechaEntrada: fechaEntrada,
-            fechaSalida: fechaSalida
-          },
-          success: function (respuesta) {
-            console.log(respuesta); // Muestra la respuesta en la consola
-            if (respuesta == "si está ocupada") {
-
-              Swal.fire({
-                title: "Ups...",
-                text: "La habitación ya está reservada en algun dia entre las fechas que seleccionaste, intenta cambiar de habitación ;)",
-                icon: "warning"
-              });
-
-            } else if (respuesta == "Reserva exitosa") {
-              Swal.fire({
-                title: "Listo!",
-                text: "Reserva Realizada",
-                icon: "success"
-              });
-            }
+        if (fechaEntradaDate > hoy) {
+          // La fecha es después del día de hoy
+          hacerConsulta(idCliente, habitacion, fechaEntrada, fechaSalida)
+        } else {
+          Swal.fire({
+            title: "Ups...",
+            text: "No puedes reservar una habitacion para una fecha anterior al dia de hoy.",
+            icon: "warning"
+          });
+        }
 
 
-          },
-          error: function () {
-            console.log("Error en la solicitud AJAX");
-          }
-        });
+
+
+
+
       });
     });
+
+    function hacerConsulta(idCliente, habitacion, fechaEntrada, fechaSalida) {
+      // Realizar la solicitud AJAX
+      $.ajax({
+        type: "POST",
+        url: "../consultasdb/recepcion/recepcion.php", // Reemplaza con la ruta correcta a tu archivo PHP
+        data: {
+          idCliente: idCliente,
+          habitacion: habitacion,
+          fechaEntrada: fechaEntrada,
+          fechaSalida: fechaSalida
+        },
+        success: function (respuesta) {
+          console.log(respuesta); // Muestra la respuesta en la consola
+          if (respuesta == "si está ocupada") {
+
+            Swal.fire({
+              title: "Ups...",
+              text: "La habitación ya está reservada en algun dia entre las fechas que seleccionaste, intenta cambiar de habitación ;)",
+              icon: "warning"
+            });
+
+          } else if (respuesta == "Puedes reservar") {
+            obtenerPrecioHabitacion(idCliente, habitacion, fechaEntrada, fechaSalida);
+
+          }
+
+
+        },
+        error: function () {
+          console.log("Error en la solicitud AJAX");
+        }
+      });
+    }
+
+    function obtenerPrecioHabitacion(idCliente, habitacion, fechaEntrada, fechaSalida) {
+      $.ajax({
+        type: 'POST',
+        url: '../consultasdb/reservar/obtenerPrecioHabitacion.php',
+        data: {
+          idHabitacion: habitacion,
+          fechaEntrada: fechaEntrada,
+          fechaSalida: fechaSalida
+        },
+        success: function (response) {
+          // Manejar la respuesta del servidor
+          console.log(response);
+
+          // Analizar la respuesta JSON (asegúrate de que el servidor esté devolviendo JSON)
+          var costoTotal = response;
+
+          // Verificar si la consulta fue exitosa
+          if (response) {
+
+            // Mostrar el SweetAlert con la información de la reserva
+            Swal.fire({
+              title: "¿Estás seguro de reservar?",
+              text: "El costo total de la reserva es: $" + costoTotal,
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Sí, reservar"
+            }).then((result) => {
+              if (result.isConfirmed) {
+                reservar(idCliente, habitacion, fechaEntrada, fechaSalida)
+              }
+            });
+          } else {
+            // Mostrar un mensaje de error si la consulta no fue exitosa
+            Swal.fire({
+              title: "Error",
+              text: "Hubo un error al obtener el precio de la habitación",
+              icon: "error"
+            });
+          }
+        }
+      });
+    }
+
+    function reservar(idCliente, habitacion, fechaEntrada, fechaSalida) {
+
+      $.ajax({
+        type: "POST",
+        url: "../consultasdb/reservar/realizarReserva.php", // Reemplaza con la ruta correcta a tu archivo PHP
+        data: {
+          idCliente: idCliente,
+          habitacion: habitacion,
+          fechaEntrada: fechaEntrada,
+          fechaSalida: fechaSalida
+        },
+        success: function (respuesta) {
+          console.log(respuesta + idCliente); // Muestra la respuesta en la consola
+          if (respuesta == "Reserva exitosa") {
+
+            Swal.fire({
+              title: "Listo!",
+              text: "Reserva exitosa",
+              icon: "success"
+            });
+
+          } else {
+
+
+          }
+
+
+        },
+        error: function () {
+          console.log("Error en la solicitud AJAX");
+        }
+      });
+
+    }
+    function calcularDiferenciaDias(fechaEntrada, fechaSalida) {
+      var dateEntrada = new Date(fechaEntrada);
+      var dateSalida = new Date(fechaSalida);
+      var diferenciaTiempo = dateSalida - dateEntrada;
+      var diferenciaDias = Math.ceil(diferenciaTiempo / (1000 * 60 * 60 * 24));
+      return diferenciaDias;
+    }
 
 
   </script>
