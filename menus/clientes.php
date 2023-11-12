@@ -61,15 +61,15 @@
             <div class="card-body ">
               <div class="row mb-2">
                 <div class="col-sm-6">
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crearHabitacionModal">
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crearClienteModal">
                     Crear Cliente
                   </button>
-                  <div class="modal fade" id="crearHabitacionModal" tabindex="-1" role="dialog"
-                    aria-labelledby="crearHabitacionModalLabel" aria-hidden="true">
+                  <div class="modal fade" id="crearClienteModal" tabindex="-1" role="dialog"
+                    aria-labelledby="crearClienteModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-scrollable" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="crearHabitacionModalLabel">Crear Cliente</h5>
+                          <h5 class="modal-title" id="crearClienteModalLabel">Crear Cliente</h5>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                           </button>
@@ -139,6 +139,7 @@
                 </div>
 
               </div>
+
               <table id="tabla1" class="table table-bordered table-striped">
                 <thead>
                   <tr>
@@ -185,196 +186,334 @@
     </div>
     <!-- ./wrapper -->
 
-    <!-- jQuery -->
-    <script src="../../plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- DataTables  & Plugins -->
-    <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-    <script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-    <script src="../../plugins/jszip/jszip.min.js"></script>
-    <script src="../../plugins/pdfmake/pdfmake.min.js"></script>
-    <script src="../../plugins/pdfmake/vfs_fonts.js"></script>
-    <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-    <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
-    <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="../../dist/js/adminlte.min.js"></script>
-    <script src="../plugins/datatables/es-ES.js"></script>
+    <!-- SEGUNDO MODAL -->
 
-    <!-- Page specific script -->
-    <script>
-      var data = <?php require '../consultasdb/clientes/clientes.php';
-      echo traerDatosClientes(); ?>;
-      $(function () {
-        $("#tabla1").DataTable({
-          language: spanish,
-          "responsive": true, "lengthChange": false, "autoWidth": false,
-          "buttons": ["excel", "pdf", "print", "colvis"],
-          columns: [
-            { title: 'Documento' },
-            { title: 'Tipo Documento' },
-            { title: 'Nombres' },
-            { title: 'Apellidos' },
-            { title: 'Correo Electronico' },
-            { title: 'Telefono' },
-            { title: 'Rol' },
-            { title: 'Estado' },
-            {
-              title: 'Acciones',
-              searchable: false,
-              orderable: false,
-              render: function (data, type, row) {
-                return '<button class="btn btn-sm" onclick="editarUsuario(' + row[0] + ')"><i class="fas fa-edit"></i> Editar</button>' +
-                  '<button class="btn btn-sm reset" onclick="resetearContrasena(' + row[0] + ',\'' + row[2] + '\')"><i class="fas fa-key"></i> Cambiar Contraseña</button>' +
-                  '<button class="btn btn-sm" onclick="cambiarEstadoCliente(' + row[0] + ',\'' + row[2] + '\')"><i class="fas fa-power-off"></i> Cambiar estado</button>';
+    <div class="card-body ">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+
+          <div class="modal fade" id="ModificarCliente" tabindex="-1" role="dialog"
+            aria-labelledby="ModificarClienteLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="ModificarClienteLabel">Editar información del cliente</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form id="formularioModificarCliente">
+                    <div class="form-group">
+                      <label for="">Documento</label>
+                      <input disabled type="text" name="documento" class="form-control" id="modificarDocumento"
+                        placeholder="Ej. 100288790">
+                    </div>
+                    <div class="form-group">
+                      <label for="">Tipo Documento</label>
+                      <select required class="form-control" name="tipoDocumento" id="modificarTipoDocumento">
+                        <option selected disabled value="">Tipo de Identificación</option>
+                        <?php
+                        include '../consultasdb/traerTiposDeIdentificacion.php';
+
+                        ?>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="">Nombres</label>
+                      <input name="nombre" type="text" class="form-control" id="modificarNombres"
+                        placeholder="Ej. Carlos">
+                    </div>
+                    <div class="form-group">
+                      <label for="">Apellidos</label>
+                      <input name="apellido" type="text" class="form-control" id="modificarApellidos"
+                        placeholder="Ej. Fonseca">
+                    </div>
+                    <div class="form-group">
+                      <label for="">Correo Electronico</label>
+                      <input name="correoElectronico" type="text" class="form-control" id="modificarCorreoElectronico"
+                        placeholder="Ej. hotelsoft@hotmail.com">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="">Telefono</label>
+                      <input name="telefono" type="text" class="form-control" id="modificarTelefono"
+                        placeholder="Ej. $3005186039">
+                    </div>
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                  <button type="button" onclick="enviarFormularioModificar()" class="btn btn-primary">Modificar</button>
+                  </form>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- jQuery -->
+      <script src="../../plugins/jquery/jquery.min.js"></script>
+      <!-- Bootstrap 4 -->
+      <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <!-- DataTables  & Plugins -->
+      <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+      <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+      <script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+      <script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+      <script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+      <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+      <script src="../../plugins/jszip/jszip.min.js"></script>
+      <script src="../../plugins/pdfmake/pdfmake.min.js"></script>
+      <script src="../../plugins/pdfmake/vfs_fonts.js"></script>
+      <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+      <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
+      <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+      <!-- AdminLTE App -->
+      <script src="../../dist/js/adminlte.min.js"></script>
+      <script src="../plugins/datatables/es-ES.js"></script>
+
+      <!-- Page specific script -->
+      <script>
+        var data = <?php require '../consultasdb/clientes/clientes.php';
+        echo traerDatosClientes(); ?>;
+        $(function () {
+          $("#tabla1").DataTable({
+            language: spanish,
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+            "buttons": ["excel", "pdf", "print", "colvis"],
+            columns: [
+              { title: 'Documento' },
+              { title: 'Tipo Documento' },
+              { title: 'Nombres' },
+              { title: 'Apellidos' },
+              { title: 'Correo Electronico' },
+              { title: 'Telefono' },
+              { title: 'Rol' },
+              { title: 'Estado' },
+              {
+                title: 'Acciones',
+                searchable: false,
+                orderable: false,
+                render: function (data, type, row) {
+                  return '<button class="btn btn-sm" onclick="editarUsuario(' + row[0] + ',\'' + row[1] + '\'' + ',\'' + row[2] + '\'' + ',\'' + row[3] + '\'' + ',\'' + row[4] + '\'' + ',\'' + row[5] + '\' )"><i class="fas fa-edit"></i> Editar</button>' +
+                    '<button class="btn btn-sm reset" onclick="resetearContrasena(' + row[0] + ',\'' + row[2] + '\')"><i class="fas fa-key"></i> Cambiar Contraseña</button>' +
+                    '<button class="btn btn-sm" onclick="cambiarEstadoCliente(' + row[0] + ',\'' + row[2] + '\')"><i class="fas fa-power-off"></i> Cambiar estado</button>';
+                }
+
               }
+            ],
+            data: data
 
+          }).buttons().container().appendTo('#tabla1_wrapper .col-md-6:eq(0)');
+
+        });
+
+
+        document.getElementById('formularioCrearCliente').addEventListener('submit', function (e) {
+          e.preventDefault(); // Evita el envío del formulario por defecto
+
+          // Realiza una solicitud AJAX para procesar el formulario
+          $.ajax({
+            type: 'POST',
+            url: '../consultasdb/clientes/crearcliente.php',
+            data: $(this).serialize(),
+            success: function (response) {
+
+
+              console.log(response)
+              if (response === "success") {
+                Swal.fire({
+                  title: 'Éxito',
+                  text: 'El cliente se ha creado correctamente',
+                  icon: 'success'
+                }).then(() => {
+                  // Recargar la página actual
+                  location.reload();
+                });
+              } else if (response === 'error') {
+                Swal.fire('Error', 'Hubo un problema al crear el cliente', 'error');
+              } else if (response === 'errorExiste') {
+
+                Swal.fire('Error', 'Ya existe ese cliente', 'error');
+              }
             }
-          ],
-          data: data
+          });
 
-        }).buttons().container().appendTo('#tabla1_wrapper .col-md-6:eq(0)');
-
-      });
+        });
 
 
-      document.getElementById('formularioCrearCliente').addEventListener('submit', function (e) {
-        e.preventDefault(); // Evita el envío del formulario por defecto
+        function editarUsuario(documento, tipoDocumento, nombres, apellidos, correo, telefono) {
 
-        // Realiza una solicitud AJAX para procesar el formulario
-        $.ajax({
-          type: 'POST',
-          url: '../consultasdb/clientes/crearcliente.php',
-          data: $(this).serialize(),
-          success: function (response) {
+          console.log('Editar usuario con documento:', documento);
 
+          $('#ModificarCliente').modal('show');
+          document.getElementById('modificarDocumento').value = documento
+          var select = document.getElementById('modificarTipoDocumento');
 
-            console.log(response)
-            if (response === "success") {
-              Swal.fire({
-                title: 'Éxito',
-                text: 'El cliente se ha creado correctamente',
-                icon: 'success'
-              }).then(() => {
-                // Recargar la página actual
-                location.reload();
+          // Iterar sobre las opciones y seleccionar la que coincide con el contenido deseado
+          for (var i = 0; i < select.options.length; i++) {
+            if (select.options[i].text === tipoDocumento) {
+              // Cambiar la opción seleccionada
+              select.options[i].selected = true;
+              break; // Terminar el bucle ya que encontramos la opción deseada
+            }
+          }
+
+          document.getElementById('modificarNombres').value = nombres
+          document.getElementById('modificarApellidos').value = apellidos
+          document.getElementById('modificarCorreoElectronico').value = correo
+          document.getElementById('modificarTelefono').value = telefono
+        }
+
+        function enviarFormularioModificar() {
+          // Obtener los valores del formulario
+          var idUsuario = $('#modificarDocumento').val(); // Usando el campo documento como idUsuario
+          var tipoDocumento = $('#modificarTipoDocumento').val();
+          var nombres = $('#modificarNombres').val();
+          var apellidos = $('#modificarApellidos').val();
+          var correoElectronico = $('#modificarCorreoElectronico').val();
+          var telefono = $('#modificarTelefono').val();
+
+          // Realizar la solicitud AJAX
+          $.ajax({
+            type: 'POST',
+            url: '../consultasdb/clientes/modificarCliente.php',
+            data: {
+              idUsuario: idUsuario, // Utilizamos el valor del campo documento como idUsuario
+              tipoDocumento: tipoDocumento,
+              nombres: nombres,
+              apellidos: apellidos,
+              correoElectronico: correoElectronico,
+              telefono: telefono
+            },
+            success: function (response) {
+              // Manejar la respuesta del servidor
+              console.log(response);
+
+              // Cerrar el modal si la modificación fue exitosa
+              if (response === "Modificación exitosa") {
+                Swal.fire({
+                  title: "Listo",
+                  text: "Información modificada correctamente",
+                  icon: "success"
+                }).then(() => {
+                  // Recargar la página después de cerrar el SweetAlert
+                  location.reload();
+                });
+                $('#ModificarCliente').modal('hide');
+              } else {
+                // Mostrar algún mensaje de error si es necesario
+                Swal.fire({
+                  title: "Upss",
+                  text: "Hubo un error al modificar la información",
+                  icon: "error"
+                });
+              }
+            }
+          });
+        }
+
+        function resetearContrasena(documento, nombre) {
+
+          Swal.fire({
+            title: "Nueva contraseña para el usuario " + nombre,
+            html:
+              '<input type="password" id="password" placeholder="ContraseñaImposible123" class="swal2-input" autocomplete="new-password">',
+            showCancelButton: true,
+            confirmButtonText: "Cambiar Contraseña",
+            preConfirm: () => {
+              const password = Swal.getPopup().querySelector("#password").value;
+              if (!password) {
+                Swal.showValidationMessage("Por favor, ingresa la nueva contraseña");
+              }
+              return password;
+            },
+          }).then((result) => {
+            if (result.isConfirmed) {
+              const newPassword = result.value;
+
+              // Realizar la solicitud AJAX
+              $.ajax({
+                type: 'POST',
+                url: '../consultasdb/clientes/update_password.php',
+                data: { userId: documento, newPassword: newPassword },
+                success: function (response) {
+                  if (response == "Contraseña actualizada correctamente") {
+                    Swal.fire({
+                      title: "Listo",
+                      text: "La contraseña ha sido cambiada con éxito.",
+                      icon: "success"
+                    }).then(() => {
+                      // Recargar la página después de cerrar el SweetAlert
+                      location.reload();
+                    });
+                  } else {
+                    Swal.fire({
+                      title: "Error",
+                      text: "Hubo un error al cambiar la contraseña.",
+                      icon: "error"
+                    });
+                  }
+                }
               });
-            } else if (response === 'error') {
-              Swal.fire('Error', 'Hubo un problema al crear el cliente', 'error');
-            } else if (response === 'errorExiste') {
-
-              Swal.fire('Error', 'Ya existe ese cliente', 'error');
             }
-          }
-        });
+          });
 
-      });
+        }
 
-
-      function editarUsuario(documento) {
-
-        console.log('Editar usuario con documento:', documento);
-      }
-
-      function resetearContrasena(documento, nombre) {
-
-        Swal.fire({
-          title: "Nueva contraseña para el usuario " + nombre,
-          html:
-            '<input type="password" id="password" placeholder="ContraseñaImposible123" class="swal2-input" autocomplete="new-password">',
-          showCancelButton: true,
-          confirmButtonText: "Cambiar Contraseña",
-          preConfirm: () => {
-            const password = Swal.getPopup().querySelector("#password").value;
-            if (!password) {
-              Swal.showValidationMessage("Por favor, ingresa la nueva contraseña");
-            }
-            return password;
-          },
-        }).then((result) => {
-          if (result.isConfirmed) {
-            const newPassword = result.value;
-
-            // Realizar la solicitud AJAX
-            $.ajax({
-              type: 'POST',
-              url: '../consultasdb/clientes/update_password.php',
-              data: { userId: documento, newPassword: newPassword },
-              success: function (response) {
-                if (response == "Contraseña actualizada correctamente") {
-                  Swal.fire({
-                    title: "Listo",
-                    text: "La contraseña ha sido cambiada con éxito.",
-                    icon: "success"
-                  }).then(() => {
-                    // Recargar la página después de cerrar el SweetAlert
-                    location.reload();
-                  });
-                } else {
-                  Swal.fire({
-                    title: "Error",
-                    text: "Hubo un error al cambiar la contraseña.",
-                    icon: "error"
-                  });
-                }
-              }
-            });
-          }
-        });
-
-      }
-
-      function cambiarEstadoCliente(documento, nombre) {
+        function cambiarEstadoCliente(documento, nombre) {
 
 
 
-        Swal.fire({
-          title: "Estas seguro?",
-          text: "Vas a cambiar el estado del cliente " + nombre,
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          cancelButtonText: "Cancelar",
-          confirmButtonText: "Si!"
-        }).then((result) => {
-          if (result.isConfirmed) {
+          Swal.fire({
+            title: "Estas seguro?",
+            text: "Vas a cambiar el estado del cliente " + nombre,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            cancelButtonText: "Cancelar",
+            confirmButtonText: "Si!"
+          }).then((result) => {
+            if (result.isConfirmed) {
 
-            $.ajax({
-              type: 'POST',
-              url: '../consultasdb/clientes/update_user_state.php',
-              data: { userId: documento },
-              success: function (response) {
+              $.ajax({
+                type: 'POST',
+                url: '../consultasdb/clientes/update_user_state.php',
+                data: { userId: documento },
+                success: function (response) {
 
-                if (response == "Estado actualizado correctamente") {
-                  Swal.fire({
-                    title: "Listo",
-                    text: "El estado ha sido cambiado con exito.",
-                    icon: "success"
-                  }).then(() => {
+                  if (response == "Estado actualizado correctamente") {
+                    Swal.fire({
+                      title: "Listo",
+                      text: "El estado ha sido cambiado con exito.",
+                      icon: "success"
+                    }).then(() => {
 
-                    location.reload();
-                  });
+                      location.reload();
+                    });
+
+                  }
 
                 }
+              });
 
-              }
-            });
+            }
+          });
+        }
 
-          }
-        });
-      }
-
-    </script>
+      </script>
 
 
 
-  </div>
+    </div>
 </body>
 
 </html>
