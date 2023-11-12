@@ -57,7 +57,7 @@
                 <h3 class="card-title"> Listado de Clientes </h3>
               </div>
             </div>
-            
+
             <div class="card-body ">
               <div class="row mb-2">
                 <div class="col-sm-6">
@@ -124,7 +124,7 @@
                                 <option value="0">Inactivo</option>
                               </select>
                             </div>
-                            
+
 
                         </div>
                         <div class="modal-footer">
@@ -174,7 +174,7 @@
 
 
 
-          
+
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
@@ -208,7 +208,8 @@
 
     <!-- Page specific script -->
     <script>
-      var data = <?php require '../consultasdb/clientes/clientes.php'; echo traerDatosClientes(); ?>;
+      var data = <?php require '../consultasdb/clientes/clientes.php';
+      echo traerDatosClientes(); ?>;
       $(function () {
         $("#tabla1").DataTable({
           language: spanish,
@@ -222,15 +223,15 @@
             { title: 'Correo Electronico' },
             { title: 'Telefono' },
             { title: 'Rol' },
-            { title: 'Estado'},
+            { title: 'Estado' },
             {
               title: 'Acciones',
               searchable: false,
               orderable: false,
               render: function (data, type, row) {
                 return '<button class="btn btn-sm" onclick="editarUsuario(' + row[0] + ')"><i class="fas fa-edit"></i> Editar</button>' +
-                '<button class="btn btn-sm reset" onclick="resetearContrasena(' + row[0] + ')"><i class="fas fa-key"></i> Cambiar Contraseña</button>' +
-                  '<button class="btn btn-sm" onclick="cambiarEstadoUsuario(' + row[0] + ')"><i class="fas fa-power-off"></i> Cambiar estado</button>';
+                  '<button class="btn btn-sm reset" onclick="resetearContrasena(' + row[0] + ')"><i class="fas fa-key"></i> Cambiar Contraseña</button>' +
+                  '<button class="btn btn-sm" onclick="cambiarEstadoCliente(' + row[0] + ',\'' + row[2] + '\')"><i class="fas fa-power-off"></i> Cambiar estado</button>';
               }
 
             }
@@ -252,7 +253,7 @@
           data: $(this).serialize(),
           success: function (response) {
 
-          
+
             console.log(response)
             if (response === "success") {
               Swal.fire({
@@ -266,7 +267,7 @@
             } else if (response === 'error') {
               Swal.fire('Error', 'Hubo un problema al crear el cliente', 'error');
             } else if (response === 'errorExiste') {
-              
+
               Swal.fire('Error', 'Ya existe ese cliente', 'error');
             }
           }
@@ -276,21 +277,58 @@
 
 
       function editarUsuario(documento) {
-        
+
         console.log('Editar usuario con documento:', documento);
       }
 
       function resetearContrasena(documento) {
-        
+
         console.log('Cambiar contraseña usuario con documento:', documento);
       }
 
-      function cambiarEstadoUsuario(documento) {
-        
-        console.log('Cambiar estado del usuario con documento:', documento);
+      function cambiarEstadoCliente(documento, nombre) {
+
+
+
+        Swal.fire({
+          title: "Estas seguro?",
+          text: "Vas a cambiar el estado del cliente " + nombre,
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          cancelButtonText: "Cancelar",
+          confirmButtonText: "Si!"
+        }).then((result) => {
+          if (result.isConfirmed) {
+
+            $.ajax({
+              type: 'POST',
+              url: '../consultasdb/clientes/update_user_state.php',
+              data: { userId: documento },
+              success: function (response) {
+
+                if (response == "Estado actualizado correctamente") {
+                  Swal.fire({
+                    title: "Listo",
+                    text: "El estado ha sido cambiado con exito.",
+                    icon: "success"
+                  }).then(() => {
+                   
+                    location.reload();
+                  });
+
+                }
+
+              }
+            });
+
+          }
+        });
       }
 
     </script>
+
   </div>
 </body>
 
