@@ -5,8 +5,5 @@ function loginExitoso($id, $nombre, $apellido, $idrol, $rol){
     $_SESSION['nombreCompleto_usuario'] = $nombre . " " . $apellido;
     $_SESSION['id_rol'] = $idrol;
     $_SESSION['rol_usuario'] = $rol;
- 
- 
- 
  }
 ?>
