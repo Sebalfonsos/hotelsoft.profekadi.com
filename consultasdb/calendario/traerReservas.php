@@ -1,8 +1,7 @@
 <?php
-
-require __DIR__ .'/../conexion.php';
-
-$sql = "SELECT idReserva, fechaEntrada, fechaSalida, Clientes_idClientes FROM Reservas";
+require __DIR__ . '/../conexion.php';
+$sql = "SELECT Reservas.*,Habitaciones.*, Usuarios.idUsuario, Usuarios.nombre, Usuarios.apellido FROM Habitaciones_has_Reservas JOIN Habitaciones ON Habitaciones_has_Reservas.Habitaciones_idHabitacion = Habitaciones.idHabitacion JOIN Reservas ON Habitaciones_has_Reservas.Reservas_idReserva = Reservas.idReserva JOIN Clientes ON Reservas.Clientes_idClientes = Clientes.idCliente JOIN Usuarios ON Clientes.Usuarios_idUsuario = Usuarios.idUsuario;
+";
 $result = $conn->query($sql);
 
 // Crear un array para almacenar los eventos
@@ -13,11 +12,10 @@ if ($result->num_rows > 0) {
         // Formatear los datos según el formato de FullCalendar
         $event = array(
             'id' => $row['idReserva'],
-            'title' => 'Reserva #' . $row['idReserva'],
+            'title' => $row['idUsuario']." - ".$row['nombre']." ".$row['apellido'],
             'start' => $row['fechaEntrada'],
-            'end' => $row['fechaSalida'],
-            'clientId' => $row['Clientes_idClientes'],
-            'description' => "aa"
+            'end' => $row['fechasalida'],
+            'clientId' => $row['Clientes_idClientes']
         );
 
         // Agregar el evento al array de eventos
