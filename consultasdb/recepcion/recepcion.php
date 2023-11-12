@@ -128,7 +128,7 @@ function habitacionOcupada($habitacion, $fechaEntrada, $fechaSalida, $idCliente)
     FROM Habitaciones_has_Reservas
     JOIN Habitaciones ON Habitaciones_has_Reservas.Habitaciones_idHabitacion = Habitaciones.idHabitacion
     JOIN Reservas ON Habitaciones_has_Reservas.Reservas_idReserva = Reservas.idReserva
-    WHERE Habitaciones.idHabitacion = ? AND Reservas.fechaSalida >= ? AND Reservas.fechaEntrada <= ?";
+    WHERE Habitaciones.idHabitacion = ? AND Reservas.fechaSalida > ? AND Reservas.fechaEntrada < ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("iss", $habitacion, $entrada, $salida);
     $stmt->execute();
