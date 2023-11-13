@@ -19,7 +19,12 @@ session_start();
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+
+
+
 </head>
+
+
 
 <body class="hold-transition sidebar-mini">
   <!-- Site wrapper -->
@@ -53,11 +58,12 @@ session_start();
               ?>
             </div>
 
-            <!-- Columna del formulario de reserva ocupando la otra mitad del ancho -->
-            <div class="col-md-4">
+            <!-- Columna del formulario de reserva ocupando la derecha de la pantalla -->
+            
+            <div class="col-md-4 ">
 
 
-              <div class="card card-primary">
+              <div class="card card-primary sticky-top">
                 <div class="card-header">
                   <h3 class="card-title">Reservar</h3>
                 </div>
@@ -166,7 +172,7 @@ session_start();
 
         var fechaEntradaDate = new Date(fechaEntrada);
         var hoy = new Date();
-        hoy.setHours(0, 0, 0, 0); 
+        hoy.setHours(0, 0, 0, 0);
 
         if (fechaEntradaDate > hoy) {
           // La fecha es después del día de hoy
