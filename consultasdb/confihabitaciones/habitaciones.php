@@ -3,7 +3,7 @@ function traerDatosHabitaciones()
 {
     require __DIR__ . '/../conexion.php';
 
-    $sql = "SELECT * FROM Habitaciones";
+    $sql = "SELECT * FROM Habitaciones JOIN estadoHabitaciones ON Habitaciones.estado = estadoHabitaciones.idEstado ";
 
     $stmt = $conn->prepare($sql);
     $stmt->execute();
@@ -17,7 +17,7 @@ function traerDatosHabitaciones()
                 $row["numHabitacion"],
                 $row["tipoHabitacion"],
                 $row["precioHabitacion"],
-                $row["estado"],
+                $row["nombreEstado"],
                 ''
             );
         }
