@@ -94,7 +94,6 @@
                                   <select name="estadoHabitacion" class="form-control" id="estadoHabitacion">
                                     <option value="1">Disponible</option>
                                     <option value="0">Deshabilitada</option>
-                                    <option value="2">Mantenimiento</option>
                                   </select>
                                 </div>
                                 <div class="form-group">
