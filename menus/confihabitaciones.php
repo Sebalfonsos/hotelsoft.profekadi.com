@@ -7,7 +7,8 @@
   <title>Hotel Soft | Lista Habitaciones</title>
 
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
   <!-- DataTables -->
@@ -58,10 +59,12 @@
                 <div class="card-body ">
                   <div class="row mb-2">
                     <div class="col-sm-6">
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crearHabitacionModal">
+                      <button type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target="#crearHabitacionModal">
                         Crear Habitación
                       </button>
-                      <div class="modal fade" id="crearHabitacionModal" tabindex="-1" role="dialog" aria-labelledby="crearHabitacionModalLabel" aria-hidden="true">
+                      <div class="modal fade" id="crearHabitacionModal" tabindex="-1" role="dialog"
+                        aria-labelledby="crearHabitacionModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-vertical" role="document">
                           <div class="modal-content">
                             <div class="modal-header">
@@ -71,10 +74,12 @@
                               </button>
                             </div>
                             <div class="modal-body">
-                              <form id="formularioCrearHabitacion" action="../consultasdb/crearhabitaciones.php" method="post">
+                              <form id="formularioCrearHabitacion" action="../consultasdb/crearhabitaciones.php"
+                                method="post">
                                 <div class="form-group">
                                   <label for="numeroHabitacion">Número de Habitación</label>
-                                  <input type="text" name="numHabitacion" class="form-control" id="numeroHabitacion" placeholder="Ej. 101">
+                                  <input type="text" name="numHabitacion" class="form-control" id="numeroHabitacion"
+                                    placeholder="Ej. 101">
                                 </div>
                                 <div class="form-group">
                                   <label for="tipoHabitacion">Tipo de Habitación</label>
@@ -94,7 +99,8 @@
                                 </div>
                                 <div class="form-group">
                                   <label for="precopHabitacion">Precio de Habitación</label>
-                                  <input name="precioHabitacion" type="text" class="form-control" id="precioHabitacion" placeholder="Ej. $30,000">
+                                  <input name="precioHabitacion" type="text" class="form-control" id="precioHabitacion"
+                                    placeholder="Ej. $30,000">
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -160,8 +166,8 @@
           <!-- Page specific script -->
           <script>
             var data = <?php require '../consultasdb/confihabitaciones/habitaciones.php';
-                        echo traerDatosHabitaciones(); ?>;
-            $(function() {
+            echo traerDatosHabitaciones(); ?>;
+            $(function () {
               $("#tabla1").DataTable({
                 language: spanish,
                 "responsive": true,
@@ -169,34 +175,34 @@
                 "autoWidth": false,
                 "buttons": ["excel", "pdf", "print", "colvis"],
                 columns: [{
-                    title: 'N° Habitación'
-                  },
-                  {
-                    title: 'Categoria'
-                  },
-                  {
-                    title: 'Precio'
-                  },
-                  {
-                    title: 'Estado'
-                  },
-                  {
-                    title: 'Acciones',
-                    searchable: false,
-                    orderable: false,
-                    render: function(data, type, row) {
-                      return '<button class="btn btn-sm" onclick="editarUsuario(' + row[0] + ')"><i class="fas fa-edit"></i> Editar</button>' +
-                        '<button class="btn btn-sm" onclick="cambiarEstadoUsuario(' + row[0] + ')"><i class="fas fa-power-off"></i> Cambiar estado</button>';
-                    }
-
+                  title: 'N° Habitación'
+                },
+                {
+                  title: 'Categoria'
+                },
+                {
+                  title: 'Precio'
+                },
+                {
+                  title: 'Estado'
+                },
+                {
+                  title: 'Acciones',
+                  searchable: false,
+                  orderable: false,
+                  render: function (data, type, row) {
+                    return '<button class="btn btn-sm" onclick="editarHabitacion(\'' + row[5] + '\')"><i class="fas fa-edit"></i> Editar</button>' +
+                      '<button class="btn btn-sm" onclick="cambiarEstadoHabitacion('+row[5]+','+row[0]+')"><i class="fas fa-power-off"></i> Cambiar estado</button>';
                   }
+
+                }
                 ],
                 data: data
 
               }).buttons().container().appendTo('#tabla1_wrapper .col-md-6:eq(0)');
 
             });
-            document.getElementById('formularioCrearHabitacion').addEventListener('submit', function(e) {
+            document.getElementById('formularioCrearHabitacion').addEventListener('submit', function (e) {
               e.preventDefault(); // Evita el envío del formulario por defecto
 
               // Realiza una solicitud AJAX para procesar el formulario
@@ -204,7 +210,7 @@
                 type: 'POST',
                 url: '../consultasdb/confihabitaciones/crearhabitaciones.php',
                 data: $(this).serialize(),
-                success: function(response) {
+                success: function (response) {
 
 
 
@@ -236,14 +242,52 @@
             }
 
 
-            function resetearContrasena(documento) {
-              // Implementa la lógica para editar el usuario con el documento proporcionado
-              console.log('Cambiar contraseña usuario con documento:', documento);
-            }
 
-            function cambiarEstadoUsuario(documento) {
+            function cambiarEstadoHabitacion(idHabitacion, numHabitacion) {
 
-              console.log('Cambiar estado del usuario con documento:', documento);
+
+
+              Swal.fire({
+                title: "Estas seguro?",
+                text: "Vas a cambiar el estado de la habitacion # " + numHabitacion,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                cancelButtonText: "Cancelar",
+                confirmButtonText: "Si!"
+              }).then((result) => {
+                if (result.isConfirmed) {
+
+                  $.ajax({
+                    type: 'POST',
+                    url: '../consultasdb/confihabitaciones/update_habitaciones_state.php',
+                    data: { idHabitacion: idHabitacion },
+                    success: function (response) {
+                      console.log(response)
+                      if (response == "Estado actualizado correctamente") {
+                        Swal.fire({
+                          title: "Listo",
+                          text: "El estado ha sido cambiado con exito.",
+                          icon: "success"
+                        }).then(() => {
+
+                          location.reload();
+                        });
+
+                      }else{
+                        Swal.fire({
+                          title: "Upss..",
+                          text: "Hubo un error al cambiar el estado",
+                          icon: "error"
+                        })
+                      }
+
+                    }
+                  });
+
+                }
+              });
             }
           </script>
       </section>

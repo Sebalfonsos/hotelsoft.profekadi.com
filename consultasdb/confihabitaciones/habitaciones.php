@@ -14,11 +14,13 @@ function traerDatosHabitaciones()
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             $data[] = array(
+                
                 $row["numHabitacion"],
                 $row["tipoHabitacion"],
                 $row["precioHabitacion"],
                 $row["nombreEstado"],
-                ''
+                '',
+                $row["idHabitacion"]
             );
         }
     }
