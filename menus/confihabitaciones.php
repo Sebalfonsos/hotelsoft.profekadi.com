@@ -87,9 +87,9 @@
                                 <div class="form-group">
                                   <label for="estadoHabitacion">Estado de la Habitación</label>
                                   <select name="estadoHabitacion" class="form-control" id="estadoHabitacion">
-                                    <option value="Disponible">Disponible</option>
-                                    <option value="Ocupada">Ocupada</option>
-                                    <option value="Mantenimiento">Mantenimiento</option>
+                                    <option value="1">Disponible</option>
+                                    <option value="0">Deshabilitada</option>
+                                    <option value="2">Mantenimiento</option>
                                   </select>
                                 </div>
                                 <div class="form-group">
@@ -186,7 +186,6 @@
                     orderable: false,
                     render: function(data, type, row) {
                       return '<button class="btn btn-sm" onclick="editarUsuario(' + row[0] + ')"><i class="fas fa-edit"></i> Editar</button>' +
-                        '<button class="btn btn-sm reset" onclick="resetearContrasena(' + row[0] + ')"><i class="fas fa-key"></i> Cambiar Contraseña</button>' +
                         '<button class="btn btn-sm" onclick="cambiarEstadoUsuario(' + row[0] + ')"><i class="fas fa-power-off"></i> Cambiar estado</button>';
                     }
 
