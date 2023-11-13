@@ -4,6 +4,7 @@ $habitacion = $_POST['habitacion'];
 $fechaEntrada = $_POST['fechaEntrada'];
 $fechaSalida = $_POST['fechaSalida'];
 $idCliente = $_POST['idCliente'];
+$costoTotal = $_POST['costoTotal'];
 
 $sql = "SELECT * FROM Clientes WHERE Usuarios_idUsuario = ?";
 $stmt = $conn->prepare($sql);
@@ -16,8 +17,8 @@ $idClienteREAL = $row['idCliente'];
 $stmt->close();
 
 // Insertar en la tabla 'reservas'
-$stmtReservas = $conn->prepare("INSERT INTO Reservas (fechaEntrada, fechaSalida, Clientes_idClientes) VALUES (?, ?, ?)");
-$stmtReservas->bind_param("sss", $fechaEntrada, $fechaSalida, $idClienteREAL);
+$stmtReservas = $conn->prepare("INSERT INTO Reservas (fechaEntrada, fechaSalida, Clientes_idClientes, precioTotal) VALUES (?, ?, ?, ?)");
+$stmtReservas->bind_param("sssi", $fechaEntrada, $fechaSalida, $idClienteREAL, $costoTotal);
 $stmtReservas->execute();
 
 // Obtener el ID de la reserva recién insertada
