@@ -257,7 +257,7 @@ session_start();
               confirmButtonText: "Sí, reservar"
             }).then((result) => {
               if (result.isConfirmed) {
-                reservar(idCliente, habitacion, fechaEntrada, fechaSalida)
+                reservar(idCliente, habitacion, fechaEntrada, fechaSalida, costoTotal)
               }
             });
           } else {
@@ -272,7 +272,7 @@ session_start();
       });
     }
 
-    function reservar(idCliente, habitacion, fechaEntrada, fechaSalida) {
+    function reservar(idCliente, habitacion, fechaEntrada, fechaSalida, costoTotal) {
 
       $.ajax({
         type: "POST",
@@ -281,7 +281,8 @@ session_start();
           idCliente: idCliente,
           habitacion: habitacion,
           fechaEntrada: fechaEntrada,
-          fechaSalida: fechaSalida
+          fechaSalida: fechaSalida,
+          costoTotal: costoTotal
         },
         success: function (respuesta) {
           console.log(respuesta + idCliente); // Muestra la respuesta en la consola
@@ -313,7 +314,9 @@ session_start();
       var diferenciaDias = Math.ceil(diferenciaTiempo / (1000 * 60 * 60 * 24));
       return diferenciaDias;
     }
-
+    function seleccionar(id) {
+      document.getElementById("habitacion").value = id
+    }
 
   </script>
 
