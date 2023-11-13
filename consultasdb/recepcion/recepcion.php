@@ -44,17 +44,18 @@ function traerHabitaciones()
     foreach ($habitaciones as $habitacion) {
 
         echo '<div class="col-lg-3 col-6">
-        <div class="small-box bg-success">
+        <div class="small-box bg-success" id="'. $habitacion['numHabitacion'] .'">
           <div class="inner">
             <h3>' . $habitacion['numHabitacion'] . '</h3>
             <p>' . $habitacion['tipoHabitacion'] . '</p>
+            <p> Precio por dia: $' . $habitacion['precioHabitacion'] . '</p>
           </div>
           <div class="icon">
             <i class="fas fa-bed"></i>
           </div>
-          <a href="#" class="small-box-footer">
+          <a href="#" onclick="seleccionar(\'' . $habitacion['id'] . '\'); event.preventDefault();" class="small-box-footer">
           Disponible - Seleccionar <i class="fas fa-arrow-circle-right"></i>
-          </a>
+        </a>
         </div>
       </div>';
 
