@@ -7,8 +7,8 @@
     <title>AdminLTE 3 | DataTables</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" 
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
     <!-- DataTables -->
@@ -66,19 +66,14 @@
                             <nav>
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
 
-                                    <a class="nav-item nav-link active bordecitoverde" id="nav-home-tab"
-                                        data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home"
-                                        aria-selected="true">Tabla
+                                    <a class="nav-item nav-link active bordecitoverde" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Tabla
                                         alquiler</a>
-                                    <a class="nav-item nav-link bordecitoverde" id="nav-profile-tab" data-toggle="tab"
-                                        href="#nav-profile" role="tab" aria-controls="nav-profile"
-                                        aria-selected="false">Tabla servicio a la habitación y venta
+                                    <a class="nav-item nav-link bordecitoverde" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Tabla servicio a la habitación y venta
                                         directa</a>
                                 </div>
                             </nav>
                             <div class="tab-content" id="nav-tabContent">
-                                <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
-                                    aria-labelledby="nav-home-tab">
+                                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 
                                     <div class="container" style="margin-top: 2%;">
                                         <div class="row">
@@ -141,8 +136,7 @@
                                     </div>
                                     <!-- /.card-body -->
                                 </div>
-                                <div class="tab-pane fade" id="nav-profile" role="tabpanel"
-                                    aria-labelledby="nav-profile-tab">
+                                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                                     <div class="container" style="margin-top: 2%;">
                                         <div class="row">
                                             <div class="col order-last" style="text-align: center;">
@@ -202,7 +196,9 @@
                         </div>
                         <!-- /.row -->
                     </div>
-                    <!-- /.container-fluid -->
+                </div>
+            </div>
+            <!-- /.container-fluid -->
         </section>
         <!-- /.content -->
     </div>
@@ -238,17 +234,21 @@
     <script src="../plugins/datatables/es-ES.js"></script>
     <!-- Page specific script -->
     <script>
-        $(function () {
+        $(function() {
             $("#tabla1").DataTable({
                 language: spanish,
-                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
                 "buttons": ["excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#tabla1_wrapper .col-md-6:eq(0)');
 
 
             $("#tabla2").DataTable({
                 language: spanish,
-                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
                 "buttons": ["excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#tabla2_wrapper .col-md-6:eq(0)');
 
