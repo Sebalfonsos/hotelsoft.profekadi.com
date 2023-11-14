@@ -265,7 +265,7 @@
                         <div class="team-member">
                             <img class="mx-auto rounded-circle" src="assets/img/team/Luis Acuña Rodriguez.jpg" alt="..." />
                             <h4>Luis Acuña Rodriguez</h4>
-                            <p class="text-muted">Lead Designer</p>
+                            <p class="text-muted">Plantillero</p>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Twitter Profile"><i class="fab fa-twitter"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Facebook Profile"><i class="fab fa-facebook-f"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
@@ -275,7 +275,7 @@
                         <div class="team-member">
                             <img class="mx-auto rounded-circle" src="assets/img/team/Sebastian Sierra.jpg" alt="..." />
                             <h4>Sebastián Sierra Torres</h4>
-                            <p class="text-muted">Lead Marketer</p>
+                            <p class="text-muted">Full Stack</p>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen Twitter Profile"><i class="fab fa-twitter"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen Facebook Profile"><i class="fab fa-facebook-f"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
@@ -285,7 +285,7 @@
                         <div class="team-member">
                             <img class="mx-auto rounded-circle" src="assets/img/team/3.jpg" alt="..." />
                             <h4>Cristian Brieva</h4>
-                            <p class="text-muted">"El mandadero"</p>
+                            <p class="text-muted">Diseñador UX/UI</p>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Twitter Profile"><i class="fab fa-twitter"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Facebook Profile"><i class="fab fa-facebook-f"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>

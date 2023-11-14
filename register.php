@@ -63,21 +63,23 @@ require 'consultasdb/registro.php';
               </div>
             </div>
           </div>
-
+          <?php
+            echo $avisoIdentificación;
+            ?>
           <div class="input-group mb-3">
-            <input required type="text" class="form-control" placeholder="Identificación" name="Identificacion">
+            <input required type="number" class="form-control" placeholder="Identificación" name="Identificacion">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-user"></span>
               </div>
             </div>
 
-            <?php
-            echo $avisoIdentificación;
-            ?>
+            
           </div>
 
-
+          <?php
+            echo $avisoValidacionTelefono;
+            ?>
           <div class="input-group mb-3">
             <input required type="tel" class="form-control" placeholder="Telefono" name="Telefono">
             <div class="input-group-append">
@@ -85,8 +87,15 @@ require 'consultasdb/registro.php';
                 <span class="fas fa-phone"></span>
               </div>
             </div>
+            
+            
           </div>
-
+          
+         
+          <?php
+            echo $avisoCorreo;
+            echo $avisoValidacionCorreo;
+            ?>
           <div class="input-group mb-3">
             <input required type="email" class="form-control" placeholder="Correo" name="Correo">
             <div class="input-group-append">
@@ -94,10 +103,12 @@ require 'consultasdb/registro.php';
                 <span class="fas fa-envelope"></span>
               </div>
             </div>
-            <?php
-            echo $avisoCorreo;
-            ?>
+            
+            
           </div>
+          <?php
+            echo $avisovalidacionContrasena;
+            ?>
           <div class="input-group mb-3">
             <input required type="password" class="form-control" placeholder="Contraseña" name="Contrasena">
             <div class="input-group-append">
@@ -105,6 +116,7 @@ require 'consultasdb/registro.php';
                 <span class="fas fa-lock"></span>
               </div>
             </div>
+            
           </div>
 
 

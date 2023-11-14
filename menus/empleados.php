@@ -77,7 +77,7 @@
                           <form id="formularioCrearEmpleado">
                             <div class="form-group">
                               <label for="">Documento</label>
-                              <input type="text" name="documento" class="form-control" id=" "
+                              <input type="number" name="documento" class="form-control" id=" "
                                 placeholder="Ej. 100288790">
                             </div>
                             <div class="form-group">
@@ -92,32 +92,32 @@
                             </div>
                             <div class="form-group">
                               <label for="">Nombres</label>
-                              <input name="nombre" type="text" class="form-control" id="nombres"
+                              <input required name="nombre" type="text" class="form-control" id="nombres"
                                 placeholder="Ej. Carlos">
                             </div>
                             <div class="form-group">
                               <label for="">Apellidos</label>
-                              <input name="apellido" type="text" class="form-control" id="apellidos"
+                              <input required name="apellido" type="text" class="form-control" id="apellidos"
                                 placeholder="Ej. Fonseca">
                             </div>
                             <div class="form-group">
                               <label for="">Correo Electronico</label>
-                              <input name="correoElectronico" type="text" class="form-control" id="correoElectronico"
+                              <input required name="correoElectronico" type="enail" class="form-control" id="correoElectronico"
                                 placeholder="Ej. hotelsoft@hotmail.com">
                             </div>
                             <div class="form-group">
                               <label for="">Contraseña</label>
-                              <input type="password" name="contrasena" class="form-control" id="contrasena"
+                              <input min="8" required type="password" name="contrasena" class="form-control" id="contrasena"
                                 placeholder="Ej. 100288790">
                             </div>
                             <div class="form-group">
                               <label for="">Telefono</label>
-                              <input name="telefono" type="text" class="form-control" id="telefono"
+                              <input required name="telefono" type="number" class="form-control" id="telefono"
                                 placeholder="Ej. $3005186039">
                             </div>
                             <div class="form-group">
                               <label for="">Rol</label>
-                              <select name="rol" class="form-control" id="rol">
+                              <select required name="rol" class="form-control" id="rol">
                                 <?php
                                 include '../consultasdb/roles/consultarRolesYPermisos.php';
                                 traerRolesEnFormatoSelect();
@@ -126,7 +126,7 @@
                             </div>
                             <div class="form-group">
                               <label for="">Estado</label>
-                              <select name="estado" class="form-control" id="estado">
+                              <select required name="estado" class="form-control" id="estado">
                                 <option value="1">Activo</option>
                                 <option value="0">Inactivo</option>
                               </select>
