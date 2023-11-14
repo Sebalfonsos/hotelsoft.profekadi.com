@@ -15,7 +15,14 @@ if ($result->num_rows > 0) {
             'title' => " Habitación numero: ".$row['numHabitacion']." | ".$row['idUsuario']." | ".$row['nombre']." ".$row['apellido'],
             'start' => $row['fechaEntrada'],
             'end' => $row['fechasalida'],
-            'clientId' => $row['Clientes_idClientes']
+            'idUsuario' => $row['idUsuario'],
+            'nombreUsuario' => $row['nombre'],
+            'apellidoUsuario' => $row['apellido'],
+            'habitacionNumero' => $row['numHabitacion'],
+            'precioTotal' => $row['precioTotal'],
+            'tipoHabitacion' => $row['tipoHabitacion'],
+            'fechaEntrada' => $row['fechaEntrada'],
+            'fechaSalida' => $row['fechasalida']
         );
 
         // Agregar el evento al array de eventos

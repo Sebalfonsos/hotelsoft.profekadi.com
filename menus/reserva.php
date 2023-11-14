@@ -15,6 +15,8 @@
   <link rel="stylesheet" href="../plugins/fullcalendar/main.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../dist/css/adminlte.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -81,29 +83,16 @@
   <script src="../plugins/fullcalendar/locales/es.js"></script>
   <script>
     $(function () {
-
-      /* initialize the external events
-       -----------------------------------------------------------------*/
       function ini_events(ele) {
         ele.each(function () {
-
-          // create an Event Object (https://fullcalendar.io/docs/event-object)
-          // it doesn't need to have a start or end
           var eventObject = {
-            title: $.trim($(this).text()) // use the element's text as the event title
+            title: $.trim($(this).text())
           }
-
-          // store the Event Object in the DOM element so we can get to it later
           $(this).data('eventObject', eventObject)
-
-
-
         })
       }
 
       ini_events($('#external-events div.external-event'))
-
-     
 
       var Calendar = FullCalendar.Calendar;
 
@@ -111,10 +100,6 @@
       var containerEl = document.getElementById('external-events');
       var checkbox = document.getElementById('drop-remove');
       var calendarEl = document.getElementById('calendar');
-
-      // initialize the external events
-      // -----------------------------------------------------------------
-
 
       var calendar = new Calendar(calendarEl, {
         locale: 'es',
@@ -124,26 +109,29 @@
           right: 'dayGridMonth,timeGridWeek,timeGridDay,list'
         },
         themeSystem: 'bootstrap',
-        //Random default events
         events: eventos,
         editable: false,
-        droppable: false, // this allows things to be dropped onto the calendar !!!
-        drop: function (info) {
-          // is the "remove after drop" checkbox checked?
-          if (checkbox.checked) {
-            // if so, remove the element from the "Draggable Events" list
-            info.draggedEl.parentNode.removeChild(info.draggedEl);
-          }
+        droppable: false,
+        eventClick: function (info) {
+          // Aquí puedes ejecutar la acción que desees al hacer clic en un evento.
+          // 'info' contiene información sobre el evento clickeado.
+          //alert('Evento clickeado: ' + info.event.extendedProps.nombreUsuario);
+
+          Swal.fire({
+            title: "Reserva de: "+info.event.extendedProps.nombreUsuario+" "+info.event.extendedProps.apellidoUsuario,
+            html: '<p class="mb-0"><strong>Documento: </strong> '+info.event.extendedProps.idUsuario+'</p><p class="mb-0"><strong>Habitacion #</strong> '+info.event.extendedProps.habitacionNumero+'</p> <p class="mb-0"><strong>Tipo habitación: </strong> '+info.event.extendedProps.tipoHabitacion+'</p> <p class="mb-0"><strong>Fecha entrada:</strong> '+info.event.extendedProps.fechaEntrada+'</p> <p class="mb-0"><strong>Fecha salida:</strong> '+info.event.extendedProps.fechaSalida+'</p> <p class="mb-0"><strong>Precio total: </strong>$'+info.event.extendedProps.precioTotal+'</p>',
+            icon: 'info',
+            customClass: {
+              confirmButton: 'btn btn-primary'
+            }
+          });
         },
-       
       });
 
       calendar.render();
-      // $('#calendar').fullCalendar()
-
-      
     })
   </script>
+
 </body>
 
 </html>
