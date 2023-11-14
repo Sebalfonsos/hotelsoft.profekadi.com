@@ -170,11 +170,15 @@ session_start();
         var fechaSalida = document.getElementById('fecha_salida').value;
         var idCliente = "<?php echo $_SESSION['id_usuario']; ?>"
 
-        var fechaEntradaDate = new Date(fechaEntrada);
+        var fechaEntradaDate = new Date(fechaEntrada + 'T00:00:00-05:00');
         var hoy = new Date();
         hoy.setHours(0, 0, 0, 0);
 
-        if (fechaEntradaDate > hoy) {
+        console.log(fechaEntradaDate)
+        console.log(hoy)
+        console.log(fechaSalida)
+
+        if (fechaEntradaDate >= hoy) {
           // La fecha es después del día de hoy
           hacerConsulta(idCliente, habitacion, fechaEntrada, fechaSalida)
         } else {
