@@ -121,9 +121,7 @@
             title: "Reserva de: "+info.event.extendedProps.nombreUsuario+" "+info.event.extendedProps.apellidoUsuario,
             html: '<p class="mb-0"><strong>Documento: </strong> '+info.event.extendedProps.idUsuario+'</p><p class="mb-0"><strong>Habitacion #</strong> '+info.event.extendedProps.habitacionNumero+'</p> <p class="mb-0"><strong>Tipo habitación: </strong> '+info.event.extendedProps.tipoHabitacion+'</p> <p class="mb-0"><strong>Fecha entrada:</strong> '+info.event.extendedProps.fechaEntrada+'</p> <p class="mb-0"><strong>Fecha salida:</strong> '+info.event.extendedProps.fechaSalida+'</p> <p class="mb-0"><strong>Precio total: </strong>$'+info.event.extendedProps.precioTotal+'</p>',
             icon: 'info',
-            customClass: {
-              confirmButton: 'btn btn-primary'
-            }
+            
           });
         },
       });
