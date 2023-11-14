@@ -144,9 +144,7 @@
 
           <div class="row mb-2">
             <div class="col-sm-6">
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modificarHabitacionModal">
-                Modificar Habitación
-              </button>
+              
               <div class="modal fade" id="modificarHabitacionModal" tabindex="-1" role="dialog"
                 aria-labelledby="modificarHabitacionModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-vertical" role="document">
