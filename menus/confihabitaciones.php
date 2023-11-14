@@ -141,6 +141,57 @@
             </section>
           </div>
 
+
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modificarHabitacionModal">
+                Modificar Habitación
+              </button>
+              <div class="modal fade" id="modificarHabitacionModal" tabindex="-1" role="dialog"
+                aria-labelledby="modificarHabitacionModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-vertical" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modificarHabitacionModalLabel">Modificar Habitación</h5>
+
+                    </div>
+                    <div class="modal-body">
+                      <form id="formularioModificarHabitacion">
+                        <div class="form-group">
+                          <label for="numeroHabitacion">Número de Habitación</label>
+                          <input disabled type="text" name="numHabitacion" class="form-control" id="modificarNumeroHabitacion"
+                            placeholder="Ej. 101">
+                        </div>
+                        <div class="form-group">
+                          <label for="tipoHabitacion">Tipo de Habitación</label>
+                          <select name="tipoHabitacion" class="form-control" id="modificarTipoHabitacion">
+                            <option value="Individual">Individual</option>
+                            <option value="Doble">Doble</option>
+                            <option value="Suite">Suite</option>
+                          </select>
+                        </div>
+
+                        <div class="form-group">
+                          <label for="precopHabitacion">Precio de Habitación</label>
+                          <input name="precioHabitacion" type="text" class="form-control" id="modificarPrecioHabitacion"
+                            placeholder="Ej. $30,000">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                      <button type="button" onclick="enviarFormularioModificar()" class="btn btn-primary">Modificar
+                        Habitación</button>
+                      </form>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
           <!-- jQuery -->
           <script src="../../plugins/jquery/jquery.min.js"></script>
           <!-- Bootstrap 4 -->
@@ -190,8 +241,8 @@
                   searchable: false,
                   orderable: false,
                   render: function (data, type, row) {
-                    return '<button class="btn btn-sm" onclick="editarHabitacion(\'' + row[5] + '\')"><i class="fas fa-edit"></i> Editar</button>' +
-                      '<button class="btn btn-sm" onclick="cambiarEstadoHabitacion('+row[5]+','+row[0]+')"><i class="fas fa-power-off"></i> Cambiar estado</button>';
+                    return '<button class="btn btn-sm" onclick="editarHabitacion(' + row[0] + ',\'' + row[1] + '\'' + ',\'' + row[2] + '\'' + ')"><i class="fas fa-edit"></i> Editar</button>' +
+                      '<button class="btn btn-sm" onclick="cambiarEstadoHabitacion(' + row[5] + ',' + row[0] + ')"><i class="fas fa-power-off"></i> Cambiar estado</button>';
                   }
 
                 }
@@ -235,9 +286,75 @@
 
 
 
-            function editarUsuario(documento) {
-              // Implementa la lógica para editar el usuario con el documento proporcionado
-              console.log('Editar usuario con documento:', documento);
+            function editarHabitacion(numHabitacion, categoria, precio, idHabitacion) {
+
+              console.log('Editar habitacion numero: ', numHabitacion);
+
+              $('#modificarHabitacionModal').modal('show');
+              document.getElementById('modificarNumeroHabitacion').value = numHabitacion
+              var select = document.getElementById('modificarTipoHabitacion');
+
+              // Iterar sobre las opciones y seleccionar la que coincide con el contenido deseado
+              for (var i = 0; i < select.options.length; i++) {
+                if (select.options[i].text === categoria) {
+                  // Cambiar la opción seleccionada
+                  select.options[i].selected = true;
+                  break; // Terminar el bucle ya que encontramos la opción deseada
+                }
+              }
+
+              document.getElementById('modificarPrecioHabitacion').value = precio
+            
+            }
+
+            function enviarFormularioModificar() {
+              // Obtener los valores del formulario
+              var numHabitacion = $('#modificarNumeroHabitacion').val();
+              var tipoHabitacion = $('#modificarTipoHabitacion').val();
+              var precioHabitacion = $('#modificarPrecioHabitacion').val();
+           
+
+              // Realizar la verificación del correo electrónico antes de la solicitud AJAX
+              $.ajax({
+                type: 'POST',
+                url: '../consultasdb/confihabitaciones/modificarHabitacion.php',
+                data: {
+                  numHabitacion: numHabitacion,
+                  tipoHabitacion: tipoHabitacion,
+                  precioHabitacion: precioHabitacion
+                },
+                success: function (response) {
+                  // Manejar la respuesta del servidor
+                  console.log(response);
+
+                  // Cerrar el modal si la modificación fue exitosa
+                  if (response === "Modificación exitosa") {
+                    Swal.fire({
+                      title: "Listo",
+                      text: "Información modificada correctamente",
+                      icon: "success"
+                    }).then(() => {
+                      // Recargar la página después de cerrar el SweetAlert
+                      location.reload();
+                    });
+                    $('#ModificarCliente').modal('hide');
+                  } else if (response === "Error: El correo electrónico ya está en uso") {
+                    // Mostrar mensaje específico si el correo ya existe
+                    Swal.fire({
+                      title: "Upss",
+                      html: "El correo electrónico <strong>" + correoElectronico + "</strong> ya está en uso por otro usuario",
+                      icon: "error"
+                    });
+                  } else {
+                    // Mostrar algún mensaje de error genérico si es necesario
+                    Swal.fire({
+                      title: "Upss",
+                      text: "Hubo un error al modificar la información",
+                      icon: "error"
+                    });
+                  }
+                }
+              });
             }
 
 
@@ -274,7 +391,7 @@
                           location.reload();
                         });
 
-                      }else{
+                      } else {
                         Swal.fire({
                           title: "Upss..",
                           text: "Hubo un error al cambiar el estado",
