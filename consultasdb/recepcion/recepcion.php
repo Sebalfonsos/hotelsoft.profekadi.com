@@ -13,7 +13,7 @@ if (isset($_POST['habitacion']) && isset($_POST['fechaEntrada']) && isset($_POST
 
 }
 require __DIR__ . '/../conexion.php';
-$result = $conn->query("SELECT * FROM Habitaciones WHERE estado = '1'");
+$result = $conn->query("SELECT ROW_NUMBER() OVER (ORDER BY numHabitacion) AS NumeroOrden, idHabitacion, numHabitacion, tipoHabitacion, estado, precioHabitacion FROM Habitaciones WHERE estado = '1' ORDER BY numHabitacion");
 
 $habitaciones = array();
 
@@ -24,7 +24,8 @@ while ($row = $result->fetch_assoc()) {
         'numHabitacion' => $row['numHabitacion'],
         'tipoHabitacion' => $row['tipoHabitacion'],
         'estado' => $row['estado'],
-        'precioHabitacion' => $row['precioHabitacion']
+        'precioHabitacion' => $row['precioHabitacion'],
+        'NumeroOrden' => $row['NumeroOrden']
     );
 }
 $conn->close();
@@ -60,7 +61,7 @@ function traerHabitaciones()
       </div>';
 
         // Cerrar y abrir una nueva fila cada cuatro habitaciones
-        if ($habitacion['id'] % 4 === 0) {
+        if ($habitacion['NumeroOrden'] % 4 === 0) {
             echo '</div><div class="row">';
         }
     }
