@@ -1,5 +1,5 @@
 <?php
-require '../conexion.php';
+require __DIR__.'/../conexion.php';
 $idRol = $_POST['idRol'];
 $permisos = $_POST['permisos'];
 
