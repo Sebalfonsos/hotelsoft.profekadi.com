@@ -29,7 +29,7 @@ function totalHabitacionesLibres()
 {
 
     require __DIR__ . '/../conexion.php';
-    $sql = "SELECT count(h.idHabitacion) AS totalHabitacionesLibres FROM Habitaciones h WHERE h.idHabitacion NOT IN(SELECT hr.Habitaciones_idHabitacion FROM Habitaciones_has_Reservas hr JOIN Reservas r ON hr.Reservas_idReserva = r.idReserva WHERE CURDATE() BETWEEN r.fechaEntrada AND r.fechaSalida)";
+    $sql = "SELECT count(h.idHabitacion) AS totalHabitacionesLibres FROM Habitaciones h WHERE h.idHabitacion NOT IN(SELECT hr.Habitaciones_idHabitacion FROM Habitaciones_has_Reservas hr JOIN Reservas r ON hr.Reservas_idReserva = r.idReserva WHERE CURDATE() >= r.fechaEntrada AND CURDATE() < r.fechaSalida)";
     $result = $conn->query($sql);
 
 
@@ -51,7 +51,7 @@ function totalHabitacionesOcupadas()
 {
 
     require __DIR__ . '/../conexion.php';
-    $sql = "SELECT count(hr.Habitaciones_idHabitacion) AS totalHabitacionesOcupadas FROM Habitaciones_has_Reservas hr JOIN Reservas r ON hr.Reservas_idReserva = r.idReserva WHERE CURDATE() BETWEEN r.fechaEntrada AND r.fechaSalida";
+    $sql = "SELECT count(hr.Habitaciones_idHabitacion) AS totalHabitacionesOcupadas FROM Habitaciones_has_Reservas hr JOIN Reservas r ON hr.Reservas_idReserva = r.idReserva WHERE CURDATE() >= r.fechaEntrada AND CURDATE() < r.fechaSalida";
     $result = $conn->query($sql);
 
 
@@ -108,7 +108,7 @@ function listaHabitacionesOcupadas()
     JOIN Habitaciones ON Habitaciones.idHabitacion = Habitaciones_has_Reservas.Habitaciones_idHabitacion
     JOIN Clientes ON Clientes.idCliente = Reservas.Clientes_idClientes
     JOIN Usuarios ON Clientes.Usuarios_idUsuario = Usuarios.idUsuario
-    WHERE CURDATE() BETWEEN Reservas.fechaEntrada AND Reservas.fechaSalida";
+    WHERE CURDATE() >= Reservas.fechaEntrada AND CURDATE() < Reservas.fechaSalida";
 
     $stmt = $conn->prepare($sql);
     $stmt->execute();

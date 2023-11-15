@@ -383,7 +383,7 @@
         var telefono = $('#modificarTelefono').val();
 
         
-        if (!idUsuario || !tipoDocumento || !nombres || !apellidos || !correoElectronico || !rol) {
+        if (!idUsuario || !tipoDocumento || !nombres || !apellidos || !correoElectronico) {
           alert('Todos los campos marcados como requeridos deben estar completos');
           return;
         }

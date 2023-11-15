@@ -201,7 +201,7 @@ session_start();
       // Realizar la solicitud AJAX
       $.ajax({
         type: "POST",
-        url: "../consultasdb/recepcion/recepcion.php", // Reemplaza con la ruta correcta a tu archivo PHP
+        url: "../consultasdb/reservar/habitaciones.php", // Reemplaza con la ruta correcta a tu archivo PHP
         data: {
           idCliente: idCliente,
           habitacion: habitacion,
