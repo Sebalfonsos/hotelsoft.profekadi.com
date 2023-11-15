@@ -25,7 +25,7 @@ $stmtReservas->execute();
 $idReserva = $stmtReservas->insert_id;
 
 
-//AQUI TENGO QUE PONER UN TRIGGER
+
 
 // Insertar en la tabla 'Habitaciones_has_Reservas'
 $stmtHabitacionesReservas = $conn->prepare("INSERT INTO Habitaciones_has_Reservas (Habitaciones_idHabitacion, Reservas_idReserva) VALUES (?, ?)");
