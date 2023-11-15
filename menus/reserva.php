@@ -41,6 +41,9 @@
       <div class="container-fluid">
         <div id="external-events"></div>
       </div>
+      <div class="container d-flex justify-content-center align-items-center">
+      <p class="text-center">--Da clic sobre una reserva para obtener más información--</p>
+      </div>
       <div class="card card-primary">
         <div class="ml-3 mr-3 card-body p-0">
           <div id="calendar"></div>
@@ -118,10 +121,10 @@
           //alert('Evento clickeado: ' + info.event.extendedProps.nombreUsuario);
 
           Swal.fire({
-            title: "Reserva de: "+info.event.extendedProps.nombreUsuario+" "+info.event.extendedProps.apellidoUsuario,
-            html: '<p class="mb-0"><strong>Documento: </strong> '+info.event.extendedProps.idUsuario+'</p><p class="mb-0"><strong>Habitacion #</strong> '+info.event.extendedProps.habitacionNumero+'</p> <p class="mb-0"><strong>Tipo habitación: </strong> '+info.event.extendedProps.tipoHabitacion+'</p> <p class="mb-0"><strong>Fecha entrada:</strong> '+info.event.extendedProps.fechaEntrada+'</p> <p class="mb-0"><strong>Fecha salida:</strong> '+info.event.extendedProps.fechaSalida+'</p> <p class="mb-0"><strong>Precio total: </strong>$'+info.event.extendedProps.precioTotal+'</p>',
+            title: "Reserva de: " + info.event.extendedProps.nombreUsuario + " " + info.event.extendedProps.apellidoUsuario,
+            html: '<p class="mb-0"><strong>Documento: </strong> ' + info.event.extendedProps.idUsuario + '</p><p class="mb-0"><strong>Habitacion #</strong> ' + info.event.extendedProps.habitacionNumero + '</p> <p class="mb-0"><strong>Tipo habitación: </strong> ' + info.event.extendedProps.tipoHabitacion + '</p> <p class="mb-0"><strong>Fecha entrada:</strong> ' + info.event.extendedProps.fechaEntrada + '</p> <p class="mb-0"><strong>Fecha salida:</strong> ' + info.event.extendedProps.fechaSalida + '</p> <p class="mb-0"><strong>Precio total: </strong>$' + info.event.extendedProps.precioTotal + '</p>',
             icon: 'info',
-            
+
           });
         },
       });

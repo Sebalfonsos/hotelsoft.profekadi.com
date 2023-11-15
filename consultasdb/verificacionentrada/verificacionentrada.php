@@ -9,7 +9,7 @@ function traerHabitacionesOcupadas()
     ON Reservas.idReserva = Habitaciones_has_Reservas.Reservas_idReserva
     JOIN Habitaciones
     ON Habitaciones.idHabitacion = Habitaciones_has_Reservas.Habitaciones_idHabitacion
-    WHERE DATE(fechasalida) = CURDATE();");
+    WHERE DATE(fechaEntrada) = CURDATE();");
 
     $habitaciones = array();
 
@@ -30,7 +30,7 @@ function traerHabitacionesOcupadas()
 
     foreach ($habitaciones as $habitacion) {
         echo '<div class="col-lg-3 col-6">
-        <div class="small-box bg-danger">
+        <div class="small-box bg-success">
           <div class="inner">
             <h3>' . $habitacion['numHabitacion'] . '</h3>
             <p>' . $habitacion['tipoHabitacion'] . '</p>

@@ -77,7 +77,7 @@ session_start();
             <div class="col-md-8">
 
               <?php
-              require '../consultasdb/recepcion/recepcion.php';
+              require '../consultasdb/reservar/habitaciones.php';
               traerHabitaciones();
               ?>
             </div>

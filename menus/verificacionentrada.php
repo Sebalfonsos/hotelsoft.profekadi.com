@@ -28,9 +28,9 @@
       <section class="content-header">
         <div class="row d-flex align-items-center">
           <div class="text-center;" style="margin-left: 1%;">
-            <i class="nav-icon fas fa-sign-out-alt" style=" font-size: 2rem;"></i>
+            <i class="nav-icon fas fas fa-sign-in-alt" style=" font-size: 2rem;"></i>
           </div>
-          <h1 style="padding-left: 1%;">Verificación Salida</h1>
+          <h1 style="padding-left: 1%;">Verificación Entrada</h1>
         </div>
       </section>
 
@@ -42,7 +42,7 @@
           <div class="row">
 
             <?php
-            require '../consultasdb/verificacionsalida/verificacionsalida.php';
+            require '../consultasdb/verificacionentrada/verificacionentrada.php';
             traerHabitacionesocupadas();
             ?>
 
@@ -72,7 +72,7 @@
       // Realiza la solicitud AJAX
       $.ajax({
         type: 'POST',
-        url: '../consultasdb/verificacionsalida/obtener_detalles_reserva.php', // Ajusta el nombre de tu archivo PHP
+        url: '../consultasdb/verificacionentrada/obtener_detalles_reserva.php', // Ajusta el nombre de tu archivo PHP
         data: { idReserva: idReserva },
         success: function (response) {
           // Procesa la respuesta del servidor
