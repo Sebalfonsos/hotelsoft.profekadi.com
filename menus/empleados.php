@@ -7,8 +7,7 @@
   <title>HotelSoft | Lista Empleados</title>
 
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
   <!-- DataTables -->
@@ -63,8 +62,7 @@
                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crearHabitacionModal">
                     Crear Empleado
                   </button>
-                  <div class="modal fade" id="crearHabitacionModal" tabindex="-1" role="dialog"
-                    aria-labelledby="crearHabitacionModalLabel" aria-hidden="true">
+                  <div class="modal fade" id="crearHabitacionModal" tabindex="-1" role="dialog" aria-labelledby="crearHabitacionModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-scrollable" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -77,8 +75,7 @@
                           <form id="formularioCrearEmpleado">
                             <div class="form-group">
                               <label for="">Documento</label>
-                              <input type="number" name="documento" class="form-control" id=" "
-                                placeholder="Ej. 100288790">
+                              <input required type="number" name="documento" class="form-control" id=" " placeholder="Ej. 100288790">
                             </div>
                             <div class="form-group">
                               <label for="">Tipo Documento</label>
@@ -92,28 +89,23 @@
                             </div>
                             <div class="form-group">
                               <label for="">Nombres</label>
-                              <input required name="nombre" type="text" class="form-control" id="nombres"
-                                placeholder="Ej. Carlos">
+                              <input required name="nombre" type="text" class="form-control" id="nombres" placeholder="Ej. Carlos">
                             </div>
                             <div class="form-group">
                               <label for="">Apellidos</label>
-                              <input required name="apellido" type="text" class="form-control" id="apellidos"
-                                placeholder="Ej. Fonseca">
+                              <input required name="apellido" type="text" class="form-control" id="apellidos" placeholder="Ej. Fonseca">
                             </div>
                             <div class="form-group">
                               <label for="">Correo Electronico</label>
-                              <input required name="correoElectronico" type="enail" class="form-control" id="correoElectronico"
-                                placeholder="Ej. hotelsoft@hotmail.com">
+                              <input required name="correoElectronico" type="email" class="form-control" id="correoElectronico" placeholder="Ej. hotelsoft@hotmail.com">
                             </div>
                             <div class="form-group">
                               <label for="">Contraseña</label>
-                              <input min="8" required type="password" name="contrasena" class="form-control" id="contrasena"
-                                placeholder="Ej. 100288790">
+                              <input minlength="8" required type="password" name="contrasena" class="form-control" id="contrasena" placeholder="Ej. 100288790">
                             </div>
                             <div class="form-group">
                               <label for="">Telefono</label>
-                              <input required name="telefono" type="number" class="form-control" id="telefono"
-                                placeholder="Ej. $3005186039">
+                              <input name="telefono" type="number" class="form-control" id="telefono" placeholder="Ej. $3005186039">
                             </div>
                             <div class="form-group">
                               <label for="">Rol</label>
@@ -195,8 +187,7 @@
       <div class="row mb-2">
         <div class="col-sm-6">
 
-          <div class="modal fade" id="ModificarEmpleado" tabindex="-1" role="dialog"
-            aria-labelledby="ModificarEmpleadoLabel" aria-hidden="true">
+          <div class="modal fade" id="ModificarEmpleado" tabindex="-1" role="dialog" aria-labelledby="ModificarEmpleadoLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -209,8 +200,7 @@
                   <form id="formularioModificarEmpleado">
                     <div class="form-group">
                       <label for="">Documento</label>
-                      <input disabled type="text" name="documento" class="form-control" id="modificarDocumento"
-                        placeholder="Ej. 100288790">
+                      <input disabled type="text" name="documento" class="form-control" id="modificarDocumento" placeholder="Ej. 100288790">
                     </div>
                     <div class="form-group">
                       <label for="">Tipo Documento</label>
@@ -224,28 +214,24 @@
                     </div>
                     <div class="form-group">
                       <label for="">Nombres</label>
-                      <input name="nombre" type="text" class="form-control" id="modificarNombres"
-                        placeholder="Ej. Carlos">
+                      <input required name="nombre" type="text" class="form-control" id="modificarNombres" placeholder="Ej. Carlos">
                     </div>
                     <div class="form-group">
                       <label for="">Apellidos</label>
-                      <input name="apellido" type="text" class="form-control" id="modificarApellidos"
-                        placeholder="Ej. Fonseca">
+                      <input required name="apellido" type="text" class="form-control" id="modificarApellidos" placeholder="Ej. Fonseca">
                     </div>
                     <div class="form-group">
                       <label for="">Correo Electronico</label>
-                      <input name="correoElectronico" type="text" class="form-control" id="modificarCorreoElectronico"
-                        placeholder="Ej. hotelsoft@hotmail.com">
+                      <input required name="correoElectronico" type="email" class="form-control" id="modificarCorreoElectronico" placeholder="Ej. hotelsoft@hotmail.com">
                     </div>
 
                     <div class="form-group">
                       <label for="">Telefono</label>
-                      <input name="telefono" type="text" class="form-control" id="modificarTelefono"
-                        placeholder="Ej. $3005186039">
+                      <input name="telefono" type="text" class="form-control" id="modificarTelefono" placeholder="Ej. $3005186039">
                     </div>
                     <div class="form-group">
                       <label for="">Rol</label>
-                      <select class="form-control" id="modificarRol">
+                      <select required class="form-control" id="modificarRol">
                         <?php
 
                         traerRolesEnFormatoSelect();
@@ -294,28 +280,43 @@
     <!-- Page specific script -->
     <script>
       var data = <?php require '../consultasdb/empleados/empleados.php';
-      echo traerDatosEmpleados(); ?>;
-      $(function () {
+                  echo traerDatosEmpleados(); ?>;
+      $(function() {
         $("#tabla1").DataTable({
           language: spanish,
           "responsive": true,
           "lengthChange": false,
           "autoWidth": false,
           "buttons": ["excel", "pdf", "print", "colvis"],
-          columns: [
-            { title: 'Documento' },
-            { title: 'Tipo Documento' },
-            { title: 'Nombres' },
-            { title: 'Apellidos' },
-            { title: 'Correo Electronico' },
-            { title: 'Telefono' },
-            { title: 'Rol' },
-            { title: 'Estado' },
+          columns: [{
+              title: 'Documento'
+            },
+            {
+              title: 'Tipo Documento'
+            },
+            {
+              title: 'Nombres'
+            },
+            {
+              title: 'Apellidos'
+            },
+            {
+              title: 'Correo Electronico'
+            },
+            {
+              title: 'Telefono'
+            },
+            {
+              title: 'Rol'
+            },
+            {
+              title: 'Estado'
+            },
             {
               title: 'Acciones',
               searchable: false,
               orderable: false,
-              render: function (data, type, row) {
+              render: function(data, type, row) {
                 return '<button class="btn btn-sm" onclick="editarEmpleado(' + row[0] + ',\'' + row[1] + '\'' + ',\'' + row[2] + '\'' + ',\'' + row[3] + '\'' + ',\'' + row[4] + '\'' + ',\'' + row[5] + '\' ,\'' + row[6] + '\')"><i class="fas fa-edit"></i> Editar</button>' +
                   '<button class="btn btn-sm reset" onclick="resetearContrasena(' + row[0] + ',\'' + row[2] + '\')"><i class="fas fa-key"></i> Cambiar Contraseña</button>' +
                   '<button class="btn btn-sm" onclick="cambiarEstadoEmpleado(' + row[0] + ',\'' + row[2] + '\')"><i class="fas fa-power-off"></i> Cambiar estado</button>';
@@ -330,7 +331,7 @@
       });
 
 
-      document.getElementById('formularioCrearEmpleado').addEventListener('submit', function (e) {
+      document.getElementById('formularioCrearEmpleado').addEventListener('submit', function(e) {
         e.preventDefault(); // Evita el envío del formulario por defecto
 
         // Realiza una solicitud AJAX para procesar el formulario
@@ -338,24 +339,24 @@
           type: 'POST',
           url: '../consultasdb/empleados/crearempleado.php',
           data: $(this).serialize(),
-          success: function (response) {
+          success: function(response) {
 
 
 
             if (response === "success") {
               Swal.fire({
                 title: 'Éxito',
-                text: 'El cliente se ha creado correctamente',
+                text: 'El Empleado se ha creado correctamente',
                 icon: 'success'
               }).then(() => {
                 // Recargar la página actual
                 location.reload();
               });
             } else if (response === 'error') {
-              Swal.fire('Error', 'Hubo un problema al crear el cliente', 'error');
+              Swal.fire('Error', 'Hubo un problema al crear el Empleado', 'error');
             } else if (response === 'errorExiste') {
 
-              Swal.fire('Error', 'Ya existe ese cliente', 'error');
+              Swal.fire('Error', 'Ya existe ese Empleado', 'error');
             }
           }
         });
@@ -408,7 +409,21 @@
         var telefono = $('#modificarTelefono').val();
         var rol = $('#modificarRol').val();
 
-        console.log(rol)
+
+        
+
+        if (!idUsuario || !tipoDocumento || !nombres || !apellidos || !correoElectronico || !rol) {
+          alert('Todos los campos marcados como requeridos deben estar completos');
+          return;
+        }
+
+        // Validar el formato del correo electrónico
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(correoElectronico)) {
+          alert('Ingrese una dirección de correo electrónico válida');
+          return;
+        }
+     
         // Realizar la verificación del correo electrónico antes de la solicitud AJAX
         $.ajax({
           type: 'POST',
@@ -422,7 +437,7 @@
             telefono: telefono,
             rol: rol
           },
-          success: function (response) {
+          success: function(response) {
             // Manejar la respuesta del servidor
             console.log(response);
 
@@ -461,8 +476,7 @@
 
         Swal.fire({
           title: "Nueva contraseña para el Empleado " + nombre,
-          html:
-            '<input type="password" id="password" placeholder="ContraseñaImposible123" class="swal2-input" autocomplete="new-password">',
+          html: '<input type="password" id="password" placeholder="ContraseñaImposible123" class="swal2-input" autocomplete="new-password">',
           showCancelButton: true,
           confirmButtonText: "Cambiar Contraseña",
           preConfirm: () => {
@@ -480,8 +494,11 @@
             $.ajax({
               type: 'POST',
               url: '../consultasdb/clientes/update_password.php',
-              data: { userId: documento, newPassword: newPassword },
-              success: function (response) {
+              data: {
+                userId: documento,
+                newPassword: newPassword
+              },
+              success: function(response) {
                 if (response == "Contraseña actualizada correctamente") {
                   Swal.fire({
                     title: "Listo",
@@ -524,8 +541,10 @@
             $.ajax({
               type: 'POST',
               url: '../consultasdb/clientes/update_user_state.php',
-              data: { userId: documento },
-              success: function (response) {
+              data: {
+                userId: documento
+              },
+              success: function(response) {
 
                 if (response == "Estado actualizado correctamente") {
                   Swal.fire({
@@ -546,6 +565,10 @@
         });
       }
     </script>
+
+
+
+
   </div>
 </body>
 

@@ -12,9 +12,9 @@ $telefono = $_POST['telefono'];
 $estado = $_POST['estado'];
 
 // Verificar si el usuario ya existe en la base de datos
-$queryUsuarios = "SELECT * FROM Usuarios WHERE idUsuario = ?";
+$queryUsuarios = "SELECT * FROM Usuarios WHERE idUsuario = ? OR correoelectronico = ?";
 $stmt = $conn->prepare($queryUsuarios);
-$stmt->bind_param("s", $documento);
+$stmt->bind_param("ss", $documento, $correoElectronico);
 $stmt->execute();
 $result = $stmt->get_result();
 

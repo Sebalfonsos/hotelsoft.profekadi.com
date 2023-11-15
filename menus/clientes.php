@@ -78,7 +78,7 @@
                           <form id="formularioCrearCliente">
                             <div class="form-group">
                               <label for="">Documento</label>
-                              <input type="text" name="documento" class="form-control" id=" "
+                              <input required type="number" name="documento" class="form-control" id=" "
                                 placeholder="Ej. 100288790">
                             </div>
                             <div class="form-group">
@@ -93,22 +93,22 @@
                             </div>
                             <div class="form-group">
                               <label for="">Nombres</label>
-                              <input name="nombre" type="text" class="form-control" id="nombres"
+                              <input required name="nombre" type="text" class="form-control" id="nombres"
                                 placeholder="Ej. Carlos">
                             </div>
                             <div class="form-group">
                               <label for="">Apellidos</label>
-                              <input name="apellido" type="text" class="form-control" id="apellidos"
+                              <input required name="apellido" type="text" class="form-control" id="apellidos"
                                 placeholder="Ej. Fonseca">
                             </div>
                             <div class="form-group">
                               <label for="">Correo Electronico</label>
-                              <input name="correoElectronico" type="text" class="form-control" id="correoElectronico"
+                              <input name="correoElectronico" type="email" class="form-control" id="correoElectronico"
                                 placeholder="Ej. hotelsoft@hotmail.com">
                             </div>
                             <div class="form-group">
                               <label for="">Contraseña</label>
-                              <input type="password" name="contrasena" class="form-control" id="contrasena"
+                              <input minlength="8" required type="password" name="contrasena" class="form-control" id="contrasena"
                                 placeholder="Ej. 100288790">
                             </div>
                             <div class="form-group">
@@ -119,7 +119,7 @@
 
                             <div class="form-group">
                               <label for="">Estado</label>
-                              <select name="estado" class="form-control" id="estado">
+                              <select required name="estado" class="form-control" id="estado">
                                 <option value="1">Activo</option>
                                 <option value="0">Inactivo</option>
                               </select>
@@ -221,17 +221,17 @@
                     </div>
                     <div class="form-group">
                       <label for="">Nombres</label>
-                      <input name="nombre" type="text" class="form-control" id="modificarNombres"
+                      <input required name="nombre" type="text" class="form-control" id="modificarNombres"
                         placeholder="Ej. Carlos">
                     </div>
                     <div class="form-group">
                       <label for="">Apellidos</label>
-                      <input name="apellido" type="text" class="form-control" id="modificarApellidos"
+                      <input required name="apellido" type="text" class="form-control" id="modificarApellidos"
                         placeholder="Ej. Fonseca">
                     </div>
                     <div class="form-group">
                       <label for="">Correo Electronico</label>
-                      <input name="correoElectronico" type="text" class="form-control" id="modificarCorreoElectronico"
+                      <input required name="correoElectronico" type="text" class="form-control" id="modificarCorreoElectronico"
                         placeholder="Ej. hotelsoft@hotmail.com">
                     </div>
 
@@ -381,6 +381,19 @@
         var apellidos = $('#modificarApellidos').val();
         var correoElectronico = $('#modificarCorreoElectronico').val();
         var telefono = $('#modificarTelefono').val();
+
+        
+        if (!idUsuario || !tipoDocumento || !nombres || !apellidos || !correoElectronico || !rol) {
+          alert('Todos los campos marcados como requeridos deben estar completos');
+          return;
+        }
+
+        // Validar el formato del correo electrónico
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(correoElectronico)) {
+          alert('Ingrese una dirección de correo electrónico válida');
+          return;
+        }
 
         // Realizar la verificación del correo electrónico antes de la solicitud AJAX
         $.ajax({
