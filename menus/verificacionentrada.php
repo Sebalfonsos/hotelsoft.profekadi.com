@@ -1,3 +1,19 @@
+<?php
+// Inicia la sesión
+session_start();
+
+// Verifica si la sesión está activa
+if (isset($_SESSION['nombreCompleto_usuario'])) {
+    // La sesión está activa
+   // echo "Sesión activa para el usuario: " . $_SESSION['nombreCompleto_usuario'];
+} else {
+    // La sesión no está activa
+    echo "No hay sesión activa.";
+
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
