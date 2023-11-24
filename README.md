@@ -1,6 +1,6 @@
 # Sistema de Gestión Hotelera con AdminLTE
 
-![Logo del Proyecto](url_del_logo.png)
+![Logo del Proyecto](/assets/img/navbar-logo.svg)
 
 Descripción corta y concisa del proyecto. Explica el propósito principal y las características clave de tu sistema de gestión hotelera.
 
