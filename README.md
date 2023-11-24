@@ -21,7 +21,7 @@ Bienvenido a nuestro Sistema de Gestión Hotelera, una solución integral basada
 
 
 ![Captura de Pantalla 1](/assets/READMEIMGS/Inicio.png)
-![Captura de Pantalla 2](/assets/READMEIMGS/Panel.png)
+![Captura de Pantalla 2](/assets/READMEIMGS/PanelHS.png)
 
 ## Licencia
 
