@@ -4,13 +4,13 @@ session_start();
 
 // Verifica si la sesión está activa
 if (isset($_SESSION['nombreCompleto_usuario'])) {
-    // La sesión está activa
-   // echo "Sesión activa para el usuario: " . $_SESSION['nombreCompleto_usuario'];
+  // La sesión está activa
+  // echo "Sesión activa para el usuario: " . $_SESSION['nombreCompleto_usuario'];
 } else {
-    // La sesión no está activa
-    echo "No hay sesión activa.";
+  // La sesión no está activa
+  echo "No hay sesión activa.";
 
-    exit();
+  exit();
 }
 ?>
 
@@ -26,8 +26,7 @@ if (isset($_SESSION['nombreCompleto_usuario'])) {
   <title>AdminLTE 3 | Blank Page</title>
 
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
@@ -40,6 +39,11 @@ if (isset($_SESSION['nombreCompleto_usuario'])) {
 </head>
 
 
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+</style>
 
 <body class="hold-transition sidebar-mini">
   <!-- Site wrapper -->
@@ -74,8 +78,8 @@ if (isset($_SESSION['nombreCompleto_usuario'])) {
             </div>
 
             <!-- Columna del formulario de reserva ocupando la derecha de la pantalla -->
-            
-            <div class="col-md-4 ">
+
+            <div id="formReservar" class="col-md-4 ">
 
 
               <div class="card card-primary sticky-top">
@@ -165,16 +169,12 @@ if (isset($_SESSION['nombreCompleto_usuario'])) {
       // Si la validación pasa, puedes continuar con el envío del formulario
       return true;
     }
-
-
   </script>
 
   <script>
-
-
-    $(document).ready(function () {
+    $(document).ready(function() {
       // Intercepta el envío del formulario
-      $('form').submit(function (e) {
+      $('form').submit(function(e) {
         e.preventDefault(); // Detiene el envío normal del formulario
         if (!validarFechas()) {
           return false; // Detiene la ejecución del resto del código
@@ -223,7 +223,7 @@ if (isset($_SESSION['nombreCompleto_usuario'])) {
           fechaEntrada: fechaEntrada,
           fechaSalida: fechaSalida
         },
-        success: function (respuesta) {
+        success: function(respuesta) {
           console.log(respuesta); // Muestra la respuesta en la consola
           if (respuesta == "si está ocupada") {
 
@@ -240,7 +240,7 @@ if (isset($_SESSION['nombreCompleto_usuario'])) {
 
 
         },
-        error: function () {
+        error: function() {
           console.log("Error en la solicitud AJAX");
         }
       });
@@ -255,7 +255,7 @@ if (isset($_SESSION['nombreCompleto_usuario'])) {
           fechaEntrada: fechaEntrada,
           fechaSalida: fechaSalida
         },
-        success: function (response) {
+        success: function(response) {
           // Manejar la respuesta del servidor
           console.log(response);
 
@@ -303,7 +303,7 @@ if (isset($_SESSION['nombreCompleto_usuario'])) {
           fechaSalida: fechaSalida,
           costoTotal: costoTotal
         },
-        success: function (respuesta) {
+        success: function(respuesta) {
           console.log(respuesta + idCliente); // Muestra la respuesta en la consola
           if (respuesta == "Reserva exitosa") {
 
@@ -320,12 +320,13 @@ if (isset($_SESSION['nombreCompleto_usuario'])) {
 
 
         },
-        error: function () {
+        error: function() {
           console.log("Error en la solicitud AJAX");
         }
       });
 
     }
+
     function calcularDiferenciaDias(fechaEntrada, fechaSalida) {
       var dateEntrada = new Date(fechaEntrada);
       var dateSalida = new Date(fechaSalida);
@@ -333,10 +334,10 @@ if (isset($_SESSION['nombreCompleto_usuario'])) {
       var diferenciaDias = Math.ceil(diferenciaTiempo / (1000 * 60 * 60 * 24));
       return diferenciaDias;
     }
+
     function seleccionar(id) {
       document.getElementById("habitacion").value = id
     }
-
   </script>
 
 </body>
