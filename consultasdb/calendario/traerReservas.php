@@ -1,7 +1,6 @@
 <?php
 require __DIR__ . '/../conexion.php';
-$sql = "SELECT Reservas.*,Habitaciones.*, Usuarios.idUsuario, Usuarios.nombre, Usuarios.apellido FROM Habitaciones_has_Reservas JOIN Habitaciones ON Habitaciones_has_Reservas.Habitaciones_idHabitacion = Habitaciones.idHabitacion JOIN Reservas ON Habitaciones_has_Reservas.Reservas_idReserva = Reservas.idReserva JOIN Clientes ON Reservas.Clientes_idClientes = Clientes.idCliente JOIN Usuarios ON Clientes.Usuarios_idUsuario = Usuarios.idUsuario;
-";
+$sql = "SELECT Reservas.*,Habitaciones.*, Usuarios.idUsuario, Usuarios.nombre, Usuarios.apellido FROM Habitaciones_has_Reservas JOIN Habitaciones ON Habitaciones_has_Reservas.Habitaciones_idHabitacion = Habitaciones.idHabitacion JOIN Reservas ON Habitaciones_has_Reservas.Reservas_idReserva = Reservas.idReserva JOIN Clientes ON Reservas.Clientes_idClientes = Clientes.idCliente JOIN Usuarios ON Clientes.Usuarios_idUsuario = Usuarios.idUsuario;";
 $result = $conn->query($sql);
 
 // Crear un array para almacenar los eventos
