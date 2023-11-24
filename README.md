@@ -18,8 +18,8 @@ Descripción corta y concisa del proyecto. Explica el propósito principal y las
 
 Inserta capturas de pantalla que muestren visualmente cómo se ve y funciona tu sistema. Puedes agregar tantas como creas necesarias para dar una buena visión general.
 
-![Captura de Pantalla 1](url_captura_1.png)
-![Captura de Pantalla 2](url_captura_2.png)
+![Captura de Pantalla 1](/assets/README IMGS/Inicio.png)
+![Captura de Pantalla 2](/assets/README IMGS/Panel.png)
 
 ## Instalación
 
